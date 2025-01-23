@@ -111,7 +111,7 @@ export function GameDescription({ game }: GameDescriptionProps) {
             {/* Description - Right Side */}
             <div className="flex-1 text-lg space-y-4 text-muted-foreground">
               <p>{game.description}</p>
-              <p>Sprunki Sprunkr is the original version of the game, featuring the same gameplay mechanics and character customization options as the original Incredibox game.</p>
+              <p>{game.description2}</p>
             </div>
           </div>
         </TabsContent>

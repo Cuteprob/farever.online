@@ -7,7 +7,7 @@ export default function FeaturesPage() {
       <main className="flex-1 container mx-auto px-4 py-12 max-w-7xl">
         <Breadcrumb 
           items={[
-            { label: "Play Sprunkr", href: "/" },
+            { label: "Play Sprunksters", href: "/" },
             { label: "Features", href: "/features" }
           ]} 
         />
@@ -21,9 +21,9 @@ export default function FeaturesPage() {
 }
 
 export const metadata = {
-  title: "Discover Sprunkr Features - Sprunkr",
-  description: "Discover Sprunkr's features and benefits. Learn about our game collection, instant play technology, and enjoy the best unblocked games online.",
+  title: "Discover Sprunksters Features - Sprunksters",
+  description: "Discover Sprunksters's features and benefits. Learn about our game collection, instant play technology, and enjoy the best unblocked games online.",
   alternates: {
-    canonical: "https://sprunkr.site/features",
+    canonical: "https://sprunksters.top/features",
   },
 }

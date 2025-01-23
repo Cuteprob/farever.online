@@ -19,23 +19,24 @@ export const runtime = "edge";
 
 // Sprunkr game data
 const SprunkiphaseGame = {
-  id: "sprunkr",
-  title: "Play Sprunki Sprunkr Game Online Free",
-  createdAt: "2025-1-3",
-  description: "Sprunki Sprunkr is an innovative rhythm-based music creation game that allows players to compose unique musical pieces through an interactive and engaging platform.The game falls under the rhythm and music creation genre, combining elements of interactive gameplay with creative expression. It allows players to mix sounds and beats using animated characters in a vibrant visual environment.",
-  iframeUrl: "https://games.sprunkimegalovania.org/game/sprunkr/index.html",
-  image: "/sprunki-sprunkr.webp",
+  id: "sprunksters",
+  title: "Play Sprunki Sprunksters Game Online Free",
+  createdAt: "2025-1-22",
+  description: "Sprunki Sprunksters is an exciting fan-made mod for Incredibox that turns music creation into a wild adventure. It features a cast of colorful characters, each bringing their own musical chaos to the mix. Through an intuitive drag-and-drop interface, players can create unexpected sound combinations and discover hidden surprises while composing unique musical pieces in a vibrant visual environment.",
+  description2: "Whether you're a seasoned Incredibox veteran or new to music creation, Sprunksters welcomes you with its easy-to-use interface while offering depth through possible combinations. Create wild compositions, discover secret animations, and join a community of fellow creators in this musical mayhem!",
+  iframeUrl: "https://games.sprunkiphase.xyz/sprunksters/index.html",
+  image: "/sprunksters.png",
   rating: 5,
   categories: [
     GameCategory.SPRUNKI
   ],
   metadata: {
-    title: "Sprunkr - Play Sprunki Sprunkr Game Online Free",
-    description: "Play Sprunkr, the ultimate online music creation game! Enhanced sound design, real-time mixing & sharing. Join now!",
-    keywords: ["sprunkr"]
+    title: "Sprunki Sprunksters - Play Sprunki Sprunksters Game Online Free",
+    description: "Play Sprunki Sprunksters, the ultimate online music creation game! Enhanced sound design, real-time mixing & sharing. ",
+    keywords: ["sprunksters"]
   },
   controls: {
-    fullscreenTip: "Click the fullscreen button to expand, press ESC to exit fullscreen",
+    fullscreenTip: "",
     guide: {
       movement: [
         "Drag & Drop - Add sounds",
@@ -52,28 +53,28 @@ const SprunkiphaseGame = {
   faqs: [],
   video: {
     youtubeId: "seDij_-8bjI",
-    title: "Sprunkr - Music Game Online",
-    thumbnail: "/sprunki-sprunkr.webp"
+    title: "Sprunksters - Music Game Online",
+    thumbnail: "/sprunksters.png"
   }
 };
 
 const games = [
   {
-    id: "sprunkr",
-    title: "Sprunki Sprunkr",
+    id: "sprunksters",
+    title: "Sprunksters",
     createdAt: "2024-1-1",
-    description: "Original Sprunki Sprunkr game",
-    image: "/sprunki-sprunkr.webp",
-    iframeUrl: "https://data.sprunk.world/game/sprunkr/index.html",
+    description: "Original Sprunki sprunksters game",
+    image: "/sprunksters.png",
+    iframeUrl: "https://games.sprunkiphase.xyz/sprunksters/index.html",
     rating: 5,
     categories: [GameCategory.SPRUNKI],
     metadata: {
-      title: "Sprunki Sprunkr",
-      description: "Original Sprunki Sprunkr",
-      keywords: ["sprunkr"]
+      title: "Sprunki Sprunksters - Play Sprunki Sprunksters Game Online Free",
+      description: "Play Sprunki Sprunksters, the ultimate online music creation game! Enhanced sound design, real-time mixing & sharing.",
+      keywords: ["sprunksters"]
     },
     controls: {
-      fullscreenTip: "Click the fullscreen button to expand Sprunkr, press ESC to exit fullscreen",
+      fullscreenTip: "",
       guide: {
         movement: [
           "Drag & Drop - Add sounds",
@@ -88,21 +89,21 @@ const games = [
     faqs: []
   },
   {
-    id: "sprunkr-2",
-    title: "Sprunki Sprunkr 2.0",
+    id: "sprunkr",
+    title: "Sprunki Sprunkr",
     createdAt: "2024-1-2",
-    description: "Sprunki Sprunkr 2.0 version",
-    image: "/sprunki-sprunkr-2.webp",
+    description: "Sprunki Sprunkr version",
+    image: "/sprunki-sprunkr.webp",
     iframeUrl: "https://game.sprunkiretake.net/Incredibox-Sprunkr-2.html",
     rating: 5,
     categories: [GameCategory.SPRUNKI],
     metadata: {
-      title: "Sprunki Sprunkr 2.0",
-      description: "Sprunki Sprunkr 2.0",
+      title: "Sprunki Sprunkr",
+      description: "Sprunki Sprunkr",
       keywords: ["sprunkr"]
     },
     controls: {
-      fullscreenTip: "Click the fullscreen button to expand, press ESC to exit fullscreen",
+      fullscreenTip: "",
       guide: {
         movement: [
           "Drag & Drop - Add sounds",
@@ -117,21 +118,21 @@ const games = [
     faqs: []
   },
   {
-    id: "sprunkr-4-oc",
-    title: "Sprunkr 4 OC",
+    id: "Sprunki Pyramixed",
+    title: "Sprunki Pyramixed",
     createdAt: "2024-1-3",
-    description: "Sprunkr 4 OC version",
-    image: "/sprunkr-4-oc.webp",
-    iframeUrl: "https://wowtbc.net/sprunkin/sprunki-restyle/index.html",
+    description: "Sprunki Pyramixed version",
+    image: "/pyramixed.webp",
+    iframeUrl: "https://wowtbc.net/sprunkin/sprunki-pyramixed/index.html",
     rating: 5,
     categories: [GameCategory.SPRUNKI],
     metadata: {
-      title: "Sprunkr 4 OC",
-      description: "Sprunkr 4 OC",
-      keywords: ["sprunkr"]
+      title: "Sprunki Pyramixed",
+      description: "Sprunki Pyramixed",
+      keywords: ["sprunki pyramixed"]
     },
     controls: {
-      fullscreenTip: "Click the fullscreen button to expand, press ESC to exit fullscreen",
+      fullscreenTip: "",
       guide: {
         movement: [
           "Drag & Drop - Add sounds",
@@ -156,10 +157,10 @@ export default function Home() {
           {/* Title */}
           <div className="flex flex-col gap-2">
             <h1 className="text-3xl md:text-4xl font-heading text-primary tracking-tight">
-              Play Sprunkr - Incredibox Style Music Game Online
+              Play Sprunki Sprunksters - Incredibox Style Music Game Online
             </h1>
             <h2 className="text-lg md:text-xl italic font-heading text-muted-foreground tracking-wide">
-              Experience Sprunkr: a bone-chilling yet mesmerizing new experience. 
+             Sprunksters, Sprunki Sprunksters Game, Incredibox Sprunksters Game, Sprunki Mods
             </h2>
           </div>
 
@@ -223,10 +224,10 @@ export default function Home() {
             </div>
             <HowToPlay />
             <Features />
-            <ExploreGames />
-            <GameCollection />
+            {/* <ExploreGames /> */}
+            {/* <GameCollection /> */}
             <SoundFeatures />
-            <VisualEvolution />
+            {/* <VisualEvolution /> */}
             <CommunityGuide />
             <FAQ />
             
@@ -264,24 +265,24 @@ export default function Home() {
 // Metadata optimization
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Play Sprunkr - Incredibox Style Music Game Online",
-    description: "Sprunkr is a free  incredibox style game that allows you to create amazing music with new characters, enhanced sound design and real-time mixing.",
-    keywords: ["sprunkr", "music creation game"],
+    title: "Play Sprunki Sprunksters - Incredibox Music Game Online",
+    description: "Sprunki Sprunksters is a free  incredibox style game that allows you to create amazing music with new characters, enhanced sound design and real-time mixing.",
+    keywords: ["sprunki sprunksters", ""],
     openGraph: {
-      title: "Sprunkr -  Incredibox Style Music Game Online",
-      description: "Join millions playing Sprunkr! Create unique music with new characters, enhanced sound design & real-time mixing.",
+      title: "Sprunksters -  Incredibox Style Music Game Online",
+      description: "Join millions playing Sprunki Sprunksters! Create unique music with new characters, enhanced sound design & real-time mixing.",
       images: ["/sprunki-sprunkr.webp"],
       type: "website",
-      url: "https://sprunkr.site"
+      url: "https://sprunksters.top"
     },
     twitter: {
       card: "summary_large_image",
-      title: "Sprunkr -  Incredibox Style Music Game Online",
-      description: "Create amazing music with Sprunkr! New characters, enhanced sound design & real-time mixing. Start   your musical journey today!",
+      title: "Sprunksters -  Incredibox Style Music Game Online",
+      description: "Create amazing music with Sprunksters! New characters, enhanced sound design & real-time mixing. Start   your musical journey today!",
       images: ["/sprunki-sprunkr.webp"],
     },
     alternates: {
-      canonical: "https://sprunkr.site"
+      canonical: "https://sprunksters.top"
     }
   };
 }

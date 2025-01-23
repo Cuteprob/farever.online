@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://sprunkr.size/sitemap.xml
+Sitemap: https://sprunksters.top/sitemap.xml
 
 # Important pages
 Allow: /games

@@ -1,4 +1,4 @@
-import { Music, Waves, Layers } from "lucide-react";
+import { Music, Waves, Layers, Sparkles } from "lucide-react";
 
 interface SoundFeature {
   title: string;
@@ -8,19 +8,24 @@ interface SoundFeature {
 
 const features: SoundFeature[] = [
   {
-    title: "Dynamic Soundscapes",
-    description: "Create rich, layered musical experiences with real-time mixing capabilities. Blend multiple sound elements and adjust them on the fly to craft your perfect composition.",
+    title: "Diverse Musical Elements",
+    description: "Explore Sprunki Sprunksters' rich collection of sounds - from funky melodies to offbeat rhythms. Each character brings their own unique musical contribution to create an engaging and dynamic soundscape.",
+    icon: <Music className="w-8 h-8 text-primary" />
+  },
+  {
+    title: "Real-time Sound Mixing",
+    description: "Experience Sprunki Sprunksters' intuitive mixing system where you can blend different character sounds in real-time. Create layered compositions by combining beats, melodies, and effects as your characters perform together.",
     icon: <Layers className="w-8 h-8 text-primary" />
   },
   {
-    title: "Horror-Themed Audio",
-    description: "Immerse yourself in spine-chilling atmospheres inspired by FNAF. Experience unique horror elements seamlessly integrated with rhythmic musical patterns.",
+    title: "Interactive Sound Design",
+    description: "Discover the magic of Sprunki Sprunksters' drag-and-drop sound system. Watch and listen as your characters come to life, each animation perfectly synchronized with their unique musical contributions.",
     icon: <Waves className="w-8 h-8 text-primary" />
   },
   {
-    title: "Interactive Sound Design",
-    description: "Intuitive drag-and-drop system for sound manipulation. Discover endless possibilities through character interactions and innovative loop combinations.",
-    icon: <Music className="w-8 h-8 text-primary" />
+    title: "Creative Sound Combinations",
+    description: "Unlock hidden musical surprises in Sprunki Sprunksters by experimenting with different character combinations. Each new arrangement can lead to unexpected and delightful sound discoveries.",
+    icon: <Sparkles className="w-8 h-8 text-primary" />
   }
 ];
 
@@ -29,10 +34,10 @@ export function SoundFeatures() {
     <section className="w-full max-w-6xl mx-auto py-12 px-4">
       <div className="text-center mb-12">
         <h2 className="text-3xl font-heading text-primary mb-4">
-          The Sound of Sprunkr
+          The Sound of Sprunki Sprunksters
         </h2>
         <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-          Experience the unique audio elements that make Sprunkr a groundbreaking musical horror adventure
+          Experience the unique audio elements that make Sprunki Sprunksters a groundbreaking musical horror adventure
         </p>
       </div>
 

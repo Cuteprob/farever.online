@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Sprunkr.site",
+  "name": "Sprunksters.top",
   "version": "1.0.0",
   "description": "A free online music creation game inspired by Incredibox",
   "icons": {
@@ -18,6 +18,6 @@
     }
   },
   "permissions": [],
-  "author": "sprunkr.site",
-  "homepage_url": "https://sprunkr.site"
+  "author": "sprunksters.top",
+  "homepage_url": "https://sprunksters.top"
 }

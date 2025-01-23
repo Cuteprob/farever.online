@@ -15,6 +15,7 @@ export interface Game {
   id: string;
   title: string;
   description: string;
+  description2?: string;
   iframeUrl: string;
   image: string;
   rating: number;
@@ -677,21 +678,21 @@ export const games: Game[] = [
     }
   },
   {
-    id: "sprunki-sprunkr-2",
-    title: "Sprunki Sprunkr 2.0",
+    id: "sprunki-sprunksters-2",
+    title: "Sprunksters 2.0",
     createdAt: "2025-01-03",
-    description: "Sprunki Sprunkr 2.0 represents the next evolution in music creation gaming, delivering an enhanced and reimagined experience of the original Sprunkr mod. This upgraded version features stunning visual improvements, smoother animations, and refined sound mechanics that elevate the music-making experience to new heights. With its modernized interface and expanded creative tools, Sprunkr 2.0 offers both newcomers and veterans an engaging platform for musical expression.\n\nThe game introduces a comprehensive suite of enhanced features, including redesigned characters with fluid animations, upgraded sound loops, and intuitive controls that make music creation more accessible and enjoyable than ever. Whether you're crafting beats, mixing melodies, or experimenting with new sound combinations, Sprunkr 2.0 provides the perfect platform for unleashing your musical creativity.",
+    description: "Sprunksters 2.0 represents the next evolution in music creation gaming, delivering an enhanced and reimagined experience of the original Sprunksters mod. This upgraded version features stunning visual improvements, smoother animations, and refined sound mechanics that elevate the music-making experience to new heights. With its modernized interface and expanded creative tools, Sprunksters 2.0 offers both newcomers and veterans an engaging platform for musical expression.\n\nThe game introduces a comprehensive suite of enhanced features, including redesigned characters with fluid animations, upgraded sound loops, and intuitive controls that make music creation more accessible and enjoyable than ever. Whether you're crafting beats, mixing melodies, or experimenting with new sound combinations, Sprunksters 2.0 provides the perfect platform for unleashing your musical creativity.",
     image: "/sprunki-sprunkr-2.webp",
-    iframeUrl: "https://game.sprunkiretake.net/Incredibox-Sprunkr-2.html",
+      iframeUrl: "https://game.sprunkiretake.net/Incredibox-Sprunkr-2.html",
     rating: 4.9,
     categories: [
-      
+      GameCategory.SPRUNKI
     ],
     metadata: {
-      title: "Sprunki Sprunkr 2.0 - Enhanced Music Creation Game Online",
-      description: "Play Sprunki Sprunkr 2.0, the enhanced version of the popular music creation game. Experience improved graphics, smoother animations, and better sound quality.",
+      title: "Sprunksters 2.0 - Enhanced Music Creation Game Online",
+      description: "Play Sprunksters 2.0, the enhanced version of the popular music creation game. Experience improved graphics, smoother animations, and better sound quality.",
       keywords: [
-        "sprunki sprunkr 2.0"
+        "sprunksters 2.0"
       ]
     },
     controls: {
@@ -723,8 +724,8 @@ export const games: Game[] = [
     ],
     faqs: [
       {
-        question: "What's new in Sprunki Sprunkr 2.0?",
-        answer: "Sprunki Sprunkr 2.0 introduces major improvements including enhanced graphics, smoother animations, refined soundscapes, and a more intuitive user interface. The game also features upgraded sound loops and improved mixing capabilities for a better music creation experience.",
+        question: "What's new in Sprunksters 2.0?",
+        answer: "Sprunksters 2.0 introduces major improvements including enhanced graphics, smoother animations, refined soundscapes, and a more intuitive user interface. The game also features upgraded sound loops and improved mixing capabilities for a better music creation experience.",
         category: "features"
       },
       {
@@ -733,8 +734,8 @@ export const games: Game[] = [
         category: "gameplay"
       },
       {
-        question: "Can I import my compositions from the original Sprunkr?",
-        answer: "Yes, Sprunki Sprunkr 2.0 supports importing compositions from the original version. Your creations will be automatically enhanced with the improved sound quality and visual effects.",
+        question: "Can I import my compositions from the original Sprunksters?",
+        answer: "Yes, Sprunksters 2.0 supports importing compositions from the original version. Your creations will be automatically enhanced with the improved sound quality and visual effects.",
         category: "technical"
       },
       {
@@ -743,7 +744,7 @@ export const games: Game[] = [
         category: "audio"
       },
       {
-        question: "Is Sprunki Sprunkr 2.0 suitable for beginners?",
+        question: "Is Sprunksters 2.0 suitable for beginners?",
         answer: "Absolutely! The game features an intuitive interface and helpful tutorials that make it easy for beginners to start creating music, while still offering depth for experienced users.",
         category: "general"
       },
@@ -755,7 +756,7 @@ export const games: Game[] = [
     ],
     video: {
       youtubeId: "I_m72UuBtVA",
-      title: "Sprunki Sprunkr 2.0 - Enhanced Music Creation Game | Create Amazing Beats",
+      title: "Sprunksters 2.0 - Enhanced Music Creation Game | Create Amazing Beats",
       thumbnail: "/sprunki-sprunkr-2.webp"
     }
   },
@@ -847,7 +848,7 @@ export const games: Game[] = [
     ],
     video: {
       youtubeId: "eVVgEnKogy0",
-      title: "Sprunki Sprunkr 4 OC - Ultimate Music Creation Game | 41 Unique Characters",
+      title: "Sprunksters 4 OC - Ultimate Music Creation Game | 41 Unique Characters",
       thumbnail: "/sprunkr-4-oc.webp"
     }
   }

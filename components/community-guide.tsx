@@ -1,4 +1,4 @@
-import { Music2, Gamepad2, Video, Share2 } from "lucide-react";
+import { Music2, Gamepad2, Video, Share2, Users } from "lucide-react";
 
 interface GuideGroup {
   title: string;
@@ -9,34 +9,44 @@ interface GuideGroup {
 
 const guides: GuideGroup[] = [
   {
-    title: "For Music Creators",
-    description: "Unleash your creativity with unique horror soundscapes",
+    title: "For Music Enthusiasts",
+    description: "Create your unique musical masterpieces in Sprunki Sprunksters",
     features: [
-      "Explore spine-chilling sound combinations",
-      "Create atmospheric horror soundtracks",
-      "Design rhythmic dark ambience"
+      "Experiment with funky melodies and offbeat rhythms",
+      "Mix and match characters to create unexpected harmonies",
+      "Discover hidden musical combinations and surprises"
     ],
     icon: <Music2 className="w-6 h-6" strokeWidth={1.5} />
   },
   {
-    title: "For Gamers",
-    description: "Experience interactive music creation like never before",
+    title: "For Beginners",
+    description: "Start your musical journey with Sprunki Sprunksters' intuitive system",
     features: [
-      "Master dynamic rhythm patterns",
-      "Discover hidden sound combinations",
-      "Challenge advanced music modes"
+      "Learn the simple drag-and-drop interface",
+      "Explore basic sound combinations",
+      "Watch your characters perform together"
     ],
     icon: <Gamepad2 className="w-6 h-6" strokeWidth={1.5} />
   },
   {
-    title: "For Content Creators",
-    description: "Enhance your content with unique Sprunkr sounds",
+    title: "For Creative Composers",
+    description: "Take your Sprunki Sprunksters compositions to the next level",
     features: [
-      "Create custom horror game soundtracks",
-      "Design unique streaming backgrounds",
-      "Share creations with community"
+      "Create complex layered arrangements",
+      "Share your musical creations with the community",
+      "Discover and learn from other creators"
     ],
     icon: <Video className="w-6 h-6" strokeWidth={1.5} />
+  },
+  {
+    title: "For Incredibox Fans",
+    description: "Experience the exciting world of Sprunki Sprunksters mod",
+    features: [
+      "Explore new characters and sound combinations",
+      "Create unique musical interpretations",
+      "Join the vibrant Sprunki Sprunksters community"
+    ],
+    icon: <Users className="w-6 h-6" strokeWidth={1.5} />
   }
 ];
 
@@ -45,10 +55,10 @@ export function CommunityGuide() {
     <section className="w-full max-w-6xl mx-auto py-12 px-4">
       <div className="text-center mb-12">
         <h2 className="text-3xl font-heading text-primary mb-4">
-          Create with Sprunkr
+          Who Should Play Sprunki Sprunksters?
         </h2>
         <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-          Join our community and discover endless possibilities for creation
+          Whether you're a music enthusiast, gamer, or content creator, Sprunki Sprunksters offers an addictive musical playground where creativity knows no bounds
         </p>
       </div>
 

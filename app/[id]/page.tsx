@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: GamePageProps): Promise<Metad
       images: [game.image],
     },
     alternates: {
-      canonical: `https://sprunkr.site/${params.id}`,
+      canonical: `https://sprunksters.top/${params.id}`,
     },
   }
 }
@@ -63,7 +63,7 @@ export default function GamePage({ params }: GamePageProps) {
         <div className="mb-6">
           <Breadcrumb 
             items={[
-              { label: "Play Sprunkr", href: "/" },
+              { label: "Play Sprunksters", href: "/" },
               { label: game.title, href: `/${game.id}` }
             ]} 
           />

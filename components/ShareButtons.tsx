@@ -10,8 +10,8 @@ interface ShareButtonsProps {
 }
 
 const ShareButtons: FC<ShareButtonsProps> = ({
-  title = 'Play Sprunkr',
-  description = 'Create amazing music with Sprunkr!',
+  title = 'Play Sprunksters',
+  description = 'Create amazing music with Sprunksters!',
   variant = 'default'
 }) => {
   const [currentUrl, setCurrentUrl] = useState('');

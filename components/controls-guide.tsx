@@ -66,7 +66,7 @@ const controls = [
 export function ControlsGuide() {
   return (
     <div className="w-[360px] bg-white/80 backdrop-blur-sm rounded-2xl border border-[#FFE5E5] p-4">
-      <h3 className="font-heading text-primary text-lg mb-4">Sprunkr Controls Guide</h3>
+      <h3 className="font-heading text-primary text-lg mb-4">Sprunksters Controls Guide</h3>
       <Tabs defaultValue="basic" className="w-full">
         <TabsList className="w-full mb-4">
           <TabsTrigger value="basic" className="flex-1 font-heading text-text-secondary data-[state=active]:text-primary">Basic</TabsTrigger>
@@ -92,7 +92,7 @@ export function ControlsGuide() {
         ))}
       </Tabs>
       <p className="text-xs text-text-secondary mt-4 pt-4 border-t border-[#FFE5E5]">
-        Tip: Master these controls to create amazing tracks in Sprunkr and challenge your friends!
+        Tip: Master these controls to create amazing tracks in Sprunksters and challenge your friends!
       </p>
     </div>
   )

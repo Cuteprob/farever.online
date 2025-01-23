@@ -6,7 +6,7 @@ export default function FAQPage() {
     <div className="container mx-auto px-4 py-8 space-y-4 max-w-7xl">
       <Breadcrumb 
           items={[
-            { label: "Play Sprunkr", href: "/" },
+            { label: "Play Sprunksters", href: "/" },
             { label: "FAQ", href: "/faq" }
           ]} 
       />  
@@ -19,10 +19,10 @@ export default function FAQPage() {
 }
 
 export const metadata = {
-  title: "Frequently Asked Questions - Sprunkr",
+  title: "Frequently Asked Questions - Sprunksters",
   description: "Find answers to frequently asked questions. Get help with games, features, tips,and more. Discover controls, strategies, and gameplay mechanics.",
-  keywords: ["FAQ", "Sprunkr"],
+  keywords: ["FAQ", "Sprunksters"],
   alternates: {
-    canonical: "https://sprunkr.site/faq",
+    canonical: "https://sprunksters.top/faq",
   },
 }

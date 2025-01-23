@@ -16,63 +16,63 @@ interface Step {
 const steps: Step[] = [
   {
     number: 1,
-    title: "Choose Your Sprunki Sprunkr Character",
-    description: "Begin your journey by selecting characters that match the iconic rhythm and energy of the soundtrack. Each character represents a key sonic element like percussion, synth lines, and bass drops that contribute to creating intense musical compositions.",
+    title: "Select Your Musical Characters",
+    description: "Start your musical journey by exploring Sprunki Sprunksters' colorful cast of characters. Each performer brings their own unique sounds and animations to your composition - from funky melodies to offbeat rhythms. Simply browse through the available characters and find the ones that spark your creativity.",
     tips: [
-      "Discover the unique abilities of each character",
-      "Listen to individual sound samples first",
-      "Mix and match characters to build beats",
-      "Select voices that work well together"
+      "Listen to each character's unique sound before adding them",
+      "Pay attention to the different sound types (beats, melodies, effects)",
+      "Start with rhythm characters as your foundation",
+      "Experiment with different character combinations"
     ],
     area: {
       name: "Character Selection",
       hazards: [
-        "Percussion: Drive the Sprunki Sprunkr beat",
-        "Synth Lines: Create melodic intensity", 
-        "Bass: Add powerful energy",
-        "Support: Balance the composition"
+        "Beats: Create your rhythmic foundation",
+        "Melodies: Add musical themes",
+        "Effects: Enhance your mix",
+        "Vocals: Bring personality to your track"
       ]
     },
     image: "/howtoplay/step-1.webp"
   },
   {
     number: 2,
-    title: "Create Your Sprunki Sprunkr Music Loop",
-    description: "After selecting characters, arrange them strategically to create dynamic loops. Each sound element's position contributes to the iconic rhythm pattern, allowing you to craft your own unique musical interpretation.",
+    title: "Create Your Musical Masterpiece",
+    description: "Making music in Sprunki Sprunksters is beautifully simple - just drag and drop characters onto your stage! Watch as they come to life with distinctive animations and blend their sounds together. Try different combinations to discover unexpected harmonies and create your own unique musical story.",
     tips: [
-      "Experiment with loop arrangements",
-      "Fine-tune sound timing",
-      "Build layered Sprunki Sprunkr patterns",
-      "Create dynamic variations"
+      "Drag and drop characters to add them to your mix",
+      "Click characters to toggle their sounds on/off",
+      "Use the spacebar to play/pause your creation",
+      "Press 'R' to reset and start fresh"
     ],
     area: {
-      name: "Loop Creation",
+      name: "Music Creation",
       hazards: [
-        "Pattern Timing: Match the Sprunki Sprunkr beat",
-        "Layer Balancing: Build intensity",
-        "Sound Placement: Create flow",
-        "Loop Dynamics: Add variation"
+        "Stage Management: Organize your performers",
+        "Sound Mixing: Balance your elements",
+        "Rhythm Control: Keep the beat flowing",
+        "Performance: Watch your creation come alive"
       ]
     },
     image: "/howtoplay/step-2.webp"
   },
   {
     number: 3,
-    title: "Experience the Sprunki Sprunkr Horror Mode",
-    description: "Unlock a bone-chilling twist in Sprunkr by clicking the black hat. This enthralling mode transforms your Sprunkr musical creation into an electrifying and eerie adventure, merging the beloved rhythm with spine-tingling elements. Please note: Before entering this mode, ensure you can handle intense horror elements.",
+    title: "Discover Hidden Surprises",
+    description: "Sprunki Sprunksters is full of delightful secrets waiting to be uncovered! As you experiment with different character combinations, you might trigger special animations and unlock bonus characters. Keep exploring and mixing to discover all the magical moments this musical playground has to offer.",
     tips: [
-      "Drag the black hat to activate Sprunkr's dark side",
-      "Prepare for spine-chilling Sprunkr sounds",
-      "Experience the dark atmosphere",
-      "Create haunting Sprunkr melodies"
+      "Try different character combinations",
+      "Watch for special animations",
+      "Look for hidden bonus characters",
+      "Share your discoveries with the community"
     ],
     area: {
-      name: "Sprunki Sprunkr Horror Experience",
+      name: "Secret Features",
       hazards: [
-        "Dark Transformation: Intense visual effects",
-        "Eerie Soundscape: Haunting Sprunkr atmosphere",
-        "Horror Elements: Spine-chilling moments",
-        "Thrilling Adventure: Mesmerizing Sprunkr twists"
+        "Bonus Content: Find hidden characters",
+        "Special Animations: Trigger unique performances",
+        "Creative Combinations: Unlock new possibilities",
+        "Community Sharing: Show off your discoveries"
       ]
     },
     image: "/howtoplay/step-3.webp"
@@ -85,11 +85,11 @@ export function HowToPlay() {
       <div className="text-center space-y-4">
         <div className="inline-block bg-card/80 backdrop-blur-sm px-6 py-3 rounded-2xl border border-border">
           <h2 className="text-2xl font-heading text-primary">
-            Master Sprunki Sprunkr Music Gameplay
+            Master Sprunki Sprunksters Music Gameplay
           </h2>
         </div>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Learn how to create powerful musical combinations while mastering the art of Sprunkr
+          Learn how to create powerful musical combinations while mastering the art of Sprunki Sprunksters
         </p>
       </div>
 

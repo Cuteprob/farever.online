@@ -2,10 +2,10 @@ import { Breadcrumb } from "@/components/ui/breadcrumb"
 
 // 在文件顶部添加 metadata
 export const metadata = {
-  title: 'Privacy Policy - Sprunkr',
-  description: 'Privacy policy and data collection practices for Sprunkr online game. Learn how we protect your information and maintain your privacy.',
+  title: 'Privacy Policy - Sprunksters',
+  description: 'Privacy policy and data collection practices for Sprunksters online game. Learn how we protect your information and maintain your privacy.',
   alternates: {
-    canonical: 'https://sprunkr.site/privacy'
+    canonical: 'https://sprunksters.top/privacy'
   }
 }
 
@@ -14,7 +14,7 @@ export default function PrivacyPolicy() {
     <main className="flex-1 container mx-auto px-4 py-8 max-w-7xl">
       <Breadcrumb 
         items={[
-          { label: "Play Sprunkr", href: "/" },
+          { label: "Play Sprunksters", href: "/" },
           { label: "Privacy Policy", href: "/privacy" }
         ]} 
       />
@@ -30,7 +30,7 @@ export default function PrivacyPolicy() {
           <section className="mt-8">
             <h2 className="text-2xl font-heading text-primary mb-4">1. Information We Collect</h2>
             <p className="text-text-secondary leading-relaxed mb-4">
-              When you use Sprunkr, we collect certain information to improve your gaming experience and our services:
+              When you use Sprunksters, we collect certain information to improve your gaming experience and our services:
             </p>
             <ul className="list-disc pl-6 space-y-2 text-text-secondary">
               <li>Game progress and preferences</li>
@@ -65,14 +65,14 @@ export default function PrivacyPolicy() {
           <section className="mt-8">
             <h2 className="text-2xl font-heading text-primary mb-4">4. Third-Party Services</h2>
             <p className="text-text-secondary leading-relaxed">
-              Sprunkr integrates with third-party services like Speedrun.com for leaderboards and track sharing. These services have their own privacy policies, and we encourage you to review them.
+              Sprunksters integrates with third-party services like Speedrun.com for leaderboards and track sharing. These services have their own privacy policies, and we encourage you to review them.
             </p>
           </section>
 
           <section className="mt-8">
             <h2 className="text-2xl font-heading text-primary mb-4">5. Contact Us</h2>
             <p className="text-text-secondary leading-relaxed">
-              If you have any questions about this Privacy Policy, please contact us at support@sprunkr.site.
+              If you have any questions about this Privacy Policy, please contact us at support@sprunksters.top.
             </p>
           </section>
         </div>

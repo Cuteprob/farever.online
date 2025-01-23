@@ -15,9 +15,9 @@ interface GameInfo {
 
 const games: GameInfo[] = [
   {
-    title: "Sprunki Sprunkr (Original)",
+    title: "Sprunki Incredibox",
     rating: 5.0,
-    votes: 2847,
+    votes: 28470,
     descriptionTitle: "The Original Horror Rhythm",
     description: "Experience the groundbreaking collaboration between Incredibox and Sprunki, transforming the classic music creation tool into a spine-chilling adventure. Drawing inspiration from FNAF's atmosphere, this original version sets the foundation for a whole new genre of horror rhythm games.",
     featureTitle: "Signature Horror Elements",
@@ -67,10 +67,10 @@ export function GameCollection() {
       {/* Header */}
       <div className="text-center mb-12">
         <h2 className="text-3xl font-heading text-primary mb-4">
-          The Sprunkr Games Collection
+          The Sprunksters Games Collection
         </h2>
         <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-          Journey through the evolution of Sprunkr, from its horror-inspired origins to the community-driven masterpiece
+          Journey through the evolution of Sprunksters, from its horror-inspired origins to the community-driven masterpiece
         </p>
       </div>
 

@@ -10,15 +10,15 @@ interface GameInfo {
 
 const games: GameInfo[] = [
   {
-    title: "Sprunki Sprunkr (Original)",
-    description: "Experience the original Sprunki Sprunkr where Incredibox meets rhythm gaming. This thrilling collaboration transforms music creation into an electrifying adventure, featuring spine-tingling atmosphere and immersive gameplay that will captivate your senses.",
+    title: "Sprunki sprunksters (Original)",
+    description: "Experience the original Sprunki sprunksters where Incredibox meets rhythm gaming. This thrilling collaboration transforms music creation into an electrifying adventure, featuring spine-tingling atmosphere and immersive gameplay that will captivate your senses.",
     features: [
       "Unique horror-themed musical environment",
       "Intuitive drag-and-drop music creation",
       "Classic character roster with dark twists"
     ],
     image: "/sprunki-sprunkr.webp",
-    imageAlt: "Sprunki Sprunkr Original Version"
+    imageAlt: "Sprunki sprunksters Original Version"
   },
   {
     title: "Sprunki Sprunkr 2.0",
@@ -50,7 +50,7 @@ export function ExploreGames() {
       {/* Header */}
       <div className="text-center mb-12">
         <h2 className="text-3xl font-heading text-primary mb-4">
-          Explore The Sprunkr Games
+          Explore The Sprunksters Games
         </h2>
         <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
           Discover the evolution through its different versions, each offering unique features and experiences

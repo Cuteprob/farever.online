@@ -4,50 +4,50 @@ interface Feature {
   title: string;
   description: string[];
   highlight: string;
-  category: 'evolution' | 'gameplay' | 'technical' | 'characters';
+  category: 'evolution' | 'gameplay' | 'technical' | 'characters' | 'social';
 }
 
 const features: Feature[] = [
   {
-    title: "Sprunki Sprunkr Horror Evolution",
+    title: "Intuitive Music Creation",
     description: [
-      "Transform your musical experience with Sprunkr's bone-chilling horror mode, featuring dark atmospheres and spine-tingling soundscapes",
-      "Master Sprunkr's unique blend of rhythm-based gameplay and horror elements, inspired by classic horror games",
-      "Unlock eerie sound combinations and haunting visual effects as you progress through the dark universe"
+      "Create amazing music with Sprunki Sprunksters' simple drag-and-drop interface - perfect for both beginners and music enthusiasts",
+      "Watch your music come alive as colorful characters perform their unique animations and sounds",
+      "Mix and match different sound elements to discover unexpected musical combinations in Sprunksters"
     ],
-    highlight: "Horror Mode",
-    category: "evolution"
-  },
-  {
-    title: "Dynamic Music Creation System",
-    description: [
-      "Create mesmerizing musical compositions using Sprunkr's intuitive drag-and-drop interface",
-      "Blend multiple sound layers with Sprunkr's advanced mixing tools to craft your unique soundscape",
-      "Experience real-time sound manipulation as you experiment with Sprunkr's diverse audio elements",
-      "Watch your music come alive with the responsive character animations"
-    ],
-    highlight: "Music Creation",
+    highlight: "Easy to Play",
     category: "gameplay"
   },
   {
-    title: "Immersive Rhythm Integration",
+    title: "Dynamic Sound System",
     description: [
-      "Synchronize with Sprunkr's dynamic beat system that adapts to your musical choices",
-      "Explore Sprunkr's vast library of original sounds and rhythmic patterns",
-      "Build complex musical arrangements through Sprunkr's innovative loop-based composition system"
+      "Explore Sprunki Sprunksters' diverse collection of musical loops, from funky melodies to offbeat rhythms",
+      "Build layered compositions by combining different character sounds in Sprunki Sprunksters",
+      "Experience real-time sound mixing as your characters perform together on stage",
+      "Create endless musical possibilities with Sprunki Sprunksters' innovative loop-based system"
     ],
-    highlight: "Rhythm System",
+    highlight: "Rich Sounds",
     category: "technical"
   },
   {
-    title: "Interactive Character Ensemble",
+    title: "Vibrant Character Ensemble",
     description: [
-      "Choose from Sprunkr's diverse cast of characters, each with unique sound signatures",
-      "Combine different character abilities to create rich, layered musical experiences",
-      "Discover hidden character interactions and special sound combinations exclusive to Sprunki Sprunkr's horror mode"
+      "Choose from Sprunki Sprunksters' expressive cast of performers, each with their own musical personality",
+      "Discover how different characters interact and complement each other's sounds",
+      "Unlock hidden animations and bonus characters as you explore Sprunki Sprunksters' musical world"
     ],
     highlight: "Unique Characters",
     category: "characters"
+  },
+  {
+    title: "Community Features",
+    description: [
+      "Share your Sprunki Sprunksters musical creations with a vibrant community of fellow composers",
+      "Discover and learn from other players' creative musical arrangements",
+      "Join the growing Sprunki Sprunksters community in spreading the joy of music creation"
+    ],
+    highlight: "Share & Connect",
+    category: "social"
   }
 ];
 
@@ -57,10 +57,10 @@ export function Features() {
       {/* Header */}
       <div className="text-center mb-12">
         <h2 className="text-2xl font-heading text-primary mb-4">
-          Sprunki Sprunkr Features
+          Explore Sprunki Sprunksters' Musical Magic
         </h2>
         <p className="text-muted-foreground">
-          Discover the latest innovations and improvements
+          Discover an innovative music creation experience with unique characters and endless possibilities
         </p>
       </div>
 

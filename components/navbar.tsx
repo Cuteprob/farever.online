@@ -21,7 +21,7 @@ export function Navbar() {
           <Link href="/" className="flex items-center space-x-4">
           
             <span className="text-2xl font-heading font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 hover:animate-shake transition-all duration-300 transform hover:scale-110">
-              Sprunkr.site
+            sprunksters.top
             </span>
           </Link>
 
