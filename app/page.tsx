@@ -14,6 +14,7 @@ import { GameCollection } from '@/components/game-collection'
 import { SoundFeatures } from '@/components/sound-features'
 import { VisualEvolution } from '@/components/visual-evolution'
 import { CommunityGuide } from '@/components/community-guide'
+import { GameAreaLayout } from "@/components/homepage-blocks/game-area-layout"
 
 export const runtime = "edge";
 
@@ -165,7 +166,8 @@ export default function Home() {
           </div>
 
           {/* Game Container */}
-          <div id="game" className="w-full flex justify-center">
+          <GameAreaLayout game={SprunkiphaseGame} />
+          {/* <div id="game" className="w-full flex justify-center">
             <div className="w-full max-w-4xl">
               <Tabs defaultValue={games[0].id} className="w-full">
                 <TabsList className="grid w-full grid-cols-3 mb-6 p-1 bg-card/0 backdrop-blur-sm rounded-2xl">
@@ -199,7 +201,7 @@ export default function Home() {
                 ))}
               </Tabs>
             </div>
-          </div>
+          </div> */}
           {/* Game Description Section */}
           <div className="space-y-12">
             <GameDescription game={SprunkiphaseGame} />
@@ -210,8 +212,7 @@ export default function Home() {
                 <div className="md:col-span-1">
                   <h2 className="text-xl font-heading mb-4">More Hot Games</h2>
                   <GamesSidebar 
-                    currentGameId={SprunkiphaseGame.id} 
-                    gameCategories={SprunkiphaseGame.categories} 
+                    limit={9}
                   />
                 </div>
                 

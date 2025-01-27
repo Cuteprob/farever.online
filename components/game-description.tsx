@@ -12,15 +12,15 @@ interface GameDescriptionProps {
 }
 
 export function GameDescription({ game }: GameDescriptionProps) {
-  console.log(game.image)
+
   return (
     <section className="max-w-7xl mx-auto bg-card/80 backdrop-blur-sm rounded-2xl p-8 border border-border">
       {/* Header */}
-      <div className="flex flex-col gap-4 mb-2">
-        <div className="flex justify-between items-start">
+      <div className="flex flex-col gap-4 mb-4 md:mb-2">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6">
           {/* Left side with logo */}
-          <div className="flex gap-6">
-            <div className="w-[120px] h-[120px] rounded-lg border border-border overflow-hidden bg-card">
+          <div className="flex gap-4 md:gap-6">
+            <div className="w-[80px] h-[60px] md:w-[120px] md:h-[90px] rounded-lg border border-border overflow-hidden bg-card">
               <img
                 src={game.image}
                 alt={game.title}
@@ -31,35 +31,37 @@ export function GameDescription({ game }: GameDescriptionProps) {
                 }}
               />
             </div>
-            <div className="space-y-2">
-              <h2 className="text-3xl font-heading text-primary">
+            <div className="space-y-1 md:space-y-2">
+              <h2 className="text-2xl md:text-3xl font-heading text-primary">
                 {game.title}
               </h2>
               <Rating 
                 initialRating={game.rating} 
                 isReadOnly 
-                size="md"
+                size="sm"
+              
                 showReviewSystem={true}
               />
             </div>
           </div>
 
           {/* Right side with platforms and share */}
-          <div className="flex flex-col gap-4">
-            <div className="text-base">
+          <div className="flex flex-row md:flex-col gap-4 md:gap-4">
+            <div className="text-sm md:text-base">
               <h3 className="text-muted-foreground">Platforms:</h3>
               <div className="flex gap-2 mt-1">
-                <span className="p-3 bg-card rounded-lg text-xl">🖥️</span>
-                <span className="p-3 bg-card rounded-lg text-xl">📱</span>
+                <span className="p-2 md:p-3 bg-card rounded-lg text-lg md:text-xl">🖥️</span>
+                <span className="p-2 md:p-3 bg-card rounded-lg text-lg md:text-xl">📱</span>
               </div>
             </div>
-            <div className="text-base">
+            <div className="text-sm md:text-base">
               <h3 className="text-muted-foreground">Share on:</h3>
               <div className="flex gap-2 mt-1">
                 <ShareButtons 
                   title={`Play ${game.title}`}
                   description="Experience the evolution of music creation"
                   variant="compact"
+                  
                 />
               </div>
             </div>
@@ -100,7 +102,7 @@ export function GameDescription({ game }: GameDescriptionProps) {
                 <div>
                   <div className="font-heading mb-2 text-primary">INTERACTION</div>
                   <ul className="space-y-2 text-muted-foreground">
-                    {game.controls.guide.movement.map((control, index) => (
+                    {game?.controls?.guide?.movement?.map((control, index) => (
                       <li key={index}>{control}</li>
                     ))}
                   </ul>

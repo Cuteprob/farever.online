@@ -1,0 +1,17 @@
+@baseUrl = http://localhost:3001
+
+### 获取所有游戏
+GET {{baseUrl}}/api/getAllGames
+
+### 获取单个游戏详情
+GET {{baseUrl}}/api/incredibox-vbal6-the-ruler-rap
+# 替换 123 为实际的游戏 ID
+
+### 根据分类获取游戏
+GET {{baseUrl}}/api/getGamesByCategory?categoryId=NEW
+
+### 测试不存在的游戏 ID
+GET {{baseUrl}}/api/999999
+
+### 测试不存在的分类
+GET {{baseUrl}}/api/category/NONEXISTENT

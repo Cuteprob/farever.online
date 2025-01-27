@@ -99,7 +99,7 @@ export function Rating({
 
   const handleSubmitReview = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Review submitted:', formData)
+
     setReviewSubmitted(true)
     setFormData({
       name: '',
