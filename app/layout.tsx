@@ -1,35 +1,38 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import { Fredoka, Nunito, Fira_Code } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { Toaster } from "sonner";
+import WebVitals from "@/components/WebVitals";
+import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 
-// 配置字体
-const spaceGrotesk = Space_Grotesk({ 
+// 配置可爱游戏风格字体
+const fredoka = Fredoka({ 
+  weight: '400',
   subsets: ["latin"],
   display: 'swap',
-  variable: '--font-space-grotesk',
+  variable: '--font-fredoka',
 });
 
-const inter = Inter({ 
+const nunito = Nunito({ 
   subsets: ["latin"],
   display: 'swap',
-  variable: '--font-inter',
+  variable: '--font-nunito',
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const firaCode = Fira_Code({
   subsets: ["latin"],
   display: 'swap',
-  variable: '--font-jetbrains-mono',
+  variable: '--font-fira-code',
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://sprunksters.top'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_WEB_URL || 'https://bunnymarket.app'),
   openGraph: {
-    siteName: 'Sprunksters',
-    locale: 'en_US',
+    siteName: 'BunnyMarket',
+    locale: 'en',
     type: 'website',
   },
   twitter: {
@@ -45,27 +48,76 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8480929139790231" data-overlays="bottom" crossOrigin="anonymous"></Script>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-K8RC4LFETZ"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#3b82f6" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" href="/favicon.ico" />
+        
+        {/* DNS预解析和资源预加载 */}
+        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="//pagead2.googlesyndication.com" />
+        
+        {/* 关键API预加载 */}
+        <link rel="preload" href="/api/getMainGames" as="fetch" crossOrigin="anonymous" />
+        
+        {/* 关键CSS预加载 */}
+        <link rel="preload" href="/globals.css" as="style" />
+        
+        {/* 字体预连接 */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* 关键CSS内联 - 首屏渲染优化 */}
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            /* 关键CSS - 首屏渲染 */
+            body { margin: 0; padding: 0; }
+            .loading-skeleton { 
+              animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; 
+            }
+            @keyframes pulse {
+              0%, 100% { opacity: 1; }
+              50% { opacity: .5; }
+            }
+            /* 防止布局偏移的关键样式 */
+            .aspect-ratio-4-3 { aspect-ratio: 4/3; }
+            .aspect-ratio-16-9 { aspect-ratio: 16/9; }
+          `
+        }} />
+        {process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID && (
+          <Script 
+            async 
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID}`} 
+            data-overlays="bottom" 
+            crossOrigin="anonymous"
+          ></Script>
+        )}
+        {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
 
-            gtag('config', 'G-K8RC4LFETZ');
-          `}
-        </Script>
+                gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}');
+              `}
+            </Script>
+          </>
+        )}
       </head>
       <body 
         className={`
-          ${spaceGrotesk.variable} 
-          ${inter.variable} 
-          ${jetbrainsMono.variable} 
-          font-sans 
+          ${fredoka.variable} 
+          ${nunito.variable} 
+          ${firaCode.variable} 
+          font-body 
           antialiased
         `}
       >
@@ -75,6 +127,8 @@ export default function RootLayout({
         </main>
         <Footer />
         <Toaster />
+        <WebVitals />
+        <ServiceWorkerRegistration />
       </body>
     </html>
   );

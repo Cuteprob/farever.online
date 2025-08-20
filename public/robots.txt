@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://sprunksters.top/sitemap.xml
+Sitemap: https://bunnymarket.app/sitemap.xml
 
 # Important pages
 Allow: /games
@@ -11,4 +11,7 @@ Allow: /how-to-play
 Allow: /faq
 Allow: /privacy
 Allow: /terms
+
+# Crawl-delay
+Crawl-delay: 1
 

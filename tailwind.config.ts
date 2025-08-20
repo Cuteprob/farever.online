@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
   	extend: {
   		backgroundImage: {
-          'gradient-game': 'radial-gradient(at 100% 0%, hsla(265,40%,90%,0.2) 0px, transparent 50%), radial-gradient(at 0% 100%, hsla(265,60%,85%,0.2) 0px, transparent 50%)',
+          'gradient-game': 'radial-gradient(at 100% 0%, hsla(200,85%,60%,0.08) 0px, transparent 50%), radial-gradient(at 0% 100%, hsla(330,70%,70%,0.08) 0px, transparent 50%)',
         },
   			borderRadius: {
   				lg: 'var(--radius)',
@@ -63,13 +63,13 @@ const config: Config = {
   				}
   		},
   		boxShadow: {
-          'game': '0 4px 20px -8px hsla(265,60%,40%,0.2)',
-          'game-hover': '0 8px 30px -8px hsla(265,60%,40%,0.3)',
+          'game': '0 4px 20px -8px hsla(200,85%,60%,0.15)',
+          'game-hover': '0 8px 30px -8px hsla(200,85%,60%,0.25)',
         },
   		fontFamily: {
-  			heading: ['var(--font-space-grotesk)', 'sans-serif'],
-  			body: ['var(--font-inter)', 'sans-serif'],
-  			mono: ['var(--font-jetbrains-mono)', 'monospace'],
+  			heading: ['var(--font-fredoka)', 'Comic Sans MS', 'cursive'],
+  			body: ['var(--font-nunito)', 'Quicksand', 'sans-serif'],
+  			mono: ['var(--font-fira-code)', 'Courier New', 'monospace'],
   		},
   		keyframes: {
   			'accordion-down': {
@@ -87,11 +87,35 @@ const config: Config = {
   				to: {
   					height: '0'
   				}
+  			},
+  			'bounce': {
+  				'0%, 20%, 53%, 80%, 100%': {
+  					transform: 'translate3d(0,0,0)'
+  				},
+  				'40%, 43%': {
+  					transform: 'translate3d(0, -8px, 0)'
+  				},
+  				'70%': {
+  					transform: 'translate3d(0, -4px, 0)'
+  				},
+  				'90%': {
+  					transform: 'translate3d(0, -2px, 0)'
+  				}
+  			},
+  			'pulse': {
+  				'0%, 100%': {
+  					opacity: '1'
+  				},
+  				'50%': {
+  					opacity: '0.8'
+  				}
   			}
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+  			'bounce': 'bounce 1s ease-in-out',
+  			'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
   		}
   	}
   },

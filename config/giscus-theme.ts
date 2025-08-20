@@ -37,13 +37,14 @@ export const giscusTheme = {
 
     /* 输入框文本区域 */
     .gsc-comment-box textarea {
-      border: none !important;
-      background-color: var(--background) !important;
+      border: 1px solid hsl(var(--border)) !important;
+      background-color: hsl(var(--input)) !important;
       padding: 1rem !important;
       font-size: 0.875rem !important;
       line-height: 1.5 !important;
-      color: var(--foreground);
-      border-radius: 0.5rem !important;
+      color: hsl(var(--foreground)) !important;
+      border-radius: var(--radius) !important;
+      font-family: var(--font-nunito), sans-serif !important;
     }
 
     /* 按钮样式 */
@@ -53,12 +54,13 @@ export const giscusTheme = {
       font-size: 0.875rem !important;
       font-weight: 500 !important;
       transition: all 0.2s !important;
+      font-family: var(--font-nunito), sans-serif !important;
     }
 
     /* 主按钮 */
     .gsc-comment-box-buttons button.gsc-submit {
-      background-color: var(--primary) !important;
-      color: var(--primary-foreground) !important;
+      background-color: hsl(var(--primary)) !important;
+      color: hsl(var(--primary-foreground)) !important;
     }
 
     .gsc-comment-box-buttons button.gsc-submit:hover {
@@ -100,21 +102,24 @@ export const giscusTheme = {
 
     /* 用户名样式 */
     .gsc-comment-author-name {
-      color: var(--foreground) !important;
+      color: hsl(var(--foreground)) !important;
       font-weight: 500 !important;
+      font-family: var(--font-fredoka-one), cursive !important;
     }
 
     /* 时间戳样式 */
     .gsc-comment-timestamp {
-      color: var(--muted-foreground) !important;
+      color: hsl(var(--muted-foreground)) !important;
       font-size: 0.75rem !important;
+      font-family: var(--font-nunito), sans-serif !important;
     }
 
     /* 评论文本样式 */
     .gsc-comment-content .gsc-comment-text {
-      color: var(--muted-foreground) !important;
+      color: hsl(var(--muted-foreground)) !important;
       font-size: 0.875rem !important;
       line-height: 1.5 !important;
+      font-family: var(--font-nunito), sans-serif !important;
     }
 
     /* 移除所有分割线 */

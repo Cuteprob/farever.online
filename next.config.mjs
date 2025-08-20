@@ -8,6 +8,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  // Cloudflare Pages 部署时不需要 Next.js 图片优化
+};
 
 export default nextConfig;

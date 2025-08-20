@@ -40,17 +40,18 @@ main {
 }
 
 .gsc-comment-box-textarea {
-  background-color: var(--color-canvas-subtle) !important;
-  border-color: var(--color-border-default) !important;
-  border-radius: 8px !important;
-  color: var(--color-fg-default) !important;
+  background-color: hsl(var(--input)) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: var(--radius) !important;
+  color: hsl(var(--foreground)) !important;
+  font-family: var(--font-nunito), sans-serif !important;
 }
 
 /* 评论列表样式 */
 .gsc-comment {
   background-color: transparent !important;
   border: none !important;
-  border-bottom: 1px solid var(--color-border-muted) !important;
+  border-bottom: 1px solid hsl(var(--border)) !important;
   padding: 16px 0 !important;
 }
 
@@ -61,9 +62,32 @@ main {
 /* 按钮样式 */
 .gsc-comment-box-buttons button {
   border-radius: 9999px !important;
+  font-family: var(--font-nunito), sans-serif !important;
 }
 
 .gsc-submit {
-  background-color: var(--color-accent-emphasis) !important;
-  color: white !important;
+  background-color: hsl(var(--primary)) !important;
+  color: hsl(var(--primary-foreground)) !important;
+}
+
+.gsc-submit:hover {
+  opacity: 0.9 !important;
+}
+
+/* 用户名样式 */
+.gsc-comment-author-name {
+  color: hsl(var(--foreground)) !important;
+  font-family: var(--font-fredoka-one), cursive !important;
+}
+
+/* 时间戳样式 */
+.gsc-comment-timestamp {
+  color: hsl(var(--muted-foreground)) !important;
+  font-family: var(--font-nunito), sans-serif !important;
+}
+
+/* 评论文本样式 */
+.gsc-comment-text {
+  color: hsl(var(--muted-foreground)) !important;
+  font-family: var(--font-nunito), sans-serif !important;
 } 

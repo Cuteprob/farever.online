@@ -1,8 +1,11 @@
 #:schema node_modules/wrangler/config-schema.json
-name = "sprunksters-top"
+name = "bunnymarket-app"
 compatibility_date = "2024-10-22"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".vercel/output/static"
+
+# Cloudflare Pages 不支持 [build] 配置段落
+# 构建命令需要在 Pages 仪表板中配置或使用 wrangler pages deploy 命令
 
 # Automatically place your workloads in an optimal location to minimize latency.
 # If you are running back-end logic in a Pages Function, running it closer to your back-end infrastructure
@@ -79,9 +82,31 @@ pages_build_output_dir = ".vercel/output/static"
 
 ######## PRODUCTION environment config ########
 
-# [env.production.vars]
-# API_KEY = "abc123"
+[env.production.vars]
+# 数据库配置
+TURSO_DATABASE_URL = "https://games-data-justinxie.turso.io"
+TURSO_DATABASE_AUTH_TOKEN = "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzY0NzI4NTEsImlkIjoiMTAxZDI3OWEtZTcxNi00NTlkLTlkMTctNzk5ZjY3YjBlYTk3In0.F92EtqQqnhdWCzpUEYBB1lze2SznVOv_JApGke_sNHtc_KwFSnaqA5Rj28QJFvoQm3l2IiKzJaIuZSC1RcWvDQ"
 
-# [[env.production.kv_namespaces]]
-# binding = "MY_KV_NAMESPACE"
-# id = "<PRODUCTION_NAMESPACE_ID>"
+# 项目配置
+PROJECT_ID = "bunnymarket-app"
+
+# 网站配置
+NEXT_PUBLIC_WEB_URL = "https://bunnymarket.app"
+
+# Google Analytics 配置
+NEXT_PUBLIC_GOOGLE_ANALYTICS_ID = "G-K8RC4LFETZ"
+
+# Google AdSense 配置  
+NEXT_PUBLIC_GOOGLE_ADSENSE_ID = "ca-pub-8480929139790231"
+
+# Next.js 配置
+NEXT_PUBLIC_BASE_URL = "https://bunnymarket.app"
+
+# 性能监控配置（可选）
+ENABLE_PERFORMANCE_MONITORING = "true"
+LOG_SLOW_QUERIES = "true"
+SLOW_QUERY_THRESHOLD = "1000"
+
+# 缓存配置（可选）
+CACHE_TTL = "300"
+MAX_CACHE_SIZE = "1000"
