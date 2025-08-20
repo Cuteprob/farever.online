@@ -5,10 +5,18 @@ import { StructuredData } from '@/components/structured-data';
 import { GameProps } from '@/types/game';
 import { getMainGame } from '@/models/games';
 
-// 直接使用模型层的缓存机制
+// 直接使用模型层的缓存机制，添加SSR环境的错误恢复
 async function getCachedMainGame(): Promise<GameProps | null> {
   try {
-    return await getMainGame();
+    // 直接调用数据库函数，避免HTTP调用
+    const game = await getMainGame();
+    
+    // 添加调试日志
+    if (process.env.NODE_ENV !== 'development') {
+      console.log(`getMainGame result: ${game ? 'found' : 'null'}`);
+    }
+    
+    return game;
   } catch (error) {
     console.error('Error fetching main game:', error);
     return null;
@@ -17,9 +25,10 @@ async function getCachedMainGame(): Promise<GameProps | null> {
 
 // 创建默认元数据的工厂函数
 function createDefaultMetadata(): Metadata {
+  const baseUrl = process.env.NEXT_PUBLIC_WEB_URL || 'https://bunnymarket.app';
   const defaultTitle = 'BunnyMarket - Play Free Online Games';
   const defaultDescription = 'Play the best free online games at BunnyMarket! Enjoy a collection of fun, engaging, and entertaining games for all ages. Start playing now!';
-  const defaultImage = `${process.env.NEXT_PUBLIC_WEB_URL}/og-image.jpg`;
+  const defaultImage = `${baseUrl}/og-image.jpg`;
   
   return {
     title: defaultTitle,
@@ -29,7 +38,7 @@ function createDefaultMetadata(): Metadata {
       title: defaultTitle,
       description: defaultDescription,
       type: 'website',
-      url: process.env.NEXT_PUBLIC_WEB_URL,
+      url: baseUrl,
       siteName: 'BunnyMarket',
       images: [
         {
@@ -47,17 +56,18 @@ function createDefaultMetadata(): Metadata {
       images: [defaultImage],
     },
     alternates: {
-      canonical: process.env.NEXT_PUBLIC_WEB_URL,
+      canonical: baseUrl,
     },
   };
 }
 
 // 基于游戏数据创建元数据的工厂函数
 function createGameMetadata(game: GameProps): Metadata {
+  const baseUrl = process.env.NEXT_PUBLIC_WEB_URL || 'https://bunnymarket.app';
   const title = game.metadata?.title || `${game.title} - BunnyMarket`;
   const description = game.metadata?.description || `Play ${game.title} - A fun and engaging online game at BunnyMarket!`;
   const keywords = game.metadata?.keywords;
-  const gameImage = game.image || `${process.env.NEXT_PUBLIC_WEB_URL}/og-image.jpg`;
+  const gameImage = game.image || `${baseUrl}/og-image.jpg`;
   
   return {
     title,
@@ -67,7 +77,7 @@ function createGameMetadata(game: GameProps): Metadata {
       title,
       description,
       type: 'website',
-      url: process.env.NEXT_PUBLIC_WEB_URL,
+      url: baseUrl,
       siteName: 'BunnyMarket',
       images: [
         {
@@ -85,7 +95,7 @@ function createGameMetadata(game: GameProps): Metadata {
       images: [gameImage],
     },
     alternates: {
-      canonical: process.env.NEXT_PUBLIC_WEB_URL,
+      canonical: baseUrl,
     },
   };
 }

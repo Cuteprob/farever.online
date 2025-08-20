@@ -1,30 +1,33 @@
 import { MetadataRoute } from 'next';
 import { getAllGames, getAllCategories } from '@/models/games';
 
-// 基础 URL 配置
+// 基础 URL 配置 - 确保使用正确的生产环境 URL
 const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || 'https://bunnymarket.app';
 
-// 静态页面配置
-const STATIC_PAGES = [
-  {
-    url: BASE_URL,
-    lastModified: new Date(),
-    changeFrequency: 'daily' as const,
-    priority: 1.0,
-  },
-  {
-    url: `${BASE_URL}/privacy`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.5,
-  },
-  {
-    url: `${BASE_URL}/terms`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.5,
-  },
-];
+// 生成静态页面配置 - 使用函数确保每次调用时都生成新的日期
+function getStaticPages() {
+  const now = new Date();
+  return [
+    {
+      url: BASE_URL,
+      lastModified: now,
+      changeFrequency: 'daily' as const,
+      priority: 1.0,
+    },
+    {
+      url: `${BASE_URL}/privacy`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.5,
+    },
+    {
+      url: `${BASE_URL}/terms`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.5,
+    },
+  ];
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
@@ -59,7 +62,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // 合并所有 URL
     const allUrls = [
-      ...STATIC_PAGES,
+      ...getStaticPages(),
       ...gameUrls,
       ...categoryUrls,
     ];
@@ -73,10 +76,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error('Error generating sitemap:', error);
     
     // 出错时返回基本的静态页面
-    return STATIC_PAGES;
+    return getStaticPages();
   }
 }
 
 // 设置运行时环境（可选）
 export const runtime = 'edge';
+
+// 重新验证配置 - 确保 sitemap 能够动态更新
+// 设置较短的重新验证时间，确保新游戏能够及时出现在 sitemap 中
+export const revalidate = 300; // 5分钟重新验证一次，平衡性能和实时性
 

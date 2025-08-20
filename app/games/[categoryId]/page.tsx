@@ -20,26 +20,45 @@ interface CategoryPageProps {
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
   const category = await getCategoryBySlug(params.categoryId);
   
-  if (!category) {
+  // 处理 new-games 的特殊情况
+  let displayCategory = category;
+  if (!category && params.categoryId === 'new-games') {
+    displayCategory = {
+      id: 'new-games',
+      name: 'New Games',
+      description: 'Discover the latest and most exciting games.',
+      slug: 'new-games'
+    };
+  }
+  
+  if (!displayCategory) {
     return {
       title: 'Category Not Found | BunnyMarket Games',
       description: 'The requested game category could not be found.'
     };
   }
 
+  const baseUrl = process.env.NEXT_PUBLIC_WEB_URL || 'https://bunnymarket.app';
+  const categoryUrl = `${baseUrl}/games/${params.categoryId}`;
+
   return {
-    title: `${category.name} | BunnyMarket Games`,
-    description: category.description || `Explore our collection of ${category.name.toLowerCase()}.`,
+    title: `${displayCategory.name} | BunnyMarket Games`,
+    description: displayCategory.description || `Explore our collection of ${displayCategory.name.toLowerCase()}.`,
     openGraph: {
-      title: `${category.name} Games`,
-      description: category.description || `Explore our collection of ${category.name.toLowerCase()}.`,
+      title: `${displayCategory.name} Games`,
+      description: displayCategory.description || `Explore our collection of ${displayCategory.name.toLowerCase()}.`,
       type: 'website',
+      url: categoryUrl,
+      siteName: 'BunnyMarket',
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${category.name} Games`,
-      description: category.description || `Explore our collection of ${category.name.toLowerCase()}.`,
-    }
+      title: `${displayCategory.name} Games`,
+      description: displayCategory.description || `Explore our collection of ${displayCategory.name.toLowerCase()}.`,
+    },
+    alternates: {
+      canonical: categoryUrl,
+    },
   };
 }
 
@@ -53,18 +72,37 @@ async function getCategoryGames(categorySlug: string, page: number = 1): Promise
     const limit = 12; // 每页12个游戏 (3x4网格)
     const offset = (page - 1) * limit;
     
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
-    const response = await fetch(`${baseUrl}/api/getGamesByCategory?categoryId=${categorySlug}&limit=${limit}&offset=${offset}`);
-    const data = await response.json();
-    const games = data.data;
-
-    // 获取分类信息
+    // 先验证分类是否存在
     const category = await getCategoryBySlug(categorySlug);
+    
+    let games: GameProps[];
+    
     if (!category) {
-      return { games: [], hasMore: false, total: 0 };
+      console.log(`Category not found for slug: ${categorySlug}`);
+      
+      // 如果是 new-games 且分类不存在，返回最新游戏
+      if (categorySlug === 'new-games') {
+        console.log('Fetching latest games as fallback for new-games');
+        games = await getAllGames({
+          limit: limit + 1,
+          offset
+        });
+      } else {
+        return { games: [], hasMore: false, total: 0 };
+      }
+    } else {
+      // 正常通过分类ID获取游戏
+      games = await getAllGames({
+        categoryId: category.id,
+        limit: limit + 1,
+        offset
+      });
     }
+
     const hasMore = games.length > limit;
     const actualGames = hasMore ? games.slice(0, limit) : games;
+
+    console.log(`getCategoryGames: categorySlug=${categorySlug}, categoryId=${category?.id || 'fallback'}, returned ${actualGames.length} games, hasMore=${hasMore}`);
 
     return {
       games: actualGames,
@@ -81,7 +119,16 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
   // 获取分类信息
   const category = await getCategoryBySlug(params.categoryId);
   
-  if (!category) {
+  // 特殊处理：如果是 new-games 且找不到分类，创建默认分类信息
+  let displayCategory = category;
+  if (!category && params.categoryId === 'new-games') {
+    displayCategory = {
+      id: 'new-games',
+      name: 'New Games',
+      description: 'Discover the latest and most exciting games.',
+      slug: 'new-games'
+    };
+  } else if (!category) {
     notFound();
   }
 
@@ -98,18 +145,18 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
         <div className="mb-6">
           <Breadcrumb items={[
             { label: 'Home', href: '/' },
-            { label: category.name, href: `/games/${params.categoryId}` }
+            { label: displayCategory!.name, href: `/games/${params.categoryId}` }
           ]} />
         </div>
 
         {/* 简化的页面头部 */}
         <div className="text-center mb-16">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            {category.name}
+            {displayCategory!.name}
           </h1>
-          {category.description && (
+          {displayCategory!.description && (
             <p className="text-gray-600 mb-4">
-              {category.description}
+              {displayCategory!.description}
             </p>
           )}
         </div>

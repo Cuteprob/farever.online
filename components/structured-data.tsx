@@ -9,21 +9,23 @@ interface StructuredDataProps {
 }
 
 export function StructuredData({ game, isMainPage = false }: StructuredDataProps) {
+  const baseUrl = process.env.NEXT_PUBLIC_WEB_URL || 'https://bunnymarket.app';
+
   // Website structured data
   const websiteStructuredData = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "BunnyMarket",
-    "url": process.env.NEXT_PUBLIC_WEB_URL,
+    "url": baseUrl,
     "description": "Play the best free online games at BunnyMarket! Enjoy a collection of fun, engaging, and entertaining games for all ages.",
     "publisher": {
       "@type": "Organization",
       "name": "BunnyMarket",
-      "url": process.env.NEXT_PUBLIC_WEB_URL
+      "url": baseUrl
     },
     "potentialAction": {
       "@type": "SearchAction",
-      "target": `${process.env.NEXT_PUBLIC_WEB_URL}/search?q={search_term_string}`,
+      "target": `${baseUrl}/search?q={search_term_string}`,
       "query-input": "required name=search_term_string"
     }
   };
@@ -34,8 +36,8 @@ export function StructuredData({ game, isMainPage = false }: StructuredDataProps
     "@type": "VideoGame",
     "name": game.title,
     "description": game.metadata?.description || `Play ${game.title} free online at BunnyMarket! A fun and engaging game for all ages.`,
-    "url": isMainPage ? (process.env.NEXT_PUBLIC_WEB_URL) : `${process.env.NEXT_PUBLIC_WEB_URL}/${game.id}`,
-    "image": game.image || `${process.env.NEXT_PUBLIC_WEB_URL}/og-image.jpg`,
+    "url": isMainPage ? baseUrl : `${baseUrl}/${game.id}`,
+    "image": game.image || `${baseUrl}/og-image.jpg`,
     "genre": game.categories?.join(", ") || "Online Game",
     "playMode": "SinglePlayer",
     "applicationCategory": "Game",
@@ -57,7 +59,7 @@ export function StructuredData({ game, isMainPage = false }: StructuredDataProps
     "publisher": {
       "@type": "Organization",
       "name": "BunnyMarket",
-      "url": process.env.NEXT_PUBLIC_WEB_URL
+      "url": baseUrl
     },
     "inLanguage": "en-US"
   };
@@ -67,11 +69,11 @@ export function StructuredData({ game, isMainPage = false }: StructuredDataProps
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "BunnyMarket",
-    "url": process.env.NEXT_PUBLIC_WEB_URL,
-    "logo": `${process.env.NEXT_PUBLIC_WEB_URL}/logo.png`,
+    "url": baseUrl,
+    "logo": `${baseUrl}/logo.png`,
     "description": "BunnyMarket offers the best collection of free online games for players of all ages.",
     "sameAs": [
-      process.env.NEXT_PUBLIC_WEB_URL
+      baseUrl
     ]
   };
 

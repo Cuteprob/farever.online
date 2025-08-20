@@ -25,6 +25,8 @@ export async function generateMetadata({ params }: GamePageProps): Promise<Metad
     };
   }
 
+  const baseUrl = process.env.NEXT_PUBLIC_WEB_URL || 'https://bunnymarket.app';
+  const gameUrl = `${baseUrl}/${params.id}`;
   const metadataTitle = game.metadata?.title;
   const metadataDescription = game.metadata?.description;
   const metadataKeywords = game.metadata?.keywords;
@@ -43,11 +45,11 @@ export async function generateMetadata({ params }: GamePageProps): Promise<Metad
       title: metadataTitle,
       description: metadataDescription,
       type: 'article',
-      url: `${process.env.NEXT_PUBLIC_WEB_URL}/${params.id}`,
+      url: gameUrl,
       siteName: 'BunnyMarket',
       images: [
         {
-          url: game.image || `${process.env.NEXT_PUBLIC_WEB_URL}/og-image.jpg`,
+          url: game.image || `${baseUrl}/og-image.jpg`,
           width: 1200,
           height: 630,
           alt: `${game.title} - Free Online Game`,
@@ -59,10 +61,10 @@ export async function generateMetadata({ params }: GamePageProps): Promise<Metad
       card: 'summary_large_image',
       title: metadataTitle,
       description: metadataDescription,
-      images: [game.image || `${process.env.NEXT_PUBLIC_WEB_URL}/og-image.jpg`],
+      images: [game.image || `${baseUrl}/og-image.jpg`],
     },
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_WEB_URL}/${params.id}`,
+      canonical: gameUrl,
     },
     other: {
       // 添加游戏相关的结构化数据

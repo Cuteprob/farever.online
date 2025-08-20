@@ -1,55 +1,8 @@
 import { turso } from "@/models/tursoDb";
 import { GameProps, GameComment, DbGameResult, GameQueryParams } from "@/types/game";
-import { cacheManager } from "@/utils/cache-manager";
 import { transformDbResultToGame } from "@/lib/format";
 
-// 缓存辅助函数
-function getCacheKey(operation: string, params: any): string {
-  return `${operation}:${JSON.stringify(params)}`;
-}
 
-function getFromCache<T>(key: string): T | null {
-  return cacheManager.get<T>(key);
-}
-
-function setCache<T>(key: string, data: T, dependencies?: string[]): void {
-  cacheManager.set(key, data, dependencies);
-}
-
-// 根据数据类型设置缓存的辅助函数
-function setCacheWithType<T>(key: string, data: T, type: 'games' | 'mainGame' | 'gameDetail' | 'categories' | 'ratings' | 'comments' | 'search' | 'performance', dependencies?: string[]): void {
-  cacheManager.setWithType(key, data, type, dependencies);
-}
-
-// 手动缓存清除功能
-export const clearGameCache = {
-  // 清除所有游戏相关缓存
-  all: () => cacheManager.clear(),
-  
-  // 清除特定游戏的缓存
-  game: (gameId: string) => cacheManager.invalidateByDependency(`game:${gameId}`),
-  
-  // 清除主游戏缓存
-  mainGame: () => cacheManager.invalidate('getMainGame'),
-  
-  // 清除分类相关缓存
-  categories: () => cacheManager.invalidateByDependency('categories'),
-  
-  // 清除评论相关缓存
-  comments: (gameId?: string) => {
-    if (gameId) {
-      cacheManager.invalidateByDependency(`game:${gameId}`);
-    } else {
-      cacheManager.invalidateByDependency('comments');
-    }
-  },
-  
-  // 清除相关游戏缓存
-  related: (gameId: string) => cacheManager.invalidateByDependency(`game:${gameId}`),
-  
-  // 清除搜索缓存
-  search: () => cacheManager.invalidate('search'),
-}
 
 // 获取项目ID和语言配置
 function getProjectConfig() {
@@ -59,84 +12,121 @@ function getProjectConfig() {
   };
 }
 
-// 获取主页面游戏 (isMain=1) - 只返回一个游戏
+// 获取主页面游戏 (isMain=1) - 只返回一个游戏，带重试机制确保数据一致性
 export async function getMainGame(): Promise<GameProps | null> {
   const { projectId, locale } = getProjectConfig();
-  const cacheKey = getCacheKey('getMainGame', { projectId, locale });
-  
-  // 检查缓存（使用30分钟TTL）
-  const cached = getFromCache<GameProps>(cacheKey);
-  if (cached) {
-    console.log('models/games.ts getMainGame cached');
-    return cached;
-  }
 
   const query = `
-    SELECT 
-      pg.game_id as gameId,
-      pg.title,
-      pg.content,
-      pg.metadata,
-      gb.metadata as baseMetadata,
-      gb.iframe_url as iframeUrl,
-      gb.image_url as imageUrl,
-      gb.created_at as createdAt,
-      COALESCE(gr.average_rating, 0) as averageRating,
-      COALESCE(gr.total_ratings, 0) as totalRatings,
-      GROUP_CONCAT(c.name) as categories
-    FROM project_games pg
-    INNER JOIN games_base gb ON pg.game_id = gb.id
-    LEFT JOIN game_ratings gr ON pg.game_id = gr.game_id 
-      AND pg.project_id = gr.project_id 
-      AND pg.locale = gr.locale
-    LEFT JOIN project_game_categories pgc ON pg.id = pgc.project_game_id
-    LEFT JOIN project_categories pc ON pgc.project_category_id = pc.id
-    LEFT JOIN categories c ON pc.category_id = c.id
-    WHERE pg.project_id = ? 
-      AND pg.locale = ?
-      AND pg.is_main = 1
-      AND pg.is_published = 1
-    GROUP BY pg.id, gr.average_rating, gr.total_ratings
-    ORDER BY gr.average_rating DESC, gb.created_at DESC
-    LIMIT 1
+    SELECT
+  pg.game_id AS gameId,
+  pg.title,
+  pg.content,
+  pg.metadata,
+  gb.metadata AS baseMetadata,
+  gb.iframe_url AS iframeUrl,
+  gb.image_url AS imageUrl,
+  gb.created_at AS createdAt,
+  COALESCE(gr.average_rating, 0)  AS averageRating,
+  COALESCE(gr.total_ratings, 0)   AS totalRatings,
+  cat.categories
+FROM project_games pg
+JOIN games_base gb
+  ON gb.id = pg.game_id
+LEFT JOIN game_ratings gr
+  ON gr.game_id    = pg.game_id
+ AND gr.project_id = pg.project_id
+ AND gr.locale     = pg.locale
+LEFT JOIN (
+   SELECT
+     pgc.project_game_id,
+     GROUP_CONCAT(c.name) AS categories
+   FROM project_game_categories pgc
+   JOIN project_categories pc ON pc.id = pgc.project_category_id
+   JOIN categories c          ON c.id = pc.category_id
+   WHERE pc.is_active = 1
+   GROUP BY pgc.project_game_id
+) cat ON cat.project_game_id = pg.id
+WHERE pg.project_id   = ?
+  AND pg.locale       = ?
+  AND pg.is_main      = 1
+  AND pg.is_published = 1
+ORDER BY averageRating DESC, createdAt DESC, pg.id DESC
+LIMIT 1;
+
   `;
 
-  try {
-    const result = await turso.execute({
-      sql: query,
-      args: [projectId, locale]
-    });
+  // 使用重试机制和一致性验证来处理Turso数据库的读取一致性问题
+  const maxRetries = 3;
+  let lastGame: GameProps | null = null;
+  let consistentResults = 0;
+  
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      console.log(`models/games.ts /getMainGame attempt ${attempt}/${maxRetries}`);
+      
+      const result = await turso.execute({
+        sql: query,
+        args: [projectId, locale]
+      });
 
-    if (result.rows.length === 0) {
-      setCacheWithType(cacheKey, null, 'mainGame');
-      return null;
+      if (result.rows.length === 0) {
+        console.log(`models/games.ts /getMainGame attempt ${attempt}: no data found`);
+        if (attempt === maxRetries) {
+          return null;
+        }
+        continue;
+      }
+      
+      const game = transformDbResultToGame(result.rows[0]);
+      console.log(`models/games.ts /getMainGame attempt ${attempt} categories:`, game.categories);
+      
+      // 检查数据一致性
+      if (lastGame === null) {
+        lastGame = game;
+        consistentResults = 1;
+      } else if (JSON.stringify(game.categories) === JSON.stringify(lastGame.categories)) {
+        consistentResults++;
+        console.log(`models/games.ts /getMainGame consistent results: ${consistentResults}`);
+      } else {
+        console.warn(`models/games.ts /getMainGame data inconsistency detected:`, {
+          previous: lastGame.categories,
+          current: game.categories
+        });
+        lastGame = game;
+        consistentResults = 1;
+      }
+      
+      // 如果连续两次结果一致，或者是最后一次尝试，返回结果
+      if (consistentResults >= 2 || attempt === maxRetries) {
+        console.log(`models/games.ts /getMainGame final result after ${attempt} attempts:`, game.categories);
+        return game;
+      }
+      
+      // 短暂延迟后重试，等待数据同步
+      if (attempt < maxRetries) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+      
+    } catch (error) {
+      console.error(`Error fetching main game (attempt ${attempt}):`, error);
+      if (attempt === maxRetries) {
+        return null;
+      }
+      // 重试前等待更长时间
+      await new Promise(resolve => setTimeout(resolve, 200));
     }
-    const game = transformDbResultToGame(result.rows[0]);
-    
-    // 设置主游戏缓存（30分钟）
-    setCacheWithType(cacheKey, game, 'mainGame');
-    
-    return game;
-  } catch (error) {
-    console.error('Error fetching main game:', error);
-    return null;
   }
+  
+  return lastGame;
 }
 
-// 获取游戏评论 - 性能优化版本
+// 获取游戏评论
 export async function getGameComments(
   gameId?: string,
   limit: number = 20,
   offset: number = 0
 ): Promise<GameComment[]> {
   const { projectId, locale } = getProjectConfig();
-  const cacheKey = getCacheKey('getGameComments', { gameId, projectId, locale, limit, offset });
-  
-  // 检查缓存 - 短期缓存以保持评论时效性（15分钟）
-  const cached = getFromCache<GameComment[]>(cacheKey);
-  if (cached) {
-    return cached;
-  }
   
   let query = `
     SELECT 
@@ -187,9 +177,6 @@ export async function getGameComments(
       status: row.status as 'pending' | 'approved' | 'rejected'
     }));
 
-    // 短期缓存结果（15分钟），设置依赖关系
-    setCacheWithType(cacheKey, comments, 'comments', [`game:${gameId}`, 'comments']);
-    
     return comments;
   } catch (error) {
     console.error('Error fetching game comments:', error);
@@ -252,17 +239,6 @@ export async function submitGameComment(commentData: {
       }
     }
 
-    // 清除相关缓存
-    if (commentData.gameId) {
-      clearCache(`getGameComments:${commentData.gameId}`);
-      cacheManager.invalidateByDependency(`game:${commentData.gameId}`);
-      // 如果有评分，也清除评分相关缓存
-      if (commentData.ratingScore) {
-        await clearAllGameCaches(commentData.gameId);
-      }
-    }
-    cacheManager.invalidateByDependency('comments');
-
     return { 
       success: true, 
       data: { id: Number(result.lastInsertRowid) }
@@ -285,13 +261,6 @@ export async function getCommentStats(gameId?: string): Promise<{
   averageRating?: number;
 }> {
   const { projectId, locale } = getProjectConfig();
-  const cacheKey = getCacheKey('getCommentStats', { gameId, projectId, locale });
-  
-  // 检查缓存
-  const cached = getFromCache<any>(cacheKey);
-  if (cached) {
-    return cached;
-  }
 
   let query = `
     SELECT 
@@ -324,9 +293,6 @@ export async function getCommentStats(gameId?: string): Promise<{
       averageRating: row.averageRating ? Math.round((row.averageRating as number) * 10) / 10 : undefined
     };
 
-    // 缓存统计数据（15分钟）
-    setCacheWithType(cacheKey, stats, 'comments', [`game:${gameId}`, 'comments']);
-    
     return stats;
   } catch (error) {
     console.error('Error fetching comment stats:', error);
@@ -334,23 +300,12 @@ export async function getCommentStats(gameId?: string): Promise<{
   }
 }
 
-// 获取所有游戏（兼容现有API）- 性能优化版本
+// 获取所有游戏
 export async function getAllGames(
   params: GameQueryParams = {}
 ): Promise<GameProps[]> {
   const { projectId, locale } = getProjectConfig();
   const { limit, offset = 0, categoryId, isMain } = params;
-  
-  const cacheKey = getCacheKey('getAllGames', { 
-    projectId, 
-    locale, 
-    limit, 
-    offset, 
-    categoryId, 
-    isMain 
-  });
-  
-  // 不使用缓存以避免评分数据过期（首页/列表需要展示实时评分）
   
   let query = `
     SELECT 
@@ -421,12 +376,9 @@ export async function getAllGames(
   }
 }
 
-// 获取单个游戏详情 - 性能优化版本
+// 获取单个游戏详情
 export async function getGameById(gameId: string): Promise<GameProps | null> {
   const { projectId, locale } = getProjectConfig();
-  const cacheKey = getCacheKey('getGameById', { gameId, projectId, locale });
-  
-  // 不使用缓存以避免评分数据过期（游戏详情页需要显示实时评分）
 
   const query = `
     SELECT 
@@ -476,13 +428,9 @@ export async function getGameById(gameId: string): Promise<GameProps | null> {
   }
 }
 
-// 清除缓存函数（用于数据更新后）
+// 清除缓存函数（用于数据更新后）- 已禁用缓存
 export function clearCache(pattern?: string): void {
-  if (pattern) {
-    cacheManager.invalidate(pattern);
-  } else {
-    cacheManager.clear();
-  }
+  // 缓存已禁用，此函数保留以维持API兼容性
 }
 
 // 获取所有可用分类
@@ -494,13 +442,6 @@ export async function getAllCategories(): Promise<Array<{
   gameCount: number;
 }>> {
   const { projectId, locale } = getProjectConfig();
-  const cacheKey = getCacheKey('getAllCategories', { projectId, locale });
-  
-  // 检查缓存
-  const cached = getFromCache<Array<any>>(cacheKey);
-  if (cached) {
-    return cached;
-  }
   
   const query = `
     SELECT 
@@ -538,12 +479,10 @@ export async function getAllCategories(): Promise<Array<{
       id: row.id as string,
       name: row.name as string,
       description: (row.description as string) || '',
-      slug: (row.id as string).toLowerCase().replace(/[^a-z0-9]/g, '-'),
+      slug: (row.name as string).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''),
       gameCount: parseInt(row.game_count as string) || 0
     }));
 
-    // 缓存结果，设置依赖关系（1小时）
-    setCacheWithType(cacheKey, categories, 'categories', ['categories']);
     return categories;
   } catch (error) {
     console.error('Error fetching categories:', error);
@@ -559,7 +498,15 @@ export async function getCategoryBySlug(slug: string): Promise<{
   slug: string;
 } | null> {
   const categories = await getAllCategories();
-  return categories.find(cat => cat.slug === slug) || null;
+  
+  const foundCategory = categories.find(cat => cat.slug === slug);
+  
+  // 生产环境调试日志
+  if (process.env.NODE_ENV !== 'development' && !foundCategory) {
+    console.log(`getCategoryBySlug: slug="${slug}" not found. Available slugs: ${categories.map(c => c.slug).join(', ')}`);
+  }
+  
+  return foundCategory || null;
 }
 
 // 同步评分到游戏评分表 - 内部辅助函数（用于评论提交时同步评分）
@@ -700,9 +647,6 @@ export async function saveGameRating(
       }
     };
 
-    // 彻底清除所有相关缓存 - 终极修复版
-    await clearAllGameCaches(gameId);
-
     return { success: true, data };
 
   } catch (error) {
@@ -755,12 +699,7 @@ export async function getGameRating(
       }
     };
 
-    const response = { success: true, data };
-    
-    // 不缓存评分查询结果，确保数据实时性
-    // setCache(cacheKey, response, [`game:${gameId}`, 'rating']); // 禁用缓存
-    
-    return response;
+    return { success: true, data };
 
   } catch (error) {
     console.error('Error fetching game rating:', error);
@@ -771,51 +710,12 @@ export async function getGameRating(
   }
 }
 
-// 彻底清除游戏相关的所有缓存
-async function clearAllGameCaches(gameId: string): Promise<void> {
-  try {
-    // 1. 清除内存缓存中的所有相关项
-    clearCache(gameId); // 模式匹配清除
-    cacheManager.invalidateByDependency(`game:${gameId}`); // 依赖清除
-    
-    // 2. 清除特定缓存键
-    const { projectId, locale } = getProjectConfig();
-    const keysToDelete = [
-      getCacheKey('getGameRating', { gameId, projectId, locale }),
-      getCacheKey('getGameById', { gameId, projectId, locale }),
-      getCacheKey('getMainGame', { projectId, locale }),
-      getCacheKey('getAllGames', { projectId, locale }),
-      `rating-${gameId}`,
-      `game-${gameId}`
-    ];
-    
-    keysToDelete.forEach(key => {
-      cacheManager.delete(key);
-    });
-    
-    // 3. 清除浏览器缓存
-    await cacheManager.clearBrowserCache(`rating?gameId=${gameId}`);
-    await cacheManager.clearBrowserCache(`games/${gameId}`);
-    
-    console.log(`Cleared all caches for game: ${gameId}`);
-  } catch (error) {
-    console.warn('Error clearing game caches:', error);
-  }
-}
-
 // 获取相关游戏 - 基于标签相似度
 export async function getRelatedGames(
   currentGameId: string, 
   limit: number = 16
 ): Promise<GameProps[]> {
   const { projectId, locale } = getProjectConfig();
-  const cacheKey = getCacheKey('getRelatedGames', { currentGameId, projectId, locale, limit });
-  
-  // 检查缓存
-  const cached = getFromCache<GameProps[]>(cacheKey);
-  if (cached) {
-    return cached;
-  }
 
   try {
     // 第一步：获取当前游戏的所有分类
@@ -875,7 +775,6 @@ export async function getRelatedGames(
       });
 
       const fallbackGames = fallbackResult.rows.map(transformDbResultToGame);
-      setCacheWithType(cacheKey, fallbackGames, 'games', [`game:${currentGameId}`, 'related']);
       return fallbackGames;
     }
 
@@ -952,9 +851,6 @@ export async function getRelatedGames(
       .slice(0, limit)
       .map(({ similarity, ...game }) => game); // 移除similarity字段
 
-    // 缓存结果（30分钟）
-    setCacheWithType(cacheKey, sortedGames, 'games', [`game:${currentGameId}`, 'related']);
-    
     return sortedGames;
 
   } catch (error) {
@@ -963,7 +859,7 @@ export async function getRelatedGames(
   }
 }
 
-// 获取缓存统计信息（调试用）
+// 获取缓存统计信息（调试用）- 已禁用缓存
 export function getCacheStats() {
-  return cacheManager.getStats();
+  return { message: "缓存已禁用" };
 }

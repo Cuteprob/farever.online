@@ -244,7 +244,7 @@ export function StarRating({
       {showDetails && (
         <div className={`${sizeConfig[size].text} text-gray-300 whitespace-nowrap`}>
           <span className="font-medium">
-            {currentRating.toFixed(1)}/5
+            {currentRating.toFixed(1)}/5.0
           </span>
           <span className="text-gray-400 ml-1">
             ( {currentTotal} votes )

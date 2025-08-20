@@ -18,7 +18,7 @@ const GameDetail: React.FC<GameDetailProps> = ({ game, isMain = false }) => {
     id: game.id,
     title: game.title,
     image: game.image,
-    iframeUrl: game.iframeUrl || 'https://example.com/game', // 提供默认值
+    iframeUrl: game.iframeUrl || '', // 提供默认值
     content: game.content,
     rating: {
       averageRating: game.rating.averageRating,
