@@ -72,7 +72,7 @@ export default function PrivacyPolicy() {
           <section className="mt-8">
             <h2 className="text-2xl font-heading text-primary mb-4">5. Contact Us</h2>
             <p className="text-muted-foreground leading-relaxed">
-              If you have any questions about this Privacy Policy, please contact us at support@bunnymarket.app.
+              If you have any questions about this Privacy Policy, please contact us at: support@bunnymarket.app
             </p>
           </section>
         </div>

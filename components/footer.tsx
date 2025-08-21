@@ -15,9 +15,9 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="mailto:support@bunnymarket.app" className="text-sm text-foreground hover:text-primary transition-colors">
+                <span className="text-sm text-foreground">
                   support@bunnymarket.app
-                </a>
+                </span>
               </li>
             </ul>
           </div>
