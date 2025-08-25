@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getGameComments, submitGameComment, getCommentStats } from '@/models/games';
 import type { ApiResponse } from '@/types/game';
+import { getCacheHeaders, CacheType, generateETag, checkIfNoneMatch, createNotModifiedResponse } from '@/utils/cache-config';
+import { log } from '@/utils/logger';
 
 // 使用 Edge Runtime 提升性能
 export const runtime = 'edge';
@@ -32,7 +34,7 @@ export async function GET(request: NextRequest) {
     const duration = Date.now() - startTime;
     
     // 记录性能指标
-    console.log(`getComments API: ${duration}ms, returned ${comments.length} comments`);
+    log.api('GET', '/api/comments', duration, true, { gameId, commentCount: comments.length, limit, offset });
 
     const response: ApiResponse<typeof comments> = {
       success: true,
@@ -47,10 +49,25 @@ export async function GET(request: NextRequest) {
       }
     };
 
-    // 设置缓存头 - 短期缓存
+    // 生成ETag用于缓存验证
+    const etag = generateETag(response, gameId);
+    
+    // 检查条件请求
+    if (checkIfNoneMatch(request, etag)) {
+      return createNotModifiedResponse(etag, CacheType.COMMENTS);
+    }
+
+    // 使用统一缓存策略 - 评论长缓存（因为需要审核）
+    const cacheHeaders = getCacheHeaders(
+      CacheType.COMMENTS, 
+      etag, 
+      true, // 只在有数据时缓存
+      comments.length > 0
+    );
+
     const headers = new Headers({
       'Content-Type': 'application/json',
-      'Cache-Control': 'public, max-age=60, stale-while-revalidate=120', // 1分钟缓存，2分钟stale
+      ...cacheHeaders,
       'X-Response-Time': `${duration}ms`,
       'X-Comment-Count': String(comments.length)
     });
@@ -61,7 +78,7 @@ export async function GET(request: NextRequest) {
     });
     
   } catch (error) {
-    console.error('getComments API Error:', error);
+    log.error('getComments API Error', error);
     
     const errorResponse: ApiResponse<any[]> = {
       success: false,
@@ -74,7 +91,7 @@ export async function GET(request: NextRequest) {
       status: 500,
       headers: {
         'Content-Type': 'application/json',
-        'Cache-Control': 'no-cache'
+        ...getCacheHeaders(CacheType.NO_CACHE)
       }
     });
   }
@@ -106,7 +123,7 @@ export async function POST(request: NextRequest) {
     });
 
     const duration = Date.now() - startTime;
-    console.log(`submitComment API: ${duration}ms, success: ${result.success}`);
+    log.api('POST', '/api/comments', duration, result.success, { gameId, success: result.success });
 
     if (result.success) {
       const response = {
@@ -134,7 +151,7 @@ export async function POST(request: NextRequest) {
     }
     
   } catch (error) {
-    console.error('submitComment API Error:', error);
+    log.error('submitComment API Error', error);
     
     return NextResponse.json({
       success: false,
@@ -147,8 +164,6 @@ export async function POST(request: NextRequest) {
 export async function HEAD() {
   return new NextResponse(null, {
     status: 200,
-    headers: {
-      'Cache-Control': 'public, max-age=60'
-    }
+    headers: getCacheHeaders(CacheType.SHORT_CACHE)
   });
 }

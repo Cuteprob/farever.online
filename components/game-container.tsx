@@ -115,6 +115,10 @@ export function GameContainer({ game }: GameContainerProps) {
           frameBorder="0"
           allowFullScreen={true}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation allow-top-navigation-by-user-activation"
+          referrerPolicy="no-referrer"
+          loading="lazy"
+          title={`${game.title} - Online Game`}
         />
       </div>
 

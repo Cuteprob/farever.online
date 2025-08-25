@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { saveGameRating, getGameRating } from '@/models/games';
+import { getCacheHeaders, CacheType, generateETag, checkIfNoneMatch, createNotModifiedResponse } from '@/utils/cache-config';
+import { log } from '@/utils/logger';
 
 // 使用 Edge Runtime 提升性能
 export const runtime = 'edge';
@@ -20,7 +22,7 @@ export async function POST(request: NextRequest) {
     const duration = Date.now() - startTime;
     
     // 记录性能指标
-    console.log(`saveGameRating API: ${duration}ms, success: ${result.success}`);
+    log.api('POST', '/api/games/rating', duration, result.success, { gameId, success: result.success });
 
     if (!result.success) {
       return NextResponse.json(
@@ -30,18 +32,16 @@ export async function POST(request: NextRequest) {
     }
 
     // 生成新的ETag用于缓存失效
-    const etag = `"${gameId}-${Date.now()}"`;
+    const etag = generateETag(result, gameId);
     
-    // 设置缓存头 - 关键改进：添加缓存失效指令
+    // 评分更新后必须使用无缓存策略，确保实时性
+    const cacheHeaders = getCacheHeaders(CacheType.NO_CACHE, etag);
+    
     const headers = new Headers({
       'Content-Type': 'application/json',
-      'Cache-Control': 'no-cache, no-store, must-revalidate', // 强制不缓存
-      'Pragma': 'no-cache', // HTTP/1.0 兼容
-      'Expires': '0', // 立即过期
-      'ETag': etag, // 新的ETag
+      ...cacheHeaders,
       'X-Cache-Invalidate': `rating-${gameId}`, // 自定义缓存失效标识
-      'X-Response-Time': `${duration}ms`,
-      'Vary': 'Accept-Encoding' // 确保缓存变体
+      'X-Response-Time': `${duration}ms`
     });
 
     return NextResponse.json({
@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error) {
-    console.error('Rating API POST Error:', error);
+    log.error('Rating API POST Error', error);
     
     return NextResponse.json(
       { 
@@ -94,7 +94,7 @@ export async function GET(request: NextRequest) {
     const duration = Date.now() - startTime;
     
     // 记录性能指标
-    console.log(`getGameRating API: ${duration}ms, success: ${result.success}`);
+    log.api('GET', '/api/games/rating', duration, result.success, { gameId, success: result.success });
 
     if (!result.success) {
       return NextResponse.json(
@@ -103,38 +103,27 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // 生成ETag基于数据内容和时间戳
-    const dataHash = Buffer.from(JSON.stringify({
+    // 生成ETag基于数据内容
+    const etag = generateETag({
       avg: result.data?.averageRating,
       total: result.data?.totalRatings,
       dist: result.data?.ratingDistribution
-    })).toString('base64');
-    const etag = `"${gameId}-${dataHash}"`;
+    }, gameId);
     
     // 检查条件请求
-    const ifNoneMatch = request.headers.get('if-none-match');
-    if (ifNoneMatch === etag) {
-      return new NextResponse(null, { 
-        status: 304,
-        headers: {
-          'ETag': etag,
-          'Cache-Control': 'public, max-age=60, stale-while-revalidate=120',
-        }
-      });
+    if (checkIfNoneMatch(request, etag)) {
+      return createNotModifiedResponse(etag, CacheType.RATINGS);
     }
 
-    // 禁用缓存以确保数据实时性
+    // 评分数据使用短缓存策略，必须验证
+    const cacheHeaders = getCacheHeaders(CacheType.RATINGS, etag);
+    
     const headers = new Headers({
       'Content-Type': 'application/json',
-      'Cache-Control': 'no-cache, no-store, must-revalidate, max-age=0', // 彻底禁用缓存
-      'Pragma': 'no-cache', // HTTP/1.0 兼容
-      'Expires': '0', // 立即过期
-      'ETag': etag,
-      'Last-Modified': new Date().toUTCString(),
-      'Vary': 'Accept-Encoding',
+      ...cacheHeaders,
       'X-Cache-Key': `rating-${gameId}`,
       'X-Response-Time': `${duration}ms`,
-      'X-Cache-Status': 'DISABLED' // 缓存状态指示
+      'X-Cache-Status': process.env.NODE_ENV === 'development' ? 'DISABLED' : 'ENABLED'
     });
 
     return NextResponse.json({
@@ -150,7 +139,7 @@ export async function GET(request: NextRequest) {
     });
 
   } catch (error) {
-    console.error('Rating API GET Error:', error);
+    log.error('Rating API GET Error', error);
     
     return NextResponse.json(
       { 

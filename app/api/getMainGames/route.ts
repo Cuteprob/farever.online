@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { getMainGame } from '@/models/games';
 import { ApiResponse, GameProps } from '@/types/game';
+import { getCacheHeaders, CacheType, generateETag, checkIfNoneMatch, createNotModifiedResponse } from '@/utils/cache-config';
+import { log } from '@/utils/logger';
 
 // 使用 Edge Runtime 提升性能
 export const runtime = 'edge';
@@ -18,7 +20,7 @@ export async function GET(request: Request) {
     const duration = Date.now() - startTime;
     
     // 记录性能指标
-    console.log(`getMainGame API: ${duration}ms, returned ${game ? 'game found' : 'no game'}`);
+    log.api('GET', '/api/getMainGames', duration, true, { gameFound: game ? 'yes' : 'no' });
     
     const response: ApiResponse<GameProps | null> = {
       success: true,
@@ -26,10 +28,25 @@ export async function GET(request: Request) {
       count: game ? 1 : 0
     };
 
-    // 设置缓存头
+    // 生成ETag用于缓存验证
+    const etag = generateETag(response);
+    
+    // 检查条件请求
+    if (checkIfNoneMatch(request, etag)) {
+      return createNotModifiedResponse(etag, CacheType.STATIC_DATA);
+    }
+
+    // 使用统一缓存策略 - 主游戏数据相对稳定，使用长缓存
+    const cacheHeaders = getCacheHeaders(
+      CacheType.STATIC_DATA, 
+      etag, 
+      true, 
+      game !== null
+    );
+
     const headers = new Headers({
       'Content-Type': 'application/json',
-      'Cache-Control': 'public, max-age=300, stale-while-revalidate=600', // 5分钟缓存，10分钟stale
+      ...cacheHeaders,
       'X-Response-Time': `${duration}ms`,
       'X-Game-Count': game ? '1' : '0'
     });
@@ -40,7 +57,7 @@ export async function GET(request: Request) {
     });
     
   } catch (error) {
-    console.error('getMainGame API Error:', error);
+    log.error('getMainGame API Error', error);
     
     const errorResponse: ApiResponse<GameProps | null> = {
       success: false,
@@ -52,7 +69,7 @@ export async function GET(request: Request) {
       status: 500,
       headers: {
         'Content-Type': 'application/json',
-        'Cache-Control': 'no-cache'
+        ...getCacheHeaders(CacheType.NO_CACHE)
       }
     });
   }
@@ -62,8 +79,6 @@ export async function GET(request: Request) {
 export async function HEAD() {
   return new NextResponse(null, {
     status: 200,
-    headers: {
-      'Cache-Control': 'public, max-age=60'
-    }
+    headers: getCacheHeaders(CacheType.SHORT_CACHE)
   });
 }

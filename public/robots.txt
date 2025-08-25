@@ -1,16 +1,30 @@
 User-agent: *
 Allow: /
 
+# 禁止抓取外部游戏iframe链接
+Disallow: /iframe/
+Disallow: /*iframe*
+
+# 禁止抓取常见的外部游戏域名模式
+Disallow: /external/
+Disallow: /*sprunki.com*
+Disallow: /*game-embed*
+Disallow: /*embed*
+
 # Sitemap
 Sitemap: https://bunnymarket.app/sitemap.xml
 
-# Important pages
+# 只允许收录指定页面
+Allow: /
 Allow: /games
-Allow: /features
-Allow: /how-to-play
-Allow: /faq
+Allow: /games/*
 Allow: /privacy
 Allow: /terms
+Allow: /sitemap.xml
+Allow: /robots.txt
+
+# 禁止抓取API接口
+Disallow: /api/
 
 # Crawl-delay
 Crawl-delay: 1

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getAllGames } from '@/models/games';
 import { ApiResponse, GameProps } from '@/types/game';
+import { getCacheHeaders, CacheType, generateETag, checkIfNoneMatch, createNotModifiedResponse } from '@/utils/cache-config';
 
 export const runtime = 'edge';
 
@@ -26,7 +27,7 @@ export async function GET(request: Request) {
         status: 400,
         headers: {
           'Content-Type': 'application/json',
-          'Cache-Control': 'no-cache'
+          ...getCacheHeaders(CacheType.NO_CACHE)
         }
       });
     }
@@ -51,10 +52,25 @@ export async function GET(request: Request) {
       count: games.length
     };
 
-    // 设置缓存头
+    // 生成ETag用于缓存验证
+    const etag = generateETag(response, categoryId);
+    
+    // 检查条件请求
+    if (checkIfNoneMatch(request, etag)) {
+      return createNotModifiedResponse(etag, CacheType.GAMES_LIST);
+    }
+
+    // 使用统一缓存策略 - 游戏列表中等缓存
+    const cacheHeaders = getCacheHeaders(
+      CacheType.GAMES_LIST, 
+      etag, 
+      true, // 只在有数据时缓存
+      games.length > 0
+    );
+
     const headers = new Headers({
       'Content-Type': 'application/json',
-      'Cache-Control': 'public, max-age=300, stale-while-revalidate=600', // 5分钟缓存，10分钟stale
+      ...cacheHeaders,
       'X-Response-Time': `${duration}ms`,
       'X-Game-Count': games.length.toString(),
       'X-Category-Id': categoryId
@@ -78,7 +94,7 @@ export async function GET(request: Request) {
       status: 500,
       headers: {
         'Content-Type': 'application/json',
-        'Cache-Control': 'no-cache'
+        ...getCacheHeaders(CacheType.NO_CACHE)
       }
     });
   }

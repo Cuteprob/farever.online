@@ -41,6 +41,14 @@ export async function generateMetadata({ params }: GamePageProps): Promise<Metad
     keywords: [
       ...metadataKeywords
     ],
+    robots: {
+      index: true,
+      follow: true,
+      noarchive: true,
+      nosnippet: false,
+      noimageindex: false,
+      nocache: true,
+    },
     openGraph: {
       title: metadataTitle,
       description: metadataDescription,

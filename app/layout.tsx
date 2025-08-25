@@ -56,11 +56,21 @@ export default function RootLayout({
         
         {/* DNS预解析和资源预加载 */}
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="//fonts.gstatic.com" />
         <link rel="dns-prefetch" href="//www.googletagmanager.com" />
         <link rel="dns-prefetch" href="//pagead2.googlesyndication.com" />
         
-        {/* 关键API预加载 */}
+        {/* 关键API预加载 - 首屏数据 */}
         <link rel="preload" href="/api/getMainGames" as="fetch" crossOrigin="anonymous" />
+        <link rel="preload" href="/api/getAllGames" as="fetch" crossOrigin="anonymous" />
+        
+        {/* 关键字体预加载 - 避免字体闪烁 */}
+        <link rel="preload" href="https://fonts.gstatic.com/s/fredoka/v14/X7nP4R87HX_qjq0KmJzxfpM.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/nunito/v26/XRXI3I6Li01BKofiOc5wtlZ2di8HDLshdTA.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        
+        {/* 关键图片预加载 */}
+        <link rel="preload" href="/logo.png" as="image" />
+        <link rel="preload" href="/placeholder.png" as="image" />
         
         {/* 关键CSS预加载 */}
         <link rel="preload" href="/globals.css" as="style" />

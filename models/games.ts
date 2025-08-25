@@ -1,6 +1,7 @@
 import { turso } from "@/models/tursoDb";
 import { GameProps, GameComment, DbGameResult, GameQueryParams } from "@/types/game";
 import { transformDbResultToGame } from "@/lib/format";
+import { log } from "@/utils/logger";
 
 
 
@@ -62,7 +63,7 @@ LIMIT 1;
   
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
-      console.log(`models/games.ts /getMainGame attempt ${attempt}/${maxRetries}`);
+      log.debug(`getMainGame attempt ${attempt}/${maxRetries}`, { attempt, maxRetries, projectId, locale });
       
       const result = await turso.execute({
         sql: query,
@@ -70,7 +71,7 @@ LIMIT 1;
       });
 
       if (result.rows.length === 0) {
-        console.log(`models/games.ts /getMainGame attempt ${attempt}: no data found`);
+        log.debug(`getMainGame attempt ${attempt}: no data found`, { attempt, projectId, locale });
         if (attempt === maxRetries) {
           return null;
         }
@@ -78,7 +79,7 @@ LIMIT 1;
       }
       
       const game = transformDbResultToGame(result.rows[0]);
-      console.log(`models/games.ts /getMainGame attempt ${attempt} categories:`, game.categories);
+      log.debug(`getMainGame attempt ${attempt} categories`, { attempt, categories: game.categories, gameId: game.id });
       
       // 检查数据一致性
       if (lastGame === null) {
@@ -86,11 +87,12 @@ LIMIT 1;
         consistentResults = 1;
       } else if (JSON.stringify(game.categories) === JSON.stringify(lastGame.categories)) {
         consistentResults++;
-        console.log(`models/games.ts /getMainGame consistent results: ${consistentResults}`);
+        log.debug(`getMainGame consistent results: ${consistentResults}`, { consistentResults, attempt });
       } else {
-        console.warn(`models/games.ts /getMainGame data inconsistency detected:`, {
+        log.warn(`getMainGame data inconsistency detected`, {
           previous: lastGame.categories,
-          current: game.categories
+          current: game.categories,
+          attempt
         });
         lastGame = game;
         consistentResults = 1;
@@ -98,7 +100,12 @@ LIMIT 1;
       
       // 如果连续两次结果一致，或者是最后一次尝试，返回结果
       if (consistentResults >= 2 || attempt === maxRetries) {
-        console.log(`models/games.ts /getMainGame final result after ${attempt} attempts:`, game.categories);
+        log.info(`getMainGame final result after ${attempt} attempts`, { 
+          attempt, 
+          categories: game.categories, 
+          gameId: game.id,
+          consistentResults 
+        });
         return game;
       }
       
@@ -108,7 +115,7 @@ LIMIT 1;
       }
       
     } catch (error) {
-      console.error(`Error fetching main game (attempt ${attempt}):`, error);
+      log.error(`Error fetching main game (attempt ${attempt})`, error, { attempt, maxRetries, projectId, locale });
       if (attempt === maxRetries) {
         return null;
       }
@@ -179,7 +186,7 @@ export async function getGameComments(
 
     return comments;
   } catch (error) {
-    console.error('Error fetching game comments:', error);
+    log.error('Error fetching game comments', error, { gameId, limit, offset });
     return [];
   }
 }
@@ -428,10 +435,7 @@ export async function getGameById(gameId: string): Promise<GameProps | null> {
   }
 }
 
-// 清除缓存函数（用于数据更新后）- 已禁用缓存
-export function clearCache(pattern?: string): void {
-  // 缓存已禁用，此函数保留以维持API兼容性
-}
+// 关于缓存：本项目已禁用数据层缓存，使用API层统一缓存策略
 
 // 获取所有可用分类
 export async function getAllCategories(): Promise<Array<{
@@ -859,7 +863,4 @@ export async function getRelatedGames(
   }
 }
 
-// 获取缓存统计信息（调试用）- 已禁用缓存
-export function getCacheStats() {
-  return { message: "缓存已禁用" };
-}
+// 注意：缓存相关功能已移至 utils/cache-config.ts 和 utils/logger.ts

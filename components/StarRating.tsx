@@ -157,10 +157,11 @@ export function StarRating({
         );
       }
       
-      // 2. 清除内存缓存 (如果有全局缓存管理器)
-      if (typeof window !== 'undefined' && (window as any).cacheManager) {
-        (window as any).cacheManager.invalidate(gameId);
-        (window as any).cacheManager.invalidateByDependency(`game:${gameId}`);
+      // 2. 触发缓存失效事件（如果有其他缓存机制在监听）
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('cacheInvalidate', {
+          detail: { gameId, type: 'rating' }
+        }));
       }
       
     } catch (error) {
