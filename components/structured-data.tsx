@@ -9,18 +9,18 @@ interface StructuredDataProps {
 }
 
 export function StructuredData({ game, isMainPage = false }: StructuredDataProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_WEB_URL || 'https://bunnymarket.app';
+  const baseUrl = process.env.NEXT_PUBLIC_WEB_URL || '';
 
   // Website structured data
   const websiteStructuredData = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "BunnyMarket",
+    "name": process.env.PROJECT_NAME,
     "url": baseUrl,
-    "description": "Play the best free online games at BunnyMarket! Enjoy a collection of fun, engaging, and entertaining games for all ages.",
+    "description": `Play the best free online games at ${process.env.PROJECT_NAME}! Enjoy a collection of fun, engaging, and entertaining games for all ages.`,
     "publisher": {
       "@type": "Organization",
-      "name": "BunnyMarket",
+      "name": process.env.PROJECT_NAME,
       "url": baseUrl
     },
     "potentialAction": {
@@ -35,7 +35,7 @@ export function StructuredData({ game, isMainPage = false }: StructuredDataProps
     "@context": "https://schema.org",
     "@type": "VideoGame",
     "name": game.title,
-    "description": game.metadata?.description || `Play ${game.title} free online at BunnyMarket! A fun and engaging game for all ages.`,
+    "description": game.metadata?.description || `Play ${game.title} free online at ${process.env.PROJECT_NAME}! A fun and engaging game for all ages.`,
     "url": isMainPage ? baseUrl : `${baseUrl}/${game.id}`,
     "image": game.image || `${baseUrl}/og-image.jpg`,
     "genre": game.categories?.join(", ") || "Online Game",
@@ -58,7 +58,7 @@ export function StructuredData({ game, isMainPage = false }: StructuredDataProps
     "datePublished": game.createdAt,
     "publisher": {
       "@type": "Organization",
-      "name": "BunnyMarket",
+      "name": process.env.PROJECT_NAME,
       "url": baseUrl
     },
     "inLanguage": "en-US"
@@ -68,10 +68,10 @@ export function StructuredData({ game, isMainPage = false }: StructuredDataProps
   const organizationStructuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "BunnyMarket",
+    "name": process.env.PROJECT_NAME,
     "url": baseUrl,
     "logo": `${baseUrl}/logo.png`,
-    "description": "BunnyMarket offers the best collection of free online games for players of all ages.",
+    "description": `${process.env.PROJECT_NAME} offers the best collection of free online games for players of all ages.`,
     "sameAs": [
       baseUrl
     ]

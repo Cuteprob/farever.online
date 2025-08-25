@@ -12,7 +12,7 @@ Disallow: /*game-embed*
 Disallow: /*embed*
 
 # Sitemap
-Sitemap: https://bunnymarket.app/sitemap.xml
+Sitemap: https://bloodmoney.info/sitemap.xml
 
 # 只允许收录指定页面
 Allow: /

@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { getAllGames, getAllCategories } from '@/models/games';
 
 // 基础 URL 配置 - 确保使用正确的生产环境 URL
-const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || 'https://bunnymarket.app';
+const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || '';
 
 // 生成静态页面配置 - 使用函数确保每次调用时都生成新的日期
 function getStaticPages() {

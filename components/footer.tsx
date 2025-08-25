@@ -7,7 +7,7 @@ export function Footer() {
         {/* 链接区域 */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <h2 className="font-heading text-primary font-bold">Bunny Market</h2>
+            <h2 className="font-heading text-primary font-bold">{process.env.NEXT_PUBLIC_PROJECT_NAME}</h2>
             <ul className="space-y-2">
               <li>
                 <Link href="/" className="text-sm text-foreground hover:text-primary transition-colors">
@@ -16,7 +16,7 @@ export function Footer() {
               </li>
               <li>
                 <span className="text-sm text-foreground">
-                  support@bunnymarket.app
+                  {process.env.NEXT_PUBLIC_PROJECT_EMAIL}
                 </span>
               </li>
             </ul>
@@ -26,18 +26,13 @@ export function Footer() {
             <h3 className="font-heading text-primary font-bold">Categories</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/games/new-games" className="text-sm text-foreground hover:text-primary transition-colors">
-                  New Games
+                <Link href="/games/horror-games" className="text-sm text-foreground hover:text-primary transition-colors">
+                  Horror Games
                 </Link>
               </li>
               <li>
-                <Link href="/games/hot-games" className="text-sm text-foreground hover:text-primary transition-colors">
-                  Hot Games
-                </Link>
-              </li>
-              <li>
-                <Link href="/games/animal-games" className="text-sm text-foreground hover:text-primary transition-colors">
-                  Animal Games
+                <Link href="/games/puzzle-games" className="text-sm text-foreground hover:text-primary transition-colors">
+                  Puzzle Games
                 </Link>
               </li>
               
@@ -49,8 +44,8 @@ export function Footer() {
             <ul className="space-y-2">
               <li>
 
-                <a href="/bunny-market-unblocked" className="text-sm text-foreground hover:text-primary transition-colors">
-                  Bunny Market Unblocked
+                <a href={process.env.NEXT_PUBLIC_WEB_URL} className="text-sm text-foreground hover:text-primary transition-colors">
+                  {process.env.NEXT_PUBLIC_PROJECT_NAME}
                 </a>
               </li>
             </ul>
@@ -76,7 +71,7 @@ export function Footer() {
         {/* 版权信息 */}
         <div className="text-center">
           <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} bunnymarket.app. All rights reserved.
+            &copy; {new Date().getFullYear()} {process.env.NEXT_PUBLIC_WEB_URL?.replace('https://', '')}. All rights reserved.
           </p>
         </div>
       </div>

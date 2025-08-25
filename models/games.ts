@@ -8,7 +8,7 @@ import { log } from "@/utils/logger";
 // 获取项目ID和语言配置
 function getProjectConfig() {
   return {
-    projectId: process.env.PROJECT_ID || 'bunnymarket-app',
+    projectId: process.env.PROJECT_ID || '',
     locale: 'en' // 默认英语
   };
 }
@@ -486,6 +486,16 @@ export async function getAllCategories(): Promise<Array<{
       slug: (row.name as string).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''),
       gameCount: parseInt(row.game_count as string) || 0
     }));
+
+    // 打印游戏种类信息日志
+    console.log('游戏种类信息:', {
+      totalCategories: categories.length,
+      categories: categories.map(cat => ({
+        name: cat.name,
+        slug: cat.slug,
+        gameCount: cat.gameCount
+      }))
+    });
 
     return categories;
   } catch (error) {

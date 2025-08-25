@@ -3,10 +3,49 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { MarkdownRendererProps } from '@/types/game';
 
+// 提取 YouTube 视频 ID 的工具函数
+const extractYouTubeId = (url: string): string | null => {
+  const patterns = [
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/,
+    /youtube\.com\/embed\/([a-zA-Z0-9_-]+)/,
+    /youtube\.com\/v\/([a-zA-Z0-9_-]+)/
+  ];
+  
+  for (const pattern of patterns) {
+    const match = url.match(pattern);
+    if (match) {
+      return match[1];
+    }
+  }
+  
+  return null;
+};
+
+// YouTube 视频组件
+const YouTubeComponent = ({ videoId, title = 'YouTube video' }: { videoId: string; title?: string }) => {
+  return (
+    <span className="block max-w-4xl mx-auto my-12 px-8 sm:px-12 md:px-16">
+      <span className="relative w-full block" style={{ paddingBottom: '56.25%' }}>
+        <iframe
+          className="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
+          src={`https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`}
+          title={title}
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          loading="lazy"
+        />
+      </span>
+    </span>
+  );
+};
+
+
+
 // 自定义图片组件  
 const ImageComponent = ({ src, alt, ...props }: any) => {
   return (
-    <>
+    <span className="block">
       <img
         src={src}
         alt={alt}
@@ -29,13 +68,23 @@ const ImageComponent = ({ src, alt, ...props }: any) => {
           {alt}
         </span>
       )}
-    </>
+    </span>
   );
 };
 
 // 自定义链接组件
 const LinkComponent = ({ href, children, ...props }: any) => {
   const isExternal = href?.startsWith('http');
+
+    // 检查是否为 YouTube 链接
+  if (href && isExternal) {
+    const youtubeId = extractYouTubeId(href);
+    if (youtubeId) {
+      // 所有 YouTube 链接都渲染为视频播放器
+      const title = typeof children === 'string' ? children : 'YouTube 视频';
+      return <YouTubeComponent videoId={youtubeId} title={title} />;
+    }
+  }
   
   return (
     <a
@@ -74,11 +123,28 @@ const defaultComponents = {
       {children}
     </h4>
   ),
-  p: ({ children, ...props }: any) => (
-    <p className="text-gray-700 leading-relaxed mb-4" {...props}>
-      {children}
-    </p>
-  ),
+  p: ({ children, ...props }: any) => {
+    // 检查子元素中是否包含块级元素
+    const hasBlockElements = React.Children.toArray(children).some(child => 
+      React.isValidElement(child) && 
+      (child.type === 'div' || child.type === 'section' || child.type === 'article')
+    );
+    
+    // 如果包含块级元素，则使用 span 替代 p 标签
+    if (hasBlockElements) {
+      return (
+        <span className="block text-gray-700 leading-relaxed mb-4" {...props}>
+          {children}
+        </span>
+      );
+    }
+    
+    return (
+      <p className="text-gray-700 leading-relaxed mb-4" {...props}>
+        {children}
+      </p>
+    );
+  },
   ul: ({ children, ...props }: any) => (
     <ul className="list-disc list-inside text-gray-700 mb-4 space-y-1" {...props}>
       {children}
@@ -131,12 +197,6 @@ export const renderMarkdown = ({ content, className = '', components = {} }: Mar
   const mergedComponents = { 
     ...defaultComponents, 
     ...components,
-    // 添加 div 组件以避免嵌套问题
-    div: ({ children, ...props }: any) => (
-      <div {...props}>
-        {children}
-      </div>
-    ),
   };
   
   return (
@@ -195,20 +255,20 @@ export const validateMarkdownContent = (content: string): { isValid: boolean; er
   const openBrackets = (content.match(/\[/g) || []).length;
   const closeBrackets = (content.match(/\]/g) || []).length;
   if (openBrackets !== closeBrackets) {
-    errors.push('链接标记不匹配');
+    errors.push('Links must be closed');
   }
 
   // 检查未闭合的代码块
   const codeBlocks = (content.match(/```/g) || []).length;
   if (codeBlocks % 2 !== 0) {
-    errors.push('代码块未正确闭合');
+    errors.push('code blocks must be closed');
   }
 
   // 检查过长的行
   const lines = content.split('\n');
   lines.forEach((line, index) => {
     if (line.length > 100) {
-      errors.push(`第 ${index + 1} 行过长 (${line.length} 字符)`);
+      errors.push(`The ${index + 1} line (${line.length} characters)`);
     }
   });
 

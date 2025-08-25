@@ -29,9 +29,9 @@ const firaCode = Fira_Code({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_WEB_URL || 'https://bunnymarket.app'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_WEB_URL || ''),
   openGraph: {
-    siteName: 'BunnyMarket',
+    siteName: process.env.PROJECT_NAME,
     locale: 'en',
     type: 'website',
   },
@@ -120,6 +120,14 @@ export default function RootLayout({
               `}
             </Script>
           </>
+        )}
+        {/* plausible 数据统计 */}
+        {process.env.NEXT_PUBLIC_WEB_URL && (
+          <Script 
+            defer 
+            data-domain={process.env.NEXT_PUBLIC_WEB_URL.replace('https://', '').replace('http://', '')} 
+            src="https://app.pageview.app/js/script.js" 
+          />
         )}
       </head>
       <body 

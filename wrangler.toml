@@ -1,5 +1,5 @@
 #:schema node_modules/wrangler/config-schema.json
-name = "bunnymarket-app"
+name = "bloodmoney-info"
 compatibility_date = "2024-10-22"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".vercel/output/static"
@@ -84,29 +84,24 @@ pages_build_output_dir = ".vercel/output/static"
 
 [env.production.vars]
 # 数据库配置
-TURSO_DATABASE_URL = "https://games-data-justinxie.turso.io"
-TURSO_DATABASE_AUTH_TOKEN = "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzY0NzI4NTEsImlkIjoiMTAxZDI3OWEtZTcxNi00NTlkLTlkMTctNzk5ZjY3YjBlYTk3In0.F92EtqQqnhdWCzpUEYBB1lze2SznVOv_JApGke_sNHtc_KwFSnaqA5Rj28QJFvoQm3l2IiKzJaIuZSC1RcWvDQ"
+TURSO_DATABASE_URL="https://games-data-justinxie.turso.io"
+TURSO_DATABASE_AUTH_TOKEN="eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzY0NzI4NTEsImlkIjoiMTAxZDI3OWEtZTcxNi00NTlkLTlkMTctNzk5ZjY3YjBlYTk3In0.F92EtqQqnhdWCzpUEYBB1lze2SznVOv_JApGke_sNHtc_KwFSnaqA5Rj28QJFvoQm3l2IiKzJaIuZSC1RcWvDQ"
 
 # 项目配置
-PROJECT_ID = "bunnymarket-app"
+PROJECT_ID="bloodmoney-info"
+PROJECT_NAME="BloodMoney"
+PROJECT_EMAIL="support@bloodmney.info"
+NEXT_PUBLIC_WEB_URL="https://bloodmney.info"
 
-# 网站配置
-NEXT_PUBLIC_WEB_URL = "https://bunnymarket.app"
+# 客户端可访问的项目配置
+NEXT_PUBLIC_PROJECT_NAME="BloodMoney"
+NEXT_PUBLIC_PROJECT_EMAIL="support@bloodmney.info"
 
 # Google Analytics 配置
-NEXT_PUBLIC_GOOGLE_ANALYTICS_ID="G-B7MJZ8JYT6"
+NEXT_PUBLIC_GOOGLE_ANALYTICS_ID="G-5ZFEPTWWWQ"
 
 # Google AdSense 配置  
-NEXT_PUBLIC_GOOGLE_ADSENSE_ID = "ca-pub-8480929139790231"
+NEXT_PUBLIC_GOOGLE_ADSENSE_ID="ca-pub-8480929139790231"
 
 # Next.js 配置
-NEXT_PUBLIC_BASE_URL = "https://bunnymarket.app"
-
-# 性能监控配置（可选）
-ENABLE_PERFORMANCE_MONITORING = "true"
-LOG_SLOW_QUERIES = "true"
-SLOW_QUERY_THRESHOLD = "1000"
-
-# 缓存配置（可选）
-CACHE_TTL = "300"
-MAX_CACHE_SIZE = "1000"
+NEXT_PUBLIC_BASE_URL="https://bloodmney.info"

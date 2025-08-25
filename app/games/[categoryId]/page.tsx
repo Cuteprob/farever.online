@@ -33,23 +33,23 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   
   if (!displayCategory) {
     return {
-      title: 'Category Not Found | BunnyMarket Games',
+      title: `Category Not Found | ${process.env.PROJECT_NAME} Games`,
       description: 'The requested game category could not be found.'
     };
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_WEB_URL || 'https://bunnymarket.app';
+  const baseUrl = process.env.NEXT_PUBLIC_WEB_URL || '';
   const categoryUrl = `${baseUrl}/games/${params.categoryId}`;
 
   return {
-    title: `${displayCategory.name} | BunnyMarket Games`,
+    title: `Play More ${displayCategory.name} at ${process.env.PROJECT_NAME} Games`,
     description: displayCategory.description || `Explore our collection of ${displayCategory.name.toLowerCase()}.`,
     openGraph: {
       title: `${displayCategory.name} Games`,
       description: displayCategory.description || `Explore our collection of ${displayCategory.name.toLowerCase()}.`,
       type: 'website',
       url: categoryUrl,
-      siteName: 'BunnyMarket',
+      siteName: process.env.PROJECT_NAME,
     },
     twitter: {
       card: 'summary_large_image',
@@ -219,12 +219,12 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
               href="/"
               className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
             >
-              Play Bunny Market
+              Play {process.env.PROJECT_NAME}
             </a>
           </div>
         )}
                 {/* 分类导航 */}
-                {allCategories.length > 0 && (
+                {/* {allCategories.length > 0 && (
           <div className="my-8">
             <Categories categories={allCategories.map(cat => ({
               name: cat.name,
@@ -232,7 +232,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
               count: cat.gameCount
             }))} />
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

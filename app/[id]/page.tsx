@@ -19,13 +19,13 @@ export async function generateMetadata({ params }: GamePageProps): Promise<Metad
   
   if (!game) {
     return {
-      title: 'Game Not Found | BunnyMarket',
-      description: 'The requested game could not be found. Explore other games at BunnyMarket.',
+      title: `Game Not Found | ${process.env.PROJECT_NAME}`,
+      description: `The requested game could not be found. Explore other games at ${process.env.PROJECT_NAME}.`,
       robots: 'noindex',
     };
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_WEB_URL || 'https://bunnymarket.app';
+  const baseUrl = process.env.NEXT_PUBLIC_WEB_URL || '';
   const gameUrl = `${baseUrl}/${params.id}`;
   const metadataTitle = game.metadata?.title;
   const metadataDescription = game.metadata?.description;
@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: GamePageProps): Promise<Metad
       description: metadataDescription,
       type: 'article',
       url: gameUrl,
-      siteName: 'BunnyMarket',
+      siteName: process.env.PROJECT_NAME,
       images: [
         {
           url: game.image || `${baseUrl}/og-image.jpg`,

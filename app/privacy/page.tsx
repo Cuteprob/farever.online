@@ -2,10 +2,10 @@ import { Breadcrumb } from "@/components/ui/breadcrumb"
 
 // 在文件顶部添加 metadata
 export const metadata = {
-  title: 'Privacy Policy - Bunny Market',
-  description: 'Privacy policy and data collection practices for Bunny Market online game. Learn how we protect your information and maintain your privacy.',
+  title: `Privacy Policy - ${process.env.PROJECT_NAME}`,
+  description: `Privacy policy and data collection practices for ${process.env.PROJECT_NAME} online game. Learn how we protect your information and maintain your privacy.`,
   alternates: {
-    canonical: 'https://bunnymarket.app/privacy'
+    canonical: `${process.env.NEXT_PUBLIC_WEB_URL}/privacy`
   }
 }
 
@@ -14,7 +14,7 @@ export default function PrivacyPolicy() {
     <main className="flex-1 container mx-auto px-4 py-8 max-w-7xl">
       <Breadcrumb 
         items={[
-          { label: "Play Bunny Market", href: "/" },
+          { label: `Play ${process.env.PROJECT_NAME}`, href: "/" },
           { label: "Privacy Policy", href: "/privacy" }
         ]} 
       />
@@ -30,7 +30,7 @@ export default function PrivacyPolicy() {
           <section className="mt-8">
             <h2 className="text-2xl font-heading text-primary mb-4">1. Information We Collect</h2>
             <p className="text-muted-foreground leading-relaxed mb-4">
-              When you use Bunny Market, we collect certain information to improve your gaming experience and our services:
+              When you use {process.env.PROJECT_NAME}, we collect certain information to improve your gaming experience and our services:
             </p>
             <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
               <li>Game progress and preferences</li>
@@ -65,14 +65,14 @@ export default function PrivacyPolicy() {
           <section className="mt-8">
             <h2 className="text-2xl font-heading text-primary mb-4">4. Third-Party Services</h2>
             <p className="text-muted-foreground leading-relaxed">
-              Bunny Market integrates with third-party services for enhanced gaming experience. These services have their own privacy policies, and we encourage you to review them.
+              {process.env.PROJECT_NAME} integrates with third-party services for enhanced gaming experience. These services have their own privacy policies, and we encourage you to review them.
             </p>
           </section>
 
           <section className="mt-8">
             <h2 className="text-2xl font-heading text-primary mb-4">5. Contact Us</h2>
             <p className="text-muted-foreground leading-relaxed">
-              If you have any questions about this Privacy Policy, please contact us at: support@bunnymarket.app
+              If you have any questions about this Privacy Policy, please contact us at: {process.env.PROJECT_EMAIL}
             </p>
           </section>
         </div>

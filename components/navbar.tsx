@@ -8,10 +8,9 @@ export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
   const navItems = [
-    { name: 'Bunny Market Unblocked', href: '/bunny-market-unblocked' },
     { name: 'New Games', href: '/games/new-games' },
-    { name: 'Hot Games', href: '/games/hot-games' },
-    { name: 'Animal Games', href: '/games/animal-games' },
+    { name: 'Horror Games', href: '/games/horror-games' },
+    { name: 'Puzzle Games', href: '/games/puzzle-games' },
   ];
 
   return (
@@ -20,9 +19,8 @@ export function Navbar() {
         {/* Desktop Navigation */}
         <div className="flex items-center justify-between h-full">
           <Link href="/" className="flex items-center space-x-4">
-          
             <span className="text-2xl font-heading font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent hover:animate-bounce transition-all duration-300 transform">
-            Bunny Market
+            {process.env.NEXT_PUBLIC_PROJECT_NAME}
             </span>
           </Link>
 
