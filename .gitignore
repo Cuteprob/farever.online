@@ -25,16 +25,224 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# local env files
-.env*.local
+# ========================
+# 环境变量和配置文件 (Environment & Config)
+# ========================
+# 所有环境变量文件
+.env
+.env.local
+.env.development
+.env.production
+.env.staging
+.env.test
 
-# vercel
+# 环境变量文件的备份和私有版本
+.env.*.local
+.env.*.backup
+.env.*.private
+
+# 允许示例环境文件（模板文件）
+!.env.example
+!.env.*.example
+
+# 私有配置文件
+config/private/
+config/secrets/
+private.json
+secrets.json
+*.secret
+*.private
+
+# ========================
+# 数据库和数据文件 (Database & Data)
+# ========================
+# 数据库文件
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-shm
+*.db-wal
+/data/*.db
+/data/backup-*
+/data/export-*
+/data/dump-*
+
+# 数据备份和导出
+*.sql.gz
+*.dump
+backup/
+backups/
+exports/
+dumps/
+
+# ========================
+# 密钥和证书 (Keys & Certificates)
+# ========================
+# SSH 密钥
+*.key
+*.pem
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+known_hosts
+
+# SSL/TLS 证书
+*.crt
+*.cert
+*.cer
+*.ca-bundle
+*.p7b
+*.p7s
+*.srl
+
+# API 密钥文件
+*api-key*
+*apikey*
+*api_key*
+service-account*.json
+firebase-adminsdk*.json
+google-services.json
+GoogleService-Info.plist
+
+# ========================
+# 日志和报告 (Logs & Reports)
+# ========================
+# 日志文件
+*.log
+logs/
+log/
+/reports/
+report-*.txt
+report-*.json
+report-*.csv
+
+# 应用日志
+application*.log
+error*.log
+access*.log
+debug*.log
+server*.log
+
+# ========================
+# 开发工具配置 (Development Tools)
+# ========================
+# IDE 配置
+.vscode/settings.json
+.vscode/launch.json
+.idea/
+*.swp
+*.swo
+*~
+
+# 编辑器配置
+.history/
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json.example
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# ========================
+# 缓存和临时文件 (Cache & Temp)
+# ========================
+# 缓存目录
+.cache/
+.tmp/
+tmp/
+temp/
+cache/
+
+# 系统缓存
+.DS_Store?
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# 临时文件
+*.tmp
+*.temp
+*.bak
+*.backup
+*.orig
+*.rej
+.#*
+
+# ========================
+# 部署和云服务 (Deployment & Cloud)
+# ========================
+# Vercel
 .vercel
+.vercel.json
 
-# typescript
+# Cloudflare Workers
+.wrangler
+.dev.vars
+wrangler.toml.backup
+wrangler.toml
+
+# Docker
+docker-compose.override.yml
+.dockerignore.bak
+
+# Kubernetes
+*.kubeconfig
+kube-config*
+k8s-secrets*.yaml
+
+# ========================
+# 构建和包管理 (Build & Package Management)
+# ========================
+# TypeScript
 *.tsbuildinfo
 next-env.d.ts
 
-# wrangler files
-.wrangler
-.dev.vars
+# 包管理器锁文件的备份
+package-lock.json.bak
+yarn.lock.bak
+pnpm-lock.yaml.bak
+
+# 构建产物
+dist-backup/
+build-backup/
+
+# ========================
+# 测试和分析 (Testing & Analytics)
+# ========================
+# 测试覆盖率
+/coverage
+.nyc_output/
+coverage.lcov
+
+# 性能分析
+*.heapprofile
+*.heapsnapshot
+.clinic/
+
+# ========================
+# 安全扫描 (Security Scanning)
+# ========================
+# 安全扫描报告
+security-report*.json
+vulnerability-report*.txt
+audit-report*.html
+
+# 密钥扫描忽略的文件
+.secrets.baseline
+.gitleaks.toml
+
+# ========================
+# 自定义忽略 (Custom Ignore)
+# ========================
+# 项目特定的敏感文件
+TODO.private.md
+NOTES.private.md
+admin-notes/
+internal-docs/

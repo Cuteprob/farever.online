@@ -25,7 +25,7 @@ import {
   
   // 游戏分类表
   export const categories = sqliteTable('categories', {
-    id: text('id').primaryKey(),                    // 分类ID，如 'MUSIC'
+    id: text('id').primaryKey(),                    // 分类ID，如 'music_games'
     name: text('name').notNull(),                   // 显示名称，如 'Music Games'
     description: text('description'),                // 分类描述
     createdAt: text('created_at')

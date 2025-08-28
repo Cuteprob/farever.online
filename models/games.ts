@@ -451,7 +451,11 @@ export async function getAllCategories(): Promise<Array<{
     SELECT 
       pc.id as project_category_id,
       COALESCE(c.id, pc.category_id) as id,
-      COALESCE(pc.display_name, c.name, pc.category_id) as name,
+      CASE 
+        WHEN pc.display_name IS NOT NULL AND pc.display_name != '' THEN pc.display_name
+        WHEN c.name IS NOT NULL AND c.name != '' THEN c.name
+        ELSE pc.category_id
+      END as name,
       COALESCE(pc.description, c.description, '') as description,
       pc.sort_order,
       COALESCE(game_counts.game_count, 0) as game_count

@@ -1,5 +1,5 @@
 #:schema node_modules/wrangler/config-schema.json
-name = "bloodmoney-info"
+name = "your-project-name"
 compatibility_date = "2024-10-22"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".vercel/output/static"
@@ -22,12 +22,12 @@ pages_build_output_dir = ".vercel/output/static"
 # [vars]
 # MY_VARIABLE = "production_value"
 
-# Bind the Workers AI model catalog. Run machine learning models, powered by serverless GPUs, on Cloudflare’s global network
+# Bind the Workers AI model catalog. Run machine learning models, powered by serverless GPUs, on Cloudflare's global network
 # Docs: https://developers.cloudflare.com/pages/functions/bindings/#workers-ai
 # [ai]
 # binding = "AI"
 
-# Bind a D1 database. D1 is Cloudflare’s native serverless SQL database.
+# Bind a D1 database. D1 is Cloudflare's native serverless SQL database.
 # Docs: https://developers.cloudflare.com/pages/functions/bindings/#d1-databases
 # [[d1_databases]]
 # binding = "MY_DB"
@@ -84,24 +84,30 @@ pages_build_output_dir = ".vercel/output/static"
 
 [env.production.vars]
 # 数据库配置
-TURSO_DATABASE_URL="https://games-data-justinxie.turso.io"
-TURSO_DATABASE_AUTH_TOKEN="eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzY0NzI4NTEsImlkIjoiMTAxZDI3OWEtZTcxNi00NTlkLTlkMTctNzk5ZjY3YjBlYTk3In0.F92EtqQqnhdWCzpUEYBB1lze2SznVOv_JApGke_sNHtc_KwFSnaqA5Rj28QJFvoQm3l2IiKzJaIuZSC1RcWvDQ"
+TURSO_DATABASE_URL="https://your-database-url.turso.io"
+TURSO_DATABASE_AUTH_TOKEN="your-turso-auth-token-here"
 
 # 项目配置
-PROJECT_ID="bloodmoney-info"
-PROJECT_NAME="BloodMoney"
-PROJECT_EMAIL="support@bloodmney.info"
-NEXT_PUBLIC_WEB_URL="https://bloodmney.info"
+PROJECT_ID="your-project-id"
+PROJECT_NAME="YourProject"
+PROJECT_EMAIL="support@yourproject.com"
+NEXT_PUBLIC_WEB_URL="https://yourproject.com"
 
 # 客户端可访问的项目配置
-NEXT_PUBLIC_PROJECT_NAME="BloodMoney"
-NEXT_PUBLIC_PROJECT_EMAIL="support@bloodmney.info"
+NEXT_PUBLIC_PROJECT_NAME="YourProject"
+NEXT_PUBLIC_PROJECT_EMAIL="support@yourproject.com"
 
-# Google Analytics 配置
-NEXT_PUBLIC_GOOGLE_ANALYTICS_ID="G-5ZFEPTWWWQ"
+# Google Analytics 配置 (可选)
+NEXT_PUBLIC_GOOGLE_ANALYTICS_ID="G-XXXXXXXXXX"
 
-# Google AdSense 配置  
-NEXT_PUBLIC_GOOGLE_ADSENSE_ID="ca-pub-8480929139790231"
+# Google AdSense 配置 (可选)
+NEXT_PUBLIC_GOOGLE_ADSENSE_ID="ca-pub-xxxxxxxxxx"
 
 # Next.js 配置
-NEXT_PUBLIC_BASE_URL="https://bloodmney.info"
+NEXT_PUBLIC_BASE_URL="https://yourproject.com"
+
+# 安全提醒：
+# 1. 复制此文件为 wrangler.toml 并填入实际值
+# 2. 永远不要将包含真实凭据的 wrangler.toml 提交到 git  
+# 3. 使用 Cloudflare 的 Secrets 功能管理敏感数据
+# 4. 定期轮换认证令牌和 API 密钥

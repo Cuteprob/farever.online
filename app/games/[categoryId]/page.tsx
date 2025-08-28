@@ -224,7 +224,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
           </div>
         )}
                 {/* 分类导航 */}
-                {/* {allCategories.length > 0 && (
+                {allCategories.length > 0 && (
           <div className="my-8">
             <Categories categories={allCategories.map(cat => ({
               name: cat.name,
@@ -232,7 +232,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
               count: cat.gameCount
             }))} />
           </div>
-        )} */}
+        )}
       </div>
     </div>
   );
