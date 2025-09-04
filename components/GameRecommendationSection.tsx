@@ -51,20 +51,20 @@ const DEFAULT_CONFIG: Partial<GameRecommendationConfig> = {
 // 热门游戏静态列表作为通用降级内容
 const DEFAULT_FALLBACK_GAMES: GameProps[] = [
   { 
-    id: 'sprunki-phase-3', 
-    title: 'Sprunki Phase 3', 
-    image: '/games/sprunki-phase-3.jpg', 
-    categories: ['Popular'],
+    id: 'kitty-scramble', 
+    title: 'Kitty Scramble', 
+    image: 'https://games.bunnymarket.app/kitty-scramble/kitty-scramble.jpg', 
+    categories: [''],
     rating: { averageRating: 4.5, totalRatings: 120 },
-    iframeUrl: '/games/sprunki-phase-3',
-    createdAt: '2024-01-01',
-    content: 'Popular Sprunki game',
-    metadata: { title: 'Sprunki Phase 3', description: 'Popular game', keywords: ['sprunki', 'popular'] }
+    iframeUrl: '',
+    createdAt: '',
+    content: '',
+    metadata: { title: '', description: '', keywords: [''] }
   },
   { 
-    id: 'sprunki-but-alpha', 
-    title: 'Sprunki But Alpha', 
-    image: '/games/sprunki-but-alpha.jpg', 
+    id: 'bunny-market', 
+    title: 'Bunny Market', 
+    image: 'https://games.bunnymarket.app/bunny-market/bunny-market.jpg', 
     categories: ['Popular'],
     rating: { averageRating: 4.3, totalRatings: 98 },
     iframeUrl: '/games/sprunki-but-alpha',
@@ -73,9 +73,9 @@ const DEFAULT_FALLBACK_GAMES: GameProps[] = [
     metadata: { title: 'Sprunki But Alpha', description: 'Alpha version', keywords: ['sprunki', 'alpha'] }
   },
   { 
-    id: 'sprunki-phase-4', 
-    title: 'Sprunki Phase 4', 
-    image: '/games/sprunki-phase-4.jpg', 
+    id: 'the-mergest-kingdom', 
+    title: 'The Mergest Kingdom', 
+    image: 'https://games.bunnymarket.app/the-mergest-kingdom/the-mergest-kingdom.jpg', 
     categories: ['Popular'],
     rating: { averageRating: 4.7, totalRatings: 156 },
     iframeUrl: '/games/sprunki-phase-4',
@@ -84,9 +84,9 @@ const DEFAULT_FALLBACK_GAMES: GameProps[] = [
     metadata: { title: 'Sprunki Phase 4', description: 'Latest phase', keywords: ['sprunki', 'phase4'] }
   },
   { 
-    id: 'sprunki-mustard', 
-    title: 'Sprunki Mustard', 
-    image: '/games/sprunki-mustard.jpg', 
+    id: 'kitten-never-dies', 
+    title: 'Kitten Never Dies', 
+    image: 'https://games.bunnymarket.app/kitten-never-dies/kitten-never-dies.jpg', 
     categories: ['Popular'],
     rating: { averageRating: 4.2, totalRatings: 89 },
     iframeUrl: '/games/sprunki-mustard',
@@ -95,9 +95,9 @@ const DEFAULT_FALLBACK_GAMES: GameProps[] = [
     metadata: { title: 'Sprunki Mustard', description: 'Mustard edition', keywords: ['sprunki', 'mustard'] }
   },
   { 
-    id: 'sprunki-incredibox', 
-    title: 'Sprunki Incredibox', 
-    image: '/games/sprunki-incredibox.jpg', 
+    id: 'catch-the-goose', 
+    title: 'Catch The Goose', 
+    image: 'https://games.bunnymarket.app/catch-the-goose/catch-the-goose.jpg', 
     categories: ['Popular'],
     rating: { averageRating: 4.6, totalRatings: 134 },
     iframeUrl: '/games/sprunki-incredibox',
@@ -106,9 +106,9 @@ const DEFAULT_FALLBACK_GAMES: GameProps[] = [
     metadata: { title: 'Sprunki Incredibox', description: 'Incredibox style', keywords: ['sprunki', 'incredibox'] }
   },
   { 
-    id: 'sprunki-but-everyone-is-alive', 
-    title: 'Sprunki But Everyone Is Alive', 
-    image: '/games/sprunki-but-everyone-is-alive.jpg', 
+    id: 'sugar-heroes', 
+    title: 'Sugar Heroes', 
+    image: 'https://games.bunnymarket.app/sugar-heroes/sugar-heroes.jpg', 
     categories: ['Popular'],
     rating: { averageRating: 4.4, totalRatings: 107 },
     iframeUrl: '/games/sprunki-but-everyone-is-alive',
@@ -192,6 +192,64 @@ function GameRecommendationCore({ config, currentGameId }: GameRecommendationSec
       clearTimeout(timer);
     };
   }, [isMounted, finalConfig.enableLazyLoad]); // 添加isMounted依赖
+
+
+  // 降级策略处理
+  const handleFallbackStrategy = useCallback(() => {
+    const networkStatus = getNetworkStatus();
+    
+    // 使用配置的降级游戏或默认降级游戏
+    const availableFallbackGames = finalConfig.fallbackGames.length > 0 
+      ? finalConfig.fallbackGames 
+      : DEFAULT_FALLBACK_GAMES;
+    
+    // 排除指定游戏（比如当前游戏）
+    const fallbackGames = availableFallbackGames
+      .filter(game => game.id !== finalConfig.excludeGameId)
+      .slice(0, finalConfig.limit);
+    
+    if (fallbackGames.length > 0) {
+      setGames(fallbackGames);
+      setHasData(true);
+      setUsingFallback(true);
+      setLoading(false);
+      
+      log.info('Using fallback popular games', {
+        endpoint: finalConfig.endpoint,
+        gameId: currentGameId,
+        fallbackCount: fallbackGames.length,
+        networkStatus
+      });
+      
+      // 清除任何现有的后台重试定时器
+      if (retryTimeoutRef.current) {
+        clearTimeout(retryTimeoutRef.current);
+        retryTimeoutRef.current = null;
+      }
+      
+      // 设置后台重试机制：8秒后再次尝试获取真实数据
+      retryTimeoutRef.current = setTimeout(() => {
+        log.debug('Background retry attempt for real data', {
+          endpoint: finalConfig.endpoint,
+          gameId: currentGameId,
+          backgroundRetry: true
+        });
+        // 重新开始重试循环 - 这里会触发数据获取useEffect
+        setUsingFallback(false);
+        setLoading(true);
+      }, backgroundRetryInterval);
+    } else {
+      // 没有可用的降级内容，优雅隐藏
+      setHasData(false);
+      setLoading(false);
+      
+      log.warn('No fallback games available, hiding section', {
+        endpoint: finalConfig.endpoint,
+        gameId: currentGameId,
+        networkStatus
+      });
+    }
+  }, [currentGameId, finalConfig.fallbackGames, finalConfig.excludeGameId, finalConfig.limit, finalConfig.endpoint, backgroundRetryInterval]);
 
   // 静默重试机制
   const fetchGames = useCallback(async (attemptNumber = 0): Promise<void> => {
@@ -285,62 +343,7 @@ function GameRecommendationCore({ config, currentGameId }: GameRecommendationSec
       // 所有重试都失败，执行降级策略
       handleFallbackStrategy();
     }
-  }, [currentGameId, isVisible, maxRetries, finalConfig.endpoint, finalConfig.params]);
-
-  // 降级策略处理
-  const handleFallbackStrategy = useCallback(() => {
-    const networkStatus = getNetworkStatus();
-    
-    // 使用配置的降级游戏或默认降级游戏
-    const availableFallbackGames = finalConfig.fallbackGames.length > 0 
-      ? finalConfig.fallbackGames 
-      : DEFAULT_FALLBACK_GAMES;
-    
-    // 排除指定游戏（比如当前游戏）
-    const fallbackGames = availableFallbackGames
-      .filter(game => game.id !== finalConfig.excludeGameId)
-      .slice(0, finalConfig.limit);
-    
-    if (fallbackGames.length > 0) {
-      setGames(fallbackGames);
-      setHasData(true);
-      setUsingFallback(true);
-      setLoading(false);
-      
-      log.info('Using fallback popular games', {
-        endpoint: finalConfig.endpoint,
-        gameId: currentGameId,
-        fallbackCount: fallbackGames.length,
-        networkStatus
-      });
-      
-      // 清除任何现有的后台重试定时器
-      if (retryTimeoutRef.current) {
-        clearTimeout(retryTimeoutRef.current);
-        retryTimeoutRef.current = null;
-      }
-      
-      // 设置后台重试机制：8秒后再次尝试获取真实数据
-      retryTimeoutRef.current = setTimeout(() => {
-        log.debug('Background retry attempt for real data', {
-          endpoint: finalConfig.endpoint,
-          gameId: currentGameId,
-          backgroundRetry: true
-        });
-        fetchGames(0); // 重新开始重试循环
-      }, backgroundRetryInterval);
-    } else {
-      // 没有可用的降级内容，优雅隐藏
-      setHasData(false);
-      setLoading(false);
-      
-      log.warn('No fallback games available, hiding section', {
-        endpoint: finalConfig.endpoint,
-        gameId: currentGameId,
-        networkStatus
-      });
-    }
-  }, [currentGameId, finalConfig.fallbackGames, finalConfig.excludeGameId, finalConfig.limit, finalConfig.endpoint, backgroundRetryInterval, fetchGames]);
+  }, [currentGameId, isVisible, maxRetries, finalConfig.endpoint, finalConfig.params, handleFallbackStrategy]);
 
   // 设置总超时控制
   useEffect(() => {
@@ -358,7 +361,7 @@ function GameRecommendationCore({ config, currentGameId }: GameRecommendationSec
     }, loadingTimeout);
 
     return () => clearTimeout(timeoutId);
-  }, [isVisible, loading, hasData, currentGameId, loadingTimeout, handleFallbackStrategy]);
+  }, [isVisible, loading, hasData, currentGameId, loadingTimeout, handleFallbackStrategy, finalConfig.endpoint]);
 
   // 启动数据获取
   useEffect(() => {
@@ -396,27 +399,26 @@ function GameRecommendationCore({ config, currentGameId }: GameRecommendationSec
       aria-label="Game recommendations"
       role="complementary"
     >
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto px-0 sm:px-2 lg:px-0">
         {/* 标题部分 */}
         {finalConfig.showTitle && (
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+          <div className="text-center mb-4">
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">
               {finalConfig.title}
             </h2>
-            {finalConfig.subtitle && (
-              <p className="text-gray-600">
-                {finalConfig.subtitle}
-              </p>
-            )}
           </div>
         )}
 
         {/* 骨架屏加载状态 */}
         {loading && !hasData && (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6" aria-label="Loading games">
+          <div className={`grid gap-3 sm:gap-4 ${
+            finalConfig.gridCols 
+              ? `grid-cols-${finalConfig.gridCols.mobile} sm:grid-cols-${finalConfig.gridCols.tablet} lg:grid-cols-${finalConfig.gridCols.desktop}`
+              : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-2'
+          }`} aria-label="Loading games">
             {[...Array(8)].map((_, index) => (
               <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden animate-pulse">
-                <div className="aspect-[4/3] bg-gray-200"></div>
+                <div className="aspect-[3/2] bg-gray-200"></div>
                 <div className="p-4">
                   <div className="h-4 bg-gray-200 rounded mb-2"></div>
                   <div className="h-3 bg-gray-200 rounded w-2/3 mb-3"></div>
@@ -429,7 +431,11 @@ function GameRecommendationCore({ config, currentGameId }: GameRecommendationSec
 
         {/* 游戏网格 */}
         {hasData && games.length > 0 && (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className={`grid gap-3 sm:gap-4 ${
+            finalConfig.gridCols 
+              ? `grid-cols-${finalConfig.gridCols.mobile} sm:grid-cols-${finalConfig.gridCols.tablet} lg:grid-cols-${finalConfig.gridCols.desktop}`
+              : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-2'
+          }`}>
             {games.map((game) => (
               <Link
                 key={game.id}
@@ -437,37 +443,51 @@ function GameRecommendationCore({ config, currentGameId }: GameRecommendationSec
                 className="group block"
                 aria-label={`Play ${game.title}`}
               >
-                <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 group-hover:shadow-xl group-hover:scale-105">
+                <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-300 group-hover:shadow-lg group-hover:border-primary/20 group-hover:-translate-y-1">
                   {/* 游戏图片 */}
-                  <div className="aspect-[4/3] relative overflow-hidden">
+                  <div className="aspect-[3/2] relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
                     <img
                       src={game.image}
                       alt={`${game.title} game screenshot`}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       loading="lazy"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         target.src = '/placeholder.png';
                       }}
                     />
+                    
+                    {/* 评分显示 - 右上角 */}
+                    {game.rating && (
+                      <div className="absolute top-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded-full backdrop-blur-sm">
+                        <div className="flex items-center gap-1">
+                          <svg className="w-3 h-3 fill-yellow-400" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                          </svg>
+                          <span className="font-medium">
+                            {(() => {
+                              if (typeof game.rating === 'object' && game.rating?.averageRating) {
+                                return game.rating.averageRating.toFixed(1);
+                              }
+                              if (typeof game.rating === 'number') {
+                                return (game.rating as number).toFixed(1);
+                              }
+                              return '0.0';
+                            })()}
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {/* 悬浮遮罩效果 */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
                   
                   {/* 游戏信息 */}
-                  <div className="p-4 text-center">
-                    <h3 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1 group-hover:text-primary transition-colors">
+                  <div className="p-4">
+                    <h3 className="font-medium text-gray-900 text-sm group-hover:text-primary transition-colors line-clamp-1 truncate">
                       {game.title}
                     </h3>
-                    <p className="text-gray-500 text-xs mb-3">
-                      {game.categories?.includes('New Games') ? 'New Games' : 
-                       game.categories?.includes('Hot Games') ? 'Popular Games' : 
-                       game.categories?.includes('Popular') ? 'Popular Games' :
-                       game.categories?.length > 0 ? game.categories[0] : 'Games'}
-                    </p>
-                    
-                    {/* 播放按钮 */}
-                    <button className="w-full px-4 py-2 bg-white text-gray-900 text-sm font-medium rounded-lg group-hover:bg-primary group-hover:text-white transition-colors border border-gray-300 group-hover:border-primary">
-                      Play Now
-                    </button>
                   </div>
                 </div>
               </Link>
@@ -543,6 +563,24 @@ export const createGameRecommendationConfig = {
     limit: 8,
     fallbackGames: DEFAULT_FALLBACK_GAMES,
     excludeGameId: gameId
+  }),
+
+  // 右侧栏相关游戏推荐配置（多列布局，适配2xl空间）
+  sidebarRelatedGames: (gameId: string): GameRecommendationConfig => ({
+    endpoint: '/api/getRelatedGames',
+    params: { limit: '8' }, // 8个游戏，适配2列布局（4行x2列）
+    title: 'Related Games',
+    subtitle: undefined, // 右侧栏不显示副标题
+    limit: 8,
+    gridCols: {
+      mobile: 1,  // 移动端单列
+      tablet: 2,  // 平板双列  
+      desktop: 2  // 桌面端双列布局
+    },
+    fallbackGames: DEFAULT_FALLBACK_GAMES,
+    excludeGameId: gameId,
+    containerClass: "bg-white rounded-lg shadow-sm border border-gray-100 p-6", // 稍微增加内边距适配更宽空间
+    showTitle: true
   }),
 
   // 最新游戏配置

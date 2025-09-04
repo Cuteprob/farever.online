@@ -139,8 +139,8 @@ export default async function HomePage() {
     <>
       <StructuredData game={game} isMainPage={true} />
       <div className="min-h-screen bg-gray-50 py-8">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <GameDetail game={game} isMain={true} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0">
+          <GameDetail game={game} isMain={true} containerSize="7xl" />
         </div>
       </div>
     </>

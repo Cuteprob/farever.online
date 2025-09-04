@@ -6,11 +6,11 @@ import { GameProps } from "@/types/game"
 import { StarRating } from "@/components/StarRating"
 import LazyShareDialog from "@/components/LazyShareDialog"
 
-interface GameContainerProps {
+interface GameContainerLGProps {
   game: GameProps;
 }
 
-export function GameContainer({ game }: GameContainerProps) {
+export function GameContainerLG({ game }: GameContainerLGProps) {
   const [error, setError] = useState(false);
   const [currentRating, setCurrentRating] = useState(game.rating);
   const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
@@ -92,7 +92,7 @@ export function GameContainer({ game }: GameContainerProps) {
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto h-96 sm:h-[500px] md:h-[600px] flex flex-col bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-2xl overflow-hidden">
+    <div className="w-full max-w-7xl mx-auto h-96 sm:h-[500px] md:h-[770px] flex flex-col bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-2xl overflow-hidden">
       
       {/* 游戏区域 */}
       <div className="flex-1 relative">
