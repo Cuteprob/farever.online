@@ -124,11 +124,11 @@ export default async function HomePage() {
   // 如果没有主游戏，显示提示信息
   if (!game) {
     return (
-      <div className="min-h-screen bg-gray-50 py-8">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">No Main Game Available</h1>
-            <p className="text-gray-600">Please check back later or contact support.</p>
+      <div className="container-page py-theme-xl">
+        <div className="container-content">
+          <div className="empty-state">
+            <h1 className="empty-state-title">No Main Game Available</h1>
+            <p className="empty-state-description">Please check back later or contact support.</p>
           </div>
         </div>
       </div>
@@ -138,9 +138,9 @@ export default async function HomePage() {
   return (
     <>
       <StructuredData game={game} isMainPage={true} />
-      <div className="min-h-screen bg-gray-50 py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0">
-          <GameDetail game={game} isMain={true} containerSize="7xl" />
+      <div className="container-page py-theme-xl">
+        <div className="max-w-7xl mx-auto px-theme-md sm:px-theme-lg lg:px-0">
+          <GameDetail game={game} isMain={true} containerSize="5xl" />
         </div>
       </div>
     </>

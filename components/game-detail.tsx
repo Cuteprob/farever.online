@@ -63,7 +63,7 @@ const GameDetail: React.FC<GameDetailProps> = ({ game, isMain = false, container
             </div>
             
             {/* 游戏详情内容 */}
-            <div className="bg-white rounded-lg p-6 shadow-sm border mb-6">
+            <div className="bg-theme-dark-800 rounded-lg p-theme-lg shadow-neon border border-theme-dark-600 mb-theme-lg">
               {/* 面包屑导航 - 仅在非主页游戏时显示 */}
               {!isMain && (
                 <div className="mb-6">
@@ -82,7 +82,7 @@ const GameDetail: React.FC<GameDetailProps> = ({ game, isMain = false, container
             </div>
 
             {/* 分类区域 */}
-            <div className="bg-white pb-8 mb-6 rounded-lg shadow-sm border border-gray-100">
+            <div className="bg-theme-dark-800 pb-theme-xl mb-theme-lg rounded-lg shadow-sm border border-theme-dark-600">
               <Categories 
                 categories={game.categories.map((cat: string) => ({
                   name: cat.toUpperCase(),
@@ -92,7 +92,7 @@ const GameDetail: React.FC<GameDetailProps> = ({ game, isMain = false, container
             </div>
 
             {/* 评论区域 */}
-            <div id="comments" className="bg-white pt-1 pb-8 rounded-lg shadow-sm border border-gray-100">
+            <div id="comments" className="bg-theme-dark-800 pt-theme-xs pb-theme-xl rounded-lg shadow-sm border border-theme-dark-600">
               <Comments
                 pageTitle={game.title}
                 gameId={game.id}
@@ -123,7 +123,7 @@ const GameDetail: React.FC<GameDetailProps> = ({ game, isMain = false, container
             {/* 左侧：游戏详情 - 占 5/7 宽度 */}
             <div className="xl:col-span-5">
               {/* 游戏详情内容 */}
-              <div className="bg-white rounded-lg p-6 shadow-sm border mb-6">
+              <div className="bg-theme-dark-800 rounded-lg p-theme-lg shadow-neon border border-theme-dark-600 mb-theme-lg">
                 {/* 面包屑导航 - 仅在非主页游戏时显示 */}
                 {!isMain && (
                   <div className="mb-6">
@@ -142,7 +142,7 @@ const GameDetail: React.FC<GameDetailProps> = ({ game, isMain = false, container
               </div>
 
               {/* 分类区域 */}
-              <div className="bg-white pb-8 mb-6 rounded-lg shadow-sm border border-gray-100">
+              <div className="bg-theme-dark-800 pb-theme-xl mb-theme-lg rounded-lg shadow-sm border border-theme-dark-600">
                 <Categories 
                   categories={game.categories.map((cat: string) => ({
                     name: cat.toUpperCase(),
@@ -155,7 +155,7 @@ const GameDetail: React.FC<GameDetailProps> = ({ game, isMain = false, container
               <NewGames limit={16} showTitle={true} title="Latest New Games" />
 
               {/* 评论区域 */}
-              <div id="comments" className="bg-white pt-1 pb-8 rounded-lg shadow-sm border border-gray-100">
+              <div id="comments" className="bg-theme-dark-800 pt-theme-xs pb-theme-xl rounded-lg shadow-sm border border-theme-dark-600">
                 <Comments
                   pageTitle={game.title}
                   gameId={game.id}

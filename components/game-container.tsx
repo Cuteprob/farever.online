@@ -129,7 +129,7 @@ export function GameContainer({ game }: GameContainerProps) {
           {/* 游戏名称 */}
           <h1 className="text-white font-medium text-sm sm:text-base truncate">{game.title}</h1>
           {/* 分隔符 */}
-          <div className="text-gray-400 text-sm">|</div>
+          <div className="text-helper text-sm">|</div>
           {/* 评分组件 */}
           <div className="flex-shrink-0">
             <StarRating

@@ -59,7 +59,7 @@ const ImageComponent = ({ src, alt, ...props }: any) => {
         {...props}
       />
       {alt && (
-        <span className="block text-sm text-gray-600 mb-4 text-center italic"
+        <span className="block text-theme-sm text-helper mb-theme-md text-center italic"
               style={{ 
                 display: 'block',
                 textAlign: 'center',
@@ -89,7 +89,7 @@ const LinkComponent = ({ href, children, ...props }: any) => {
   return (
     <a
       href={href}
-      className="text-blue-600 hover:text-blue-800 underline transition-colors"
+      className="text-theme-fire-400 hover:text-theme-fire-300 underline transition-colors"
       target={isExternal ? '_blank' : undefined}
       rel={isExternal ? 'noopener noreferrer' : undefined}
       {...props}
@@ -104,22 +104,22 @@ const defaultComponents = {
   img: ImageComponent,
   a: LinkComponent,
   h1: ({ children, ...props }: any) => (
-    <h1 className="text-3xl font-bold text-gray-900 mb-6 mt-8" {...props}>
+    <h1 className="text-theme-3xl font-theme-heading font-bold text-primary mb-theme-lg mt-theme-2xl" {...props}>
       {children}
     </h1>
   ),
   h2: ({ children, ...props }: any) => (
-    <h2 className="text-2xl font-semibold text-gray-800 mb-4 mt-6" {...props}>
+    <h2 className="text-theme-2xl font-theme-heading font-semibold text-primary mb-theme-md mt-theme-lg" {...props}>
       {children}
     </h2>
   ),
   h3: ({ children, ...props }: any) => (
-    <h3 className="text-xl font-medium text-gray-800 mb-3 mt-5" {...props}>
+    <h3 className="text-theme-xl font-theme-heading font-medium text-primary mb-theme-sm mt-theme-md" {...props}>
       {children}
     </h3>
   ),
   h4: ({ children, ...props }: any) => (
-    <h4 className="text-lg font-medium text-gray-800 mb-2 mt-4" {...props}>
+    <h4 className="text-theme-lg font-theme-heading font-medium text-secondary mb-theme-xs mt-theme-sm" {...props}>
       {children}
     </h4>
   ),
@@ -133,60 +133,60 @@ const defaultComponents = {
     // 如果包含块级元素，则使用 span 替代 p 标签
     if (hasBlockElements) {
       return (
-        <span className="block text-gray-700 leading-relaxed mb-4" {...props}>
+        <span className="block text-secondary leading-relaxed mb-theme-md font-theme-body" {...props}>
           {children}
         </span>
       );
     }
     
     return (
-      <p className="text-gray-700 leading-relaxed mb-4" {...props}>
+      <p className="text-secondary leading-relaxed mb-theme-md font-theme-body" {...props}>
         {children}
       </p>
     );
   },
   ul: ({ children, ...props }: any) => (
-    <ul className="list-disc list-inside text-gray-700 mb-4 space-y-1" {...props}>
+    <ul className="list-disc list-inside text-secondary mb-theme-md space-y-1 font-theme-body" {...props}>
       {children}
     </ul>
   ),
   ol: ({ children, ...props }: any) => (
-    <ol className="list-decimal list-inside text-gray-700 mb-4 space-y-1" {...props}>
+    <ol className="list-decimal list-inside text-secondary mb-theme-md space-y-1 font-theme-body" {...props}>
       {children}
     </ol>
   ),
   li: ({ children, ...props }: any) => (
-    <li className="text-gray-700" {...props}>
+    <li className="text-secondary font-theme-body" {...props}>
       {children}
     </li>
   ),
   blockquote: ({ children, ...props }: any) => (
-    <blockquote className="border-l-4 border-blue-500 pl-4 italic text-gray-600 mb-4" {...props}>
+    <blockquote className="border-l-4 border-theme-fire-500 pl-theme-md italic text-secondary mb-theme-md font-theme-body" {...props}>
       {children}
     </blockquote>
   ),
   strong: ({ children, ...props }: any) => (
-    <strong className="font-semibold text-gray-900" {...props}>
+    <strong className="font-theme-heading font-semibold text-primary" {...props}>
       {children}
     </strong>
   ),
   em: ({ children, ...props }: any) => (
-    <em className="italic text-gray-800" {...props}>
+    <em className="italic text-secondary font-theme-body" {...props}>
       {children}
     </em>
   ),
   del: ({ children, ...props }: any) => (
-    <del className="line-through text-gray-500" {...props}>
+    <del className="line-through text-helper font-theme-body" {...props}>
       {children}
     </del>
   ),
   pre: ({ children, ...props }: any) => (
-    <pre className="bg-gray-100 rounded-lg p-4 overflow-x-auto mb-4" {...props}>
+    <pre className="bg-theme-dark-800 rounded-lg p-theme-md overflow-x-auto mb-theme-md text-secondary font-theme-mono" {...props}>
       {children}
     </pre>
   ),
   code: ({ children, ...props }: any) => (
-    <code className="bg-gray-100 px-1 py-0.5 rounded text-sm" {...props}>
+    <code className="bg-theme-dark-700 text-accent px-theme-xs py-theme-xs rounded text-theme-sm font-theme-mono" {...props}>
       {children}
     </code>
   ),

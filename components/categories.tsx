@@ -15,11 +15,11 @@ export function Categories({ categories }: CategoriesProps) {
   const displayCategories = categories || [];
 
   return (
-    <section className="mt-6">
+    <section className="mt-6 bg-theme-dark-800 rounded-lg p-theme-lg border border-theme-dark-600">
       <div className="px-4 sm:px-6 lg:px-8">
         {/* 标题部分 */}
         <div className="text-center mb-6">
-          <h2 className="text-2xl text-gray-900 mb-1">
+          <h2 className="text-2xl font-theme-heading font-semibold text-primary mb-1">
             Categories & Tags
           </h2>
         </div>
@@ -32,7 +32,7 @@ export function Categories({ categories }: CategoriesProps) {
               href={category.href}
               className="group"
             >
-              <button className="px-4 py-2 bg-white text-gray-900 text-sm font-semibold rounded-lg shadow-md transition-all duration-200 hover:bg-primary hover:text-white border border-gray-100">
+              <button className="px-4 py-2 bg-theme-dark-700 text-primary text-sm font-theme-body font-semibold rounded-lg shadow-md transition-all duration-200 hover:bg-theme-fire-500 hover:text-white border border-theme-dark-600">
                 {category.name}
               </button>
             </Link>

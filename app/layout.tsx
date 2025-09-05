@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fredoka, Nunito, Fira_Code } from "next/font/google";
+import { Orbitron, Rajdhani, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { Footer } from "@/components/footer";
@@ -8,24 +8,27 @@ import { Toaster } from "sonner";
 import WebVitals from "@/components/WebVitals";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 
-// 配置可爱游戏风格字体
-const fredoka = Fredoka({ 
-  weight: '400',
+// 配置Speed Stars运动风格字体
+// Orbitron - 科技感标题字体
+// Rajdhani - 运动风格正文字体，具有现代感和动感
+const orbitron = Orbitron({ 
+  weight: ['400', '700', '900'],
   subsets: ["latin"],
   display: 'swap',
-  variable: '--font-fredoka',
+  variable: '--font-orbitron',
 });
 
-const nunito = Nunito({ 
+const rajdhani = Rajdhani({ 
+  weight: ['300', '400', '500', '600', '700'],
   subsets: ["latin"],
   display: 'swap',
-  variable: '--font-nunito',
+  variable: '--font-rajdhani',
 });
 
-const firaCode = Fira_Code({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   display: 'swap',
-  variable: '--font-fira-code',
+  variable: '--font-jetbrains-mono',
 });
 
 export const metadata: Metadata = {
@@ -50,7 +53,7 @@ export default function RootLayout({
       <head>
         <link rel="manifest" href="/manifest.json" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#3b82f6" />
+        <meta name="theme-color" content="#FF4500" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="icon" href="/favicon.ico" />
         
@@ -65,8 +68,8 @@ export default function RootLayout({
         <link rel="preload" href="/api/getAllGames" as="fetch" crossOrigin="anonymous" />
         
         {/* 关键字体预加载 - 避免字体闪烁 */}
-        <link rel="preload" href="https://fonts.gstatic.com/s/fredoka/v14/X7nP4R87HX_qjq0KmJzxfpM.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        <link rel="preload" href="https://fonts.gstatic.com/s/nunito/v26/XRXI3I6Li01BKofiOc5wtlZ2di8HDLshdTA.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/orbitron/v31/yMJmMIlzdpvBhQQL_SC3X9yhF25-T1nyGy6xpmI.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/rajdhani/v15/LDI2apCSOBg7S-QT7pasQdcVnTwgAp9MKz0.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         
         {/* 关键图片预加载 */}
         <link rel="preload" href="/logo.png" as="image" />
@@ -132,10 +135,10 @@ export default function RootLayout({
       </head>
       <body 
         className={`
-          ${fredoka.variable} 
-          ${nunito.variable} 
-          ${firaCode.variable} 
-          font-body 
+          ${orbitron.variable} 
+          ${rajdhani.variable} 
+          ${jetbrainsMono.variable} 
+          font-theme-body 
           antialiased
         `}
       >

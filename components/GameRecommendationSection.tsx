@@ -44,7 +44,7 @@ const DEFAULT_CONFIG: Partial<GameRecommendationConfig> = {
     desktop: 4
   },
   enableLazyLoad: true,
-  containerClass: "py-10 my-10 max-w-5xl mx-auto bg-white rounded-lg shadow-sm border border-gray-100 min-h-[400px]",
+  containerClass: "py-theme-2xl my-theme-2xl max-w-5xl mx-auto bg-theme-dark-800 rounded-lg shadow-neon border border-theme-dark-600 min-h-[400px]",
   showTitle: true
 };
 
@@ -403,7 +403,7 @@ function GameRecommendationCore({ config, currentGameId }: GameRecommendationSec
         {/* 标题部分 */}
         {finalConfig.showTitle && (
           <div className="text-center mb-4">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+            <h2 className="text-theme-2xl font-theme-heading font-bold text-primary mb-theme-xs">
               {finalConfig.title}
             </h2>
           </div>
@@ -417,12 +417,12 @@ function GameRecommendationCore({ config, currentGameId }: GameRecommendationSec
               : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-2'
           }`} aria-label="Loading games">
             {[...Array(8)].map((_, index) => (
-              <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden animate-pulse">
-                <div className="aspect-[3/2] bg-gray-200"></div>
+              <div key={index} className="bg-theme-dark-700 rounded-xl shadow-neon overflow-hidden loading-skeleton">
+                <div className="aspect-[3/2] bg-theme-dark-600"></div>
                 <div className="p-4">
-                  <div className="h-4 bg-gray-200 rounded mb-2"></div>
-                  <div className="h-3 bg-gray-200 rounded w-2/3 mb-3"></div>
-                  <div className="h-8 bg-gray-200 rounded"></div>
+                  <div className="h-theme-md bg-theme-dark-600 rounded mb-theme-xs"></div>
+                  <div className="h-theme-sm bg-theme-dark-600 rounded w-2/3 mb-theme-sm"></div>
+                  <div className="h-theme-xl bg-theme-dark-600 rounded"></div>
                 </div>
               </div>
             ))}
@@ -443,9 +443,9 @@ function GameRecommendationCore({ config, currentGameId }: GameRecommendationSec
                 className="group block"
                 aria-label={`Play ${game.title}`}
               >
-                <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-300 group-hover:shadow-lg group-hover:border-primary/20 group-hover:-translate-y-1">
+                <div className="bg-theme-dark-800 rounded-xl shadow-neon border border-theme-dark-600 overflow-hidden transition-all duration-300 group-hover:shadow-game-hover group-hover:border-theme-fire-500/20 group-hover:-translate-y-1">
                   {/* 游戏图片 */}
-                  <div className="aspect-[3/2] relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+                  <div className="aspect-[3/2] relative overflow-hidden bg-gradient-to-br from-theme-dark-700 to-theme-dark-600">
                     <img
                       src={game.image}
                       alt={`${game.title} game screenshot`}
@@ -485,7 +485,7 @@ function GameRecommendationCore({ config, currentGameId }: GameRecommendationSec
                   
                   {/* 游戏信息 */}
                   <div className="p-4">
-                    <h3 className="font-medium text-gray-900 text-sm group-hover:text-primary transition-colors line-clamp-1 truncate">
+                    <h3 className="font-theme-heading font-medium text-primary text-theme-sm group-hover:text-theme-fire-500 transition-colors line-clamp-1 truncate">
                       {game.title}
                     </h3>
                   </div>
@@ -497,7 +497,7 @@ function GameRecommendationCore({ config, currentGameId }: GameRecommendationSec
 
         {/* 开发环境调试信息 */}
         {process.env.NODE_ENV === 'development' && (
-          <div className="mt-4 p-3 bg-gray-100 rounded text-xs text-gray-600 space-y-1">
+          <div className="mt-theme-md p-theme-sm bg-theme-dark-700 rounded text-theme-xs text-helper space-y-1">
             <div><strong>Debug Info:</strong></div>
             <div>Game ID: {currentGameId || 'None'}</div>
             <div>Visible: {isVisible.toString()}</div>
@@ -522,17 +522,17 @@ export function GameRecommendationSection({ config, currentGameId }: GameRecomme
     <ErrorBoundary
       fallback={
         <section 
-          className="py-10 my-10 max-w-5xl mx-auto bg-white rounded-lg shadow-sm border border-gray-100 min-h-[200px]"
+          className="py-theme-2xl my-theme-2xl max-w-5xl mx-auto bg-theme-dark-800 rounded-lg shadow-neon border border-theme-dark-600 min-h-[200px]"
           aria-label="Game recommendations (error state)"
         >
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center py-12">
               <div className="max-w-sm mx-auto">
-                <svg className="w-12 h-12 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-theme-3xl h-theme-3xl text-helper mx-auto mb-theme-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.051 0-3.969.77-5.412 2.036M15 9.5a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                <h3 className="text-lg font-medium text-gray-900 mb-2">Recommendations Unavailable</h3>
-                <p className="text-gray-500 text-sm">
+                <h3 className="text-theme-lg font-theme-heading font-medium text-primary mb-theme-xs">Recommendations Unavailable</h3>
+                <p className="text-helper text-theme-sm">
                   Game recommendations are temporarily unavailable.
                 </p>
               </div>
@@ -579,7 +579,7 @@ export const createGameRecommendationConfig = {
     },
     fallbackGames: DEFAULT_FALLBACK_GAMES,
     excludeGameId: gameId,
-    containerClass: "bg-white rounded-lg shadow-sm border border-gray-100 p-6", // 稍微增加内边距适配更宽空间
+    containerClass: "bg-theme-dark-800 rounded-lg shadow-neon border border-theme-dark-600 p-theme-lg", // 稍微增加内边距适配更宽空间
     showTitle: true
   }),
 
@@ -592,6 +592,6 @@ export const createGameRecommendationConfig = {
     limit,
     fallbackGames: DEFAULT_FALLBACK_GAMES,
     enableLazyLoad: false, // 新游戏通常在页面顶部，不需要懒加载
-    containerClass: "py-10 my-10 max-w-5xl mx-auto bg-white rounded-lg shadow-sm border border-gray-100"
+    containerClass: "py-theme-2xl my-theme-2xl max-w-5xl mx-auto bg-theme-dark-800 rounded-lg shadow-neon border border-theme-dark-600"
   })
 };

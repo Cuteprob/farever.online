@@ -115,8 +115,8 @@ export default async function GamePage({ params }: GamePageProps) {
   return (
     <>
       <StructuredData game={game} />
-      <div className="min-h-screen bg-gray-50 py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0">
+      <div className="container-page py-theme-xl">
+        <div className="max-w-7xl mx-auto px-theme-md sm:px-theme-lg lg:px-0">
           <GameDetail game={game} isMain={false} containerSize="5xl" />
         </div>
       </div>

@@ -9,8 +9,8 @@ export function Navbar() {
   
   const navItems = [
     { name: 'New Games', href: '/games/new-games' },
-    { name: 'Horror Games', href: '/games/horror-games' },
-    { name: 'Puzzle Games', href: '/games/puzzle-games' },
+    { name: 'Racing Games', href: '/games/racing-games' },
+    { name: 'Strategy Games', href: '/games/strategy-games' },
   ];
 
   return (
@@ -19,7 +19,7 @@ export function Navbar() {
         {/* Desktop Navigation */}
         <div className="flex items-center justify-between h-full">
           <Link href="/" className="flex items-center space-x-4">
-            <span className="text-2xl font-heading font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent hover:animate-bounce transition-all duration-300 transform">
+            <span className="text-2xl font-theme-heading font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent hover:animate-bounce transition-all duration-300 transform">
             {process.env.NEXT_PUBLIC_PROJECT_NAME}
             </span>
           </Link>

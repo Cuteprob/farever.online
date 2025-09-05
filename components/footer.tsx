@@ -7,15 +7,15 @@ export function Footer() {
         {/* 链接区域 */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <h2 className="font-heading text-primary font-bold">{process.env.NEXT_PUBLIC_PROJECT_NAME}</h2>
+            <h2 className="font-theme-heading text-primary font-bold">{process.env.NEXT_PUBLIC_PROJECT_NAME}</h2>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-sm text-foreground hover:text-primary transition-colors">
+                <Link href="/" className="text-sm font-theme-body text-foreground hover:text-primary transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <span className="text-sm text-foreground">
+                <span className="text-sm font-theme-body text-foreground">
                   {process.env.NEXT_PUBLIC_PROJECT_EMAIL}
                 </span>
               </li>
@@ -23,16 +23,16 @@ export function Footer() {
           </div>
 
           <div className="space-y-4">
-            <h3 className="font-heading text-primary font-bold">Categories</h3>
+            <h3 className="font-theme-heading text-primary font-bold">Categories</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/games/horror-games" className="text-sm text-foreground hover:text-primary transition-colors">
-                  Horror Games
+                <Link href="/games/racing-games" className="text-sm font-theme-body text-foreground hover:text-primary transition-colors">
+                  Racing Games
                 </Link>
               </li>
               <li>
-                <Link href="/games/puzzle-games" className="text-sm text-foreground hover:text-primary transition-colors">
-                  Puzzle Games
+                <Link href="/games/strategy-games" className="text-sm font-theme-body text-foreground hover:text-primary transition-colors">
+                  Strategy Games
                 </Link>
               </li>
               
@@ -40,11 +40,11 @@ export function Footer() {
           </div>
 
           <div className="space-y-4">
-            <h3 className="font-heading text-primary font-bold">Games</h3>
+            <h3 className="font-theme-heading text-primary font-bold">Games</h3>
             <ul className="space-y-2">
               <li>
 
-                <a href={process.env.NEXT_PUBLIC_WEB_URL} className="text-sm text-foreground hover:text-primary transition-colors">
+                <a href={process.env.NEXT_PUBLIC_WEB_URL} className="text-sm font-theme-body text-foreground hover:text-primary transition-colors">
                   {process.env.NEXT_PUBLIC_PROJECT_NAME}
                 </a>
               </li>
@@ -52,15 +52,15 @@ export function Footer() {
           </div>
 
           <div className="space-y-4">
-            <h3 className="font-heading text-primary font-bold">Legal</h3>
+            <h3 className="font-theme-heading text-primary font-bold">Legal</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/privacy" className="text-sm text-foreground hover:text-primary transition-colors">
+                <Link href="/privacy" className="text-sm font-theme-body text-foreground hover:text-primary transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-sm text-foreground hover:text-primary transition-colors">
+                <Link href="/terms" className="text-sm font-theme-body text-foreground hover:text-primary transition-colors">
                   Terms of Service
                 </Link>
               </li>
@@ -70,7 +70,7 @@ export function Footer() {
 
         {/* 版权信息 */}
         <div className="text-center">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm font-theme-body text-text-secondary">
             &copy; {new Date().getFullYear()} {process.env.NEXT_PUBLIC_WEB_URL?.replace('https://', '')}. All rights reserved.
           </p>
         </div>

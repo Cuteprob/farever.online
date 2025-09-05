@@ -139,10 +139,10 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
   const allCategories = await getAllCategories();
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="container-page">
+      <div className="container-content">
         {/* 面包屑导航 */}
-        <div className="mb-6">
+        <div className="mb-theme-lg">
           <Breadcrumb items={[
             { label: 'Home', href: '/' },
             { label: displayCategory!.name, href: `/games/${params.categoryId}` }
@@ -150,12 +150,12 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
         </div>
 
         {/* 简化的页面头部 */}
-        <div className="text-center mb-16">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+        <div className="text-center mb-theme-6xl">
+          <h1 className="heading-page">
             {displayCategory!.name}
           </h1>
           {displayCategory!.description && (
-            <p className="text-gray-600 mb-4">
+            <p className="text-content mb-theme-md">
               {displayCategory!.description}
             </p>
           )}
@@ -164,15 +164,15 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
         {/* 游戏网格 */}
         {games.length > 0 ? (
           <>
-            <GameGrid games={games} className="mb-16" />
+            <GameGrid games={games} className="mb-theme-6xl" />
             
             {/* 优化的分页控制 */}
             {(page > 1 || hasMore) && (
-              <div className="mt-12 flex items-center justify-center space-x-6">
+              <div className="pagination">
                 {page > 1 && (
                   <a
                     href={page === 2 ? `/games/${params.categoryId}` : `/games/${params.categoryId}?page=${page - 1}`}
-                    className="flex items-center px-4 py-2 bg-white text-gray-700 rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors font-medium"
+                    className="pagination-button"
                   >
                     <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -181,12 +181,12 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
                   </a>
                 )}
                 
-                <div className="flex items-center space-x-2">
-                  <span className="px-3 py-2 text-gray-600 font-medium">
+                <div className="flex-center space-x-theme-sm">
+                  <span className="pagination-current">
                     Page {page}
                   </span>
                   {total > 0 && (
-                    <span className="text-gray-400 text-sm">
+                    <span className="text-helper">
                       ({total} games)
                     </span>
                   )}
@@ -195,7 +195,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
                 {hasMore && (
                   <a
                     href={`/games/${params.categoryId}?page=${page + 1}`}
-                    className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                    className="btn-primary"
                   >
                     Next
                     <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -208,16 +208,16 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
           </>
         ) : (
           /* 简化的空状态 */
-          <div className="text-center py-8">
-            <h3 className="text-lg font-medium text-gray-900 mb-2">
+          <div className="empty-state">
+            <h3 className="empty-state-title">
               No games found
             </h3>
-            <p className="text-gray-600 mb-4">
+            <p className="empty-state-description">
               This category doesn't have any games yet.
             </p>
             <a
               href="/"
-              className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              className="btn-primary"
             >
               Play {process.env.PROJECT_NAME}
             </a>
@@ -225,7 +225,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
         )}
                 {/* 分类导航 */}
                 {allCategories.length > 0 && (
-          <div className="my-8">
+          <div className="my-theme-xl">
             <Categories categories={allCategories.map(cat => ({
               name: cat.name,
               href: `/games/${cat.slug}`,

@@ -164,10 +164,10 @@ export function Comments({
     <div ref={componentRef} className={`mt-8 ${className}`} id="comments">
       {/* Header Section */}
       <div className="text-center mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-1">
+        <h2 className="text-xl font-theme-heading font-semibold text-primary mb-1">
           Discuss: {pageTitle}
         </h2>
-        <p className="text-gray-600 text-sm">
+        <p className="text-secondary text-sm font-theme-body">
           Share your thoughts and connect with other players
         </p>
       </div>
@@ -175,10 +175,10 @@ export function Comments({
       <div className="max-w-3xl mx-auto">
         <div className="px-4">
           {/* Comment Form */}
-          <div className="mb-6 bg-gray-50 p-4 rounded-lg border">
+          <div className="mb-6 bg-theme-dark-700 p-4 rounded-lg border border-theme-dark-600">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
               <div>
-                <label htmlFor="nickname" className="block text-xs font-medium text-gray-700 mb-1">
+                <label htmlFor="nickname" className="block text-xs font-theme-body font-medium text-secondary mb-1">
                   Nickname *
                 </label>
                 <input
@@ -186,13 +186,13 @@ export function Comments({
                   id="nickname"
                   value={newComment.nickname}
                   onChange={(e) => setNewComment(prev => ({ ...prev, nickname: e.target.value }))}
-                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md"
+                  className="w-full px-3 py-2 text-sm bg-theme-dark-800 border border-theme-dark-600 rounded-md text-primary font-theme-body"
                   placeholder="Your nickname"
                   required
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-xs font-medium text-gray-700 mb-1">
+                <label htmlFor="email" className="block text-xs font-theme-body font-medium text-secondary mb-1">
                   Email (optional)
                 </label>
                 <input
@@ -200,7 +200,7 @@ export function Comments({
                   id="email"
                   value={newComment.email}
                   onChange={(e) => setNewComment(prev => ({ ...prev, email: e.target.value }))}
-                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md"
+                  className="w-full px-3 py-2 text-sm bg-theme-dark-800 border border-theme-dark-600 rounded-md text-primary font-theme-body"
                   placeholder="your@email.com"
                 />
               </div>
@@ -208,7 +208,7 @@ export function Comments({
             
             {/* 评分功能 */}
             <div className="mb-3">
-              <label className="block text-xs font-medium text-gray-700 mb-1">
+              <label className="block text-xs font-theme-body font-medium text-secondary mb-1">
                 Rate this {gameId ? 'game' : 'page'} (optional)
               </label>
               <div className="flex items-center space-x-1">
@@ -236,14 +236,14 @@ export function Comments({
                   </button>
                 ))}
                 {newComment.ratingScore && (
-                  <span className="ml-2 text-xs text-gray-600">
+                  <span className="ml-2 text-xs text-secondary font-theme-body">
                     {newComment.ratingScore} star{newComment.ratingScore !== 1 ? 's' : ''}
                   </span>
                 )}
               </div>
             </div>
             <div className="mb-3">
-              <label htmlFor="content" className="block text-xs font-medium text-gray-700 mb-1">
+              <label htmlFor="content" className="block text-xs font-theme-body font-medium text-secondary mb-1">
                 Comment *
               </label>
               <textarea
@@ -251,7 +251,7 @@ export function Comments({
                 value={newComment.content}
                 onChange={(e) => setNewComment(prev => ({ ...prev, content: e.target.value }))}
                 rows={3}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md resize-vertical"
+                className="w-full px-3 py-2 text-sm bg-theme-dark-800 border border-theme-dark-600 rounded-md resize-vertical text-primary font-theme-body"
                 placeholder="Share your thoughts..."
                 required
               />
@@ -260,7 +260,7 @@ export function Comments({
               <button
                 onClick={submitComment}
                 disabled={submitting}
-                className="px-4 py-2 text-sm bg-gray-800 text-white rounded-md hover:bg-gray-700 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 text-sm bg-theme-fire-500 text-white font-theme-body font-medium rounded-md hover:bg-theme-fire-600 focus:ring-2 focus:ring-theme-fire-500 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {submitting ? 'Submitting...' : 'Comment'}
               </button>
