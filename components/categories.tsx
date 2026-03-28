@@ -11,8 +11,11 @@ interface CategoriesProps {
 }
 
 export function Categories({ categories }: CategoriesProps) {
-
   const displayCategories = categories || [];
+
+  if (displayCategories.length === 0) {
+    return null;
+  }
 
   return (
     <section className="mt-6 bg-theme-dark-800 rounded-lg p-theme-lg border border-theme-dark-600">
@@ -20,7 +23,7 @@ export function Categories({ categories }: CategoriesProps) {
         {/* 标题部分 */}
         <div className="text-center mb-6">
           <h2 className="text-2xl font-theme-heading font-semibold text-primary mb-1">
-            Categories & Tags
+            Categories
           </h2>
         </div>
 

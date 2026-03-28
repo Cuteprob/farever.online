@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { GameProps } from '@/types/game';
+import { createGameFallbackDescription, siteConfig } from '@/lib/site-config';
 
 interface StructuredDataProps {
   game: GameProps;
@@ -9,25 +10,20 @@ interface StructuredDataProps {
 }
 
 export function StructuredData({ game, isMainPage = false }: StructuredDataProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_WEB_URL || '';
+  const baseUrl = siteConfig.siteUrl;
 
   // Website structured data
   const websiteStructuredData = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": process.env.PROJECT_NAME,
+    "name": siteConfig.siteName,
     "url": baseUrl,
-    "description": `Play the best free online games at ${process.env.PROJECT_NAME}! Enjoy a collection of fun, engaging, and entertaining games for all ages.`,
+    "description": siteConfig.siteDescription,
     "publisher": {
       "@type": "Organization",
-      "name": process.env.PROJECT_NAME,
+      "name": siteConfig.siteName,
       "url": baseUrl
     },
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": `${baseUrl}/search?q={search_term_string}`,
-      "query-input": "required name=search_term_string"
-    }
   };
 
   // Game structured data
@@ -35,7 +31,7 @@ export function StructuredData({ game, isMainPage = false }: StructuredDataProps
     "@context": "https://schema.org",
     "@type": "VideoGame",
     "name": game.title,
-    "description": game.metadata?.description || `Play ${game.title} free online at ${process.env.PROJECT_NAME}! A fun and engaging game for all ages.`,
+    "description": game.metadata?.description || createGameFallbackDescription(game.title),
     "url": isMainPage ? baseUrl : `${baseUrl}/${game.id}`,
     "image": game.image || `${baseUrl}/og-image.jpg`,
     "genre": game.categories?.join(", ") || "Online Game",
@@ -58,20 +54,20 @@ export function StructuredData({ game, isMainPage = false }: StructuredDataProps
     "datePublished": game.createdAt,
     "publisher": {
       "@type": "Organization",
-      "name": process.env.PROJECT_NAME,
+      "name": siteConfig.siteName,
       "url": baseUrl
     },
-    "inLanguage": "en-US"
+    "inLanguage": siteConfig.siteLocale
   };
 
   // Organization structured data
   const organizationStructuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": process.env.PROJECT_NAME,
+    "name": siteConfig.siteName,
     "url": baseUrl,
     "logo": `${baseUrl}/logo.png`,
-    "description": `${process.env.PROJECT_NAME} offers the best collection of free online games for players of all ages.`,
+    "description": siteConfig.siteDescription,
     "sameAs": [
       baseUrl
     ]

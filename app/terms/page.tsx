@@ -1,10 +1,13 @@
 import { Breadcrumb } from "@/components/ui/breadcrumb"
+import { siteConfig } from "@/lib/site-config"
+
+export const runtime = 'edge';
 
 export const metadata = {
-  title: `Terms of Service - ${process.env.PROJECT_NAME}`,
-  description: `Terms of service and user guidelines for ${process.env.PROJECT_NAME} online game. Read about our policies, user conduct, and service terms.`,
+  title: `Terms of Service - ${siteConfig.siteName}`,
+  description: `Terms of service for ${siteConfig.siteName}, including acceptable use, site availability, and content rights.`,
   alternates: {
-    canonical: `${process.env.NEXT_PUBLIC_WEB_URL}/terms`
+    canonical: `${siteConfig.siteUrl}/terms`
   }
 }
 
@@ -13,7 +16,7 @@ export default function TermsOfService() {
     <main className="flex-1 container mx-auto px-4 py-8 max-w-7xl">
       <Breadcrumb 
         items={[
-          { label: `Play ${process.env.PROJECT_NAME}`, href: "/" },
+          { label: siteConfig.siteName, href: "/" },
           { label: "Terms of Service", href: "/terms" }
         ]} 
       />
@@ -29,53 +32,52 @@ export default function TermsOfService() {
           <section className="mt-8">
             <h2 className="text-2xl font-heading text-primary mb-4">1. Acceptance of Terms</h2>
             <p className="text-muted-foreground leading-relaxed">
-              By accessing and using {process.env.PROJECT_NAME}, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using the service.
+              By accessing and using {siteConfig.siteName}, you agree to these Terms of Service and applicable laws. If you do not agree, please do not use the site.
             </p>
           </section>
 
           <section className="mt-8">
             <h2 className="text-2xl font-heading text-primary mb-4">2. User Conduct</h2>
             <p className="text-muted-foreground leading-relaxed mb-4">
-              Users are expected to maintain appropriate behavior while using {process.env.PROJECT_NAME}. The following actions are strictly prohibited:
+              While using {siteConfig.siteName}, you agree not to:
             </p>
             <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
-              <li>Cheating, hacking, or exploiting game mechanics</li>
-              <li>Creating offensive or inappropriate content</li>
-              <li>Harassing or abusing other players</li>
-              <li>Attempting to damage or disrupt the service</li>
-              <li>Using automated systems or bots</li>
+              <li>Attempt to disrupt, overload, or damage the site or embedded game experience</li>
+              <li>Use bots, scraping, or automated abuse against site features</li>
+              <li>Upload or submit unlawful, harmful, or infringing content where user input is allowed</li>
+              <li>Bypass technical restrictions or security protections</li>
             </ul>
           </section>
 
           <section className="mt-8">
             <h2 className="text-2xl font-heading text-primary mb-4">3. Intellectual Property</h2>
             <p className="text-muted-foreground leading-relaxed">
-              {process.env.PROJECT_NAME} and all related content, features, and functionality are owned by us and protected by international copyright, trademark, and other intellectual property laws. User-created content remains the property of their creators, but we reserve the right to use, modify, or remove them as needed.
+              The site design, branding, and original content of {siteConfig.siteName} are protected by applicable intellectual property laws. Embedded games, trademarks, and media may remain the property of their respective owners.
             </p>
           </section>
 
           <section className="mt-8">
             <h2 className="text-2xl font-heading text-primary mb-4">4. Service Modifications</h2>
             <p className="text-muted-foreground leading-relaxed">
-              We reserve the right to modify, suspend, or discontinue any part of {process.env.PROJECT_NAME} at any time without notice. We will not be liable if any part of the service becomes unavailable at any time for any period.
+              We may update, suspend, remove, or change any part of {siteConfig.siteName} at any time without notice.
             </p>
           </section>
 
           <section className="mt-8">
             <h2 className="text-2xl font-heading text-primary mb-4">5. Limitation of Liability</h2>
             <p className="text-muted-foreground leading-relaxed">
-              {process.env.PROJECT_NAME} is provided &quot;as is&quot; without any warranties. We shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of the service.
+              {siteConfig.siteName} is provided on an &quot;as is&quot; and &quot;as available&quot; basis without warranties of any kind. To the fullest extent allowed by law, we are not liable for indirect or consequential damages arising from your use of the site.
             </p>
           </section>
 
           <section className="mt-8">
             <h2 className="text-2xl font-heading text-primary mb-4">6. Changes to Terms</h2>
             <p className="text-muted-foreground leading-relaxed">
-              We may revise these terms at any time without notice. By continuing to use {process.env.PROJECT_NAME} after any changes, you agree to be bound by the revised terms.
+              We may revise these terms from time to time. By continuing to use {siteConfig.siteName} after updates are posted, you agree to the revised terms.
             </p>
           </section>
         </div>
       </div>
     </main>
   )
-} 
+}

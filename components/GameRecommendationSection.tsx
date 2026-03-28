@@ -197,6 +197,27 @@ function GameRecommendationCore({ config, currentGameId }: GameRecommendationSec
   // 降级策略处理
   const handleFallbackStrategy = useCallback(() => {
     const networkStatus = getNetworkStatus();
+
+    // Related Games 只展示数据库真实数据，避免静态降级数据跳到不存在的页面。
+    if (finalConfig.endpoint.includes('getRelatedGames')) {
+      setGames([]);
+      setHasData(false);
+      setUsingFallback(false);
+      setLoading(false);
+
+      log.warn('No related games available, hiding section', {
+        endpoint: finalConfig.endpoint,
+        gameId: currentGameId,
+        networkStatus
+      });
+
+      if (retryTimeoutRef.current) {
+        clearTimeout(retryTimeoutRef.current);
+        retryTimeoutRef.current = null;
+      }
+
+      return;
+    }
     
     // 使用配置的降级游戏或默认降级游戏
     const availableFallbackGames = finalConfig.fallbackGames.length > 0 

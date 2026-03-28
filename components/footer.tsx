@@ -1,6 +1,14 @@
 import Link from "next/link"
+import { getAllCategories } from "@/models/games"
+import { unstable_noStore as noStore } from "next/cache"
+import { guidePages } from "@/data/guides"
 
-export function Footer() {
+export async function Footer() {
+  noStore();
+
+  const categories = (await getAllCategories()).filter((category) => category.gameCount > 0).slice(0, 6);
+  const guides = guidePages;
+
   return (
     <footer className="bg-card/80 backdrop-blur-sm border-t border-border">
       <div className="container mx-auto px-4 py-8 max-w-7xl space-y-8">
@@ -25,29 +33,26 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="font-theme-heading text-primary font-bold">Categories</h3>
             <ul className="space-y-2">
-              <li>
-                <Link href="/games/racing-games" className="text-sm font-theme-body text-foreground hover:text-primary transition-colors">
-                  Racing Games
-                </Link>
-              </li>
-              <li>
-                <Link href="/games/strategy-games" className="text-sm font-theme-body text-foreground hover:text-primary transition-colors">
-                  Strategy Games
-                </Link>
-              </li>
-              
+              {categories.map((category) => (
+                <li key={category.id}>
+                  <Link href={`/games/${category.slug}`} className="text-sm font-theme-body text-foreground hover:text-primary transition-colors">
+                    {category.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div className="space-y-4">
-            <h3 className="font-theme-heading text-primary font-bold">Games</h3>
+            <h3 className="font-theme-heading text-primary font-bold">Game Guides</h3>
             <ul className="space-y-2">
-              <li>
-
-                <a href={process.env.NEXT_PUBLIC_WEB_URL} className="text-sm font-theme-body text-foreground hover:text-primary transition-colors">
-                  {process.env.NEXT_PUBLIC_PROJECT_NAME}
-                </a>
-              </li>
+              {guides.map((guide) => (
+                <li key={guide.slug}>
+                  <Link href={`/${guide.slug}`} className="text-sm font-theme-body text-foreground hover:text-primary transition-colors">
+                    {guide.heading}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { getAllGames, getAllCategories } from '@/models/games';
+import { guidePages } from '@/data/guides';
 
 // 基础 URL 配置 - 确保使用正确的生产环境 URL
 const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || '';
@@ -26,6 +27,12 @@ function getStaticPages() {
       changeFrequency: 'monthly' as const,
       priority: 0.5,
     },
+    ...guidePages.map((guide) => ({
+      url: `${BASE_URL}/${guide.slug}`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    })),
   ];
 }
 
@@ -86,4 +93,3 @@ export const runtime = 'edge';
 // 重新验证配置 - 确保 sitemap 能够动态更新
 // 设置较短的重新验证时间，确保新游戏能够及时出现在 sitemap 中
 export const revalidate = 300; // 5分钟重新验证一次，平衡性能和实时性
-

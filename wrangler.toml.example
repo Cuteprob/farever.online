@@ -96,12 +96,20 @@ NEXT_PUBLIC_WEB_URL="https://yourproject.com"
 # 客户端可访问的项目配置
 NEXT_PUBLIC_PROJECT_NAME="YourProject"
 NEXT_PUBLIC_PROJECT_EMAIL="support@yourproject.com"
+NEXT_PUBLIC_SITE_SHORT_NAME="YourProject"
+NEXT_PUBLIC_SITE_DESCRIPTION="YourProject is a browser-based game site where players can jump in instantly."
+NEXT_PUBLIC_SITE_LOCALE="en-US"
+NEXT_PUBLIC_THEME_COLOR="#FF4500"
 
 # Google Analytics 配置 (可选)
 NEXT_PUBLIC_GOOGLE_ANALYTICS_ID="G-XXXXXXXXXX"
 
 # Google AdSense 配置 (可选)
 NEXT_PUBLIC_GOOGLE_ADSENSE_ID="ca-pub-xxxxxxxxxx"
+
+# Plausible Analytics 配置 (可选)
+NEXT_PUBLIC_PLAUSIBLE_DOMAIN="yourproject.com"
+NEXT_PUBLIC_PLAUSIBLE_SCRIPT_SRC="https://plausible.io/js/script.js"
 
 # Next.js 配置
 NEXT_PUBLIC_BASE_URL="https://yourproject.com"

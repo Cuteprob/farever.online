@@ -5,7 +5,9 @@ import GameDetail from '@/components/game-detail';
 import { StructuredData } from '@/components/structured-data';
 import { GameProps } from '@/types/game';
 import { getGameById } from '@/models/games';
+import { unstable_noStore as noStore } from 'next/cache';
 export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 interface GamePageProps {
   params: {
@@ -86,6 +88,8 @@ export async function generateMetadata({ params }: GamePageProps): Promise<Metad
 
 // 获取游戏详情数据 - 参考主页面数据获取流程，针对Cloudflare Pages优化
 async function getGameDetailData(gameId: string): Promise<GameProps | null> {
+  noStore();
+
   try {
     const startTime = Date.now();
     const game = await getGameById(gameId);
@@ -123,5 +127,4 @@ export default async function GamePage({ params }: GamePageProps) {
     </>
   );
 }
-
 

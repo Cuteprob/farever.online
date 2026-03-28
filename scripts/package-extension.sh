@@ -4,7 +4,7 @@
 mkdir -p dist/extension
 
 # 复制必要文件
-cp -r public/manifest.json dist/extension/
+cp -r .next/server/app/manifest.webmanifest dist/extension/manifest.webmanifest
 cp -r public/icons dist/extension/
 cp -r .next/static dist/extension/static
 cp -r public/assets dist/extension/assets

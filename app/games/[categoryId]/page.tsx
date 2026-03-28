@@ -6,7 +6,9 @@ import { GameProps } from '@/types/game';
 import GameGrid from '@/components/GameGrid';
 import { Categories } from '@/components/categories';
 import { Breadcrumb } from '@/components/ui/breadcrumb';
+import { unstable_noStore as noStore } from 'next/cache';
 export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 interface CategoryPageProps {
   params: {
     categoryId: string;
@@ -18,6 +20,8 @@ interface CategoryPageProps {
 
 // 生成页面元数据
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
+  noStore();
+
   const category = await getCategoryBySlug(params.categoryId);
   
   // 处理 new-games 的特殊情况
@@ -68,6 +72,8 @@ async function getCategoryGames(categorySlug: string, page: number = 1): Promise
   hasMore: boolean;
   total: number;
 }> {
+  noStore();
+
   try {
     const limit = 12; // 每页12个游戏 (3x4网格)
     const offset = (page - 1) * limit;
@@ -116,6 +122,8 @@ async function getCategoryGames(categorySlug: string, page: number = 1): Promise
 }
 
 export default async function CategoryPage({ params, searchParams }: CategoryPageProps) {
+  noStore();
+
   // 获取分类信息
   const category = await getCategoryBySlug(params.categoryId);
   

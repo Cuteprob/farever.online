@@ -1,11 +1,13 @@
 import { Breadcrumb } from "@/components/ui/breadcrumb"
+import { siteConfig } from "@/lib/site-config"
 
-// 在文件顶部添加 metadata
+export const runtime = 'edge';
+
 export const metadata = {
-  title: `Privacy Policy - ${process.env.PROJECT_NAME}`,
-  description: `Privacy policy and data collection practices for ${process.env.PROJECT_NAME} online game. Learn how we protect your information and maintain your privacy.`,
+  title: `Privacy Policy - ${siteConfig.siteName}`,
+  description: `Privacy policy for ${siteConfig.siteName}, including how site analytics, gameplay data, and support requests are handled.`,
   alternates: {
-    canonical: `${process.env.NEXT_PUBLIC_WEB_URL}/privacy`
+    canonical: `${siteConfig.siteUrl}/privacy`
   }
 }
 
@@ -14,7 +16,7 @@ export default function PrivacyPolicy() {
     <main className="flex-1 container mx-auto px-4 py-8 max-w-7xl">
       <Breadcrumb 
         items={[
-          { label: `Play ${process.env.PROJECT_NAME}`, href: "/" },
+          { label: siteConfig.siteName, href: "/" },
           { label: "Privacy Policy", href: "/privacy" }
         ]} 
       />
@@ -30,14 +32,14 @@ export default function PrivacyPolicy() {
           <section className="mt-8">
             <h2 className="text-2xl font-heading text-primary mb-4">1. Information We Collect</h2>
             <p className="text-muted-foreground leading-relaxed mb-4">
-              When you use {process.env.PROJECT_NAME}, we collect certain information to improve your gaming experience and our services:
+              When you use {siteConfig.siteName}, we may collect limited information needed to operate the site and understand how people use the game:
             </p>
             <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
-              <li>Game progress and preferences</li>
-              <li>Game data and records</li>
-              <li>Performance metrics and gameplay statistics</li>
+              <li>Basic technical data such as browser type, device type, and approximate region</li>
+              <li>Gameplay-related events needed to load and operate the embedded game</li>
+              <li>Anonymous traffic and engagement metrics from configured analytics tools</li>
               <li>Device information and browser type</li>
-              <li>IP address and general location data</li>
+              <li>Information you choose to send us, such as support emails or feedback</li>
             </ul>
           </section>
 
@@ -47,11 +49,10 @@ export default function PrivacyPolicy() {
               We use the collected information to:
             </p>
             <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
-              <li>Provide and maintain our gaming services</li>
-              <li>Improve game performance and user experience</li>
-              <li>Track leaderboard rankings and achievements</li>
-              <li>Detect and prevent cheating or abuse</li>
-              <li>Send important game updates and notifications</li>
+              <li>Deliver the game site and keep it available</li>
+              <li>Measure performance, errors, and basic usage trends</li>
+              <li>Improve page quality, loading speed, and gameplay experience</li>
+              <li>Respond to support requests and abuse reports</li>
             </ul>
           </section>
 
@@ -65,14 +66,21 @@ export default function PrivacyPolicy() {
           <section className="mt-8">
             <h2 className="text-2xl font-heading text-primary mb-4">4. Third-Party Services</h2>
             <p className="text-muted-foreground leading-relaxed">
-              {process.env.PROJECT_NAME} integrates with third-party services for enhanced gaming experience. These services have their own privacy policies, and we encourage you to review them.
+              {siteConfig.siteName} may rely on third-party providers for hosting, analytics, embedded game delivery, and advertising. Those providers may process data under their own privacy policies.
+            </p>
+          </section>
+
+          <section className="mt-8">
+            <h2 className="text-2xl font-heading text-primary mb-4">5. Your Choices</h2>
+            <p className="text-muted-foreground leading-relaxed">
+              You can control cookies and storage through your browser settings. If you do not want analytics to run, you can also use browser privacy controls or content blockers where supported.
             </p>
           </section>
 
           <section className="mt-8">
             <h2 className="text-2xl font-heading text-primary mb-4">5. Contact Us</h2>
             <p className="text-muted-foreground leading-relaxed">
-              If you have any questions about this Privacy Policy, please contact us at: {process.env.PROJECT_EMAIL}
+              If you have any questions about this Privacy Policy, please contact us at: {siteConfig.siteEmail || "support@example.com"}
             </p>
           </section>
         </div>

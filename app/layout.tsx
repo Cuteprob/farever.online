@@ -7,6 +7,7 @@ import { Navbar } from "@/components/navbar";
 import { Toaster } from "sonner";
 import WebVitals from "@/components/WebVitals";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
+import { siteConfig } from "@/lib/site-config";
 
 // 配置Speed Stars运动风格字体
 // Orbitron - 科技感标题字体
@@ -32,10 +33,10 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_WEB_URL || ''),
+  metadataBase: new URL(siteConfig.siteUrl || 'https://example.com'),
   openGraph: {
-    siteName: process.env.PROJECT_NAME,
-    locale: 'en',
+    siteName: siteConfig.siteName,
+    locale: siteConfig.siteLocale,
     type: 'website',
   },
   twitter: {
@@ -51,9 +52,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="manifest" href="/manifest.json" />
+        <link rel="manifest" href="/manifest.webmanifest" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#FF4500" />
+        <meta name="theme-color" content={siteConfig.siteThemeColor} />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="icon" href="/favicon.ico" />
         
@@ -125,11 +126,11 @@ export default function RootLayout({
           </>
         )}
         {/* plausible 数据统计 */}
-        {process.env.NEXT_PUBLIC_WEB_URL && (
+        {siteConfig.plausibleDomain && (
           <Script 
             defer 
-            data-domain={process.env.NEXT_PUBLIC_WEB_URL.replace('https://', '').replace('http://', '')} 
-            src="https://app.pageview.app/js/script.js" 
+            data-domain={siteConfig.plausibleDomain}
+            src={siteConfig.plausibleScriptSrc}
           />
         )}
       </head>

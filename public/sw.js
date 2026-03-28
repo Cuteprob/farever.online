@@ -1,14 +1,14 @@
-// Service Worker for BunnyMarket
+// Service Worker for the current game site template
 // 提供离线缓存和性能优化
 
-const CACHE_NAME = 'bunnymarket-v1';
-const STATIC_CACHE = 'bunnymarket-static-v1';
-const API_CACHE = 'bunnymarket-api-v1';
+const CACHE_NAME = 'game-site-v1';
+const STATIC_CACHE = 'game-site-static-v1';
+const API_CACHE = 'game-site-api-v1';
 
 // 需要缓存的静态资源
 const STATIC_ASSETS = [
   '/',
-  '/manifest.json',
+  '/manifest.webmanifest',
   '/favicon.ico',
   '/logo.png',
   '/placeholder.png',

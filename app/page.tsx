@@ -4,9 +4,16 @@ import GameDetail from '@/components/game-detail';
 import { StructuredData } from '@/components/structured-data';
 import { GameProps } from '@/types/game';
 import { getMainGame } from '@/models/games';
+import { createGameFallbackDescription, siteConfig } from '@/lib/site-config';
+import { unstable_noStore as noStore } from 'next/cache';
+
+export const dynamic = 'force-dynamic';
+export const runtime = 'edge';
 
 // 直接使用模型层的缓存机制，添加SSR环境的错误恢复
 async function getCachedMainGame(): Promise<GameProps | null> {
+  noStore();
+
   try {
     // 直接调用数据库函数，避免HTTP调用
     const game = await getMainGame();
@@ -25,9 +32,9 @@ async function getCachedMainGame(): Promise<GameProps | null> {
 
 // 创建默认元数据的工厂函数
 function createDefaultMetadata(): Metadata {
-  const baseUrl = process.env.NEXT_PUBLIC_WEB_URL || '';
-  const defaultTitle = `${process.env.PROJECT_NAME} - Play Free Online Games`;
-  const defaultDescription = `Play the best free online games at ${process.env.PROJECT_NAME}! Enjoy a collection of fun, engaging, and entertaining games for all ages. Start playing now!`;
+  const baseUrl = siteConfig.siteUrl;
+  const defaultTitle = `${siteConfig.siteName} - Play in Your Browser`;
+  const defaultDescription = siteConfig.siteDescription;
   const defaultImage = `${baseUrl}/og-image.jpg`;
   
   return {
@@ -39,13 +46,13 @@ function createDefaultMetadata(): Metadata {
       description: defaultDescription,
       type: 'website',
       url: baseUrl,
-      siteName: process.env.PROJECT_NAME,
+      siteName: siteConfig.siteName,
       images: [
         {
           url: defaultImage,
           width: 1200,
           height: 630,
-          alt: `${process.env.PROJECT_NAME} - Free Online Games`,
+          alt: `${siteConfig.siteName} cover image`,
         },
       ],
     },
@@ -63,9 +70,9 @@ function createDefaultMetadata(): Metadata {
 
 // 基于游戏数据创建元数据的工厂函数
 function createGameMetadata(game: GameProps): Metadata {
-  const baseUrl = process.env.NEXT_PUBLIC_WEB_URL || '';
-  const title = game.metadata?.title || `${game.title} - ${process.env.PROJECT_NAME}`;
-  const description = game.metadata?.description || `Play ${game.title} - A fun and engaging online game at ${process.env.PROJECT_NAME}!`;
+  const baseUrl = siteConfig.siteUrl;
+  const title = game.metadata?.title || `${game.title} - ${siteConfig.siteName}`;
+  const description = game.metadata?.description || createGameFallbackDescription(game.title);
   const keywords = game.metadata?.keywords;
   const gameImage = game.image || `${baseUrl}/og-image.jpg`;
   
@@ -78,7 +85,7 @@ function createGameMetadata(game: GameProps): Metadata {
       description,
       type: 'website',
       url: baseUrl,
-      siteName: process.env.PROJECT_NAME,
+      siteName: siteConfig.siteName,
       images: [
         {
           url: gameImage,
@@ -127,8 +134,8 @@ export default async function HomePage() {
       <div className="container-page py-theme-xl">
         <div className="container-content">
           <div className="empty-state">
-            <h1 className="empty-state-title">No Main Game Available</h1>
-            <p className="empty-state-description">Please check back later or contact support.</p>
+            <h1 className="empty-state-title">{siteConfig.siteName} is being set up</h1>
+            <p className="empty-state-description">Main game data is not available yet. Please check your database or come back later.</p>
           </div>
         </div>
       </div>
@@ -146,5 +153,3 @@ export default async function HomePage() {
     </>
   );
 }
-
-
