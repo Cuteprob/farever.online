@@ -1,9 +1,10 @@
 // Service Worker for the current game site template
 // 提供离线缓存和性能优化
 
-const CACHE_NAME = 'game-site-v1';
-const STATIC_CACHE = 'game-site-static-v1';
-const API_CACHE = 'game-site-api-v1';
+const CACHE_VERSION = 'v2';
+const CACHE_NAME = `game-site-${CACHE_VERSION}`;
+const STATIC_CACHE = `game-site-static-${CACHE_VERSION}`;
+const API_CACHE = `game-site-api-${CACHE_VERSION}`;
 
 // 需要缓存的静态资源
 const STATIC_ASSETS = [
@@ -44,9 +45,12 @@ self.addEventListener('activate', (event) => {
       caches.keys().then((cacheNames) => {
         return Promise.all(
           cacheNames.map((cacheName) => {
-            if (cacheName !== CACHE_NAME && 
-                cacheName !== STATIC_CACHE && 
-                cacheName !== API_CACHE) {
+            if (
+              cacheName.startsWith('game-site-') &&
+              cacheName !== CACHE_NAME &&
+              cacheName !== STATIC_CACHE &&
+              cacheName !== API_CACHE
+            ) {
               return caches.delete(cacheName);
             }
           })
@@ -74,7 +78,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 静态资源策略：缓存优先
+  // 仅对稳定静态资源使用缓存优先，避免部署后继续命中旧的 CSS/JS/HTML
   if (isStaticAsset(url.pathname)) {
     event.respondWith(handleStaticRequest(request));
     return;
@@ -188,15 +192,13 @@ async function handleNavigationRequest(request) {
 
 // 判断是否为静态资源
 function isStaticAsset(pathname) {
-  return pathname.startsWith('/_next/static/') ||
-         pathname.includes('.png') ||
+  return pathname.includes('.png') ||
          pathname.includes('.jpg') ||
          pathname.includes('.jpeg') ||
          pathname.includes('.gif') ||
          pathname.includes('.svg') ||
          pathname.includes('.ico') ||
-         pathname.includes('.css') ||
-         pathname.includes('.js');
+         pathname.endsWith('/manifest.webmanifest');
 }
 
 // 后台同步 - 用于评论提交等

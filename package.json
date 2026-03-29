@@ -8,11 +8,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test:runtime": "tsx --test tests/runtime-helpers.test.ts",
+    "test:deploy": "node --test scripts/cloudflare-pages-deploy.test.mjs",
     "pages:build": "npx @cloudflare/next-on-pages",
     "preview": "pnpm run pages:build && wrangler pages dev",
-    "deploy": "pnpm run pages:build && wrangler pages deploy",
+    "deploy": "node scripts/cloudflare-pages-deploy.mjs",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv env.d.ts",
-    "cf:deploy": "pnpm install --no-frozen-lockfile && pnpm run pages:build && wrangler pages deploy"
+    "cf:deploy": "pnpm install --no-frozen-lockfile && node scripts/cloudflare-pages-deploy.mjs"
   },
   "dependencies": {
     "@libsql/client": "^0.14.0",

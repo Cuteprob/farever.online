@@ -2,6 +2,7 @@
 
 import React from "react";
 import LazyMarkdownRenderer from "@/components/LazyMarkdownRenderer";
+import { sanitizeMarkdownDomProps } from "@/lib/runtime-helpers";
 
 function flattenText(children: React.ReactNode): string {
   return Array.isArray(children)
@@ -26,12 +27,13 @@ export function GuideMarkdown({ content }: { content: string }) {
             .toLowerCase()
             .replace(/[^a-z0-9]+/g, "-")
             .replace(/^-+|-+$/g, "");
+          const safeProps = sanitizeMarkdownDomProps(props as Record<string, unknown>);
 
           return (
             <h2
               id={id}
               className="scroll-mt-28 text-theme-2xl font-theme-heading font-semibold text-primary mb-theme-md mt-theme-lg"
-              {...props}
+              {...safeProps}
             >
               {children}
             </h2>

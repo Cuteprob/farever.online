@@ -1,7 +1,5 @@
-import type { MetadataRoute } from "next";
+import { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
-
-export const runtime = 'edge';
 
 export default function robots(): MetadataRoute.Robots {
   return {

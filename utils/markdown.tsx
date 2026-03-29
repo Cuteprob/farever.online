@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { sanitizeMarkdownDomProps } from '@/lib/runtime-helpers';
 import { MarkdownRendererProps } from '@/types/game';
 
 // 提取 YouTube 视频 ID 的工具函数
@@ -44,6 +45,8 @@ const YouTubeComponent = ({ videoId, title = 'YouTube video' }: { videoId: strin
 
 // 自定义图片组件  
 const ImageComponent = ({ src, alt, ...props }: any) => {
+  const safeProps = sanitizeMarkdownDomProps(props);
+
   return (
     <span className="block">
       <img
@@ -56,7 +59,7 @@ const ImageComponent = ({ src, alt, ...props }: any) => {
           display: 'block',
           textAlign: 'center'
         }}
-        {...props}
+        {...safeProps}
       />
       {alt && (
         <span className="block text-theme-sm text-helper mb-theme-md text-center italic"
@@ -74,6 +77,7 @@ const ImageComponent = ({ src, alt, ...props }: any) => {
 
 // 自定义链接组件
 const LinkComponent = ({ href, children, ...props }: any) => {
+  const safeProps = sanitizeMarkdownDomProps(props);
   const isExternal = href?.startsWith('http');
 
     // 检查是否为 YouTube 链接
@@ -92,7 +96,7 @@ const LinkComponent = ({ href, children, ...props }: any) => {
       className="text-theme-fire-400 hover:text-theme-fire-300 underline transition-colors"
       target={isExternal ? '_blank' : undefined}
       rel={isExternal ? 'noopener noreferrer' : undefined}
-      {...props}
+      {...safeProps}
     >
       {children}
     </a>
@@ -104,26 +108,27 @@ const defaultComponents = {
   img: ImageComponent,
   a: LinkComponent,
   h1: ({ children, ...props }: any) => (
-    <h1 className="text-theme-3xl font-theme-heading font-bold text-primary mb-theme-lg mt-theme-2xl" {...props}>
+    <h1 className="text-theme-3xl font-theme-heading font-bold text-primary mb-theme-lg mt-theme-2xl" {...sanitizeMarkdownDomProps(props)}>
       {children}
     </h1>
   ),
   h2: ({ children, ...props }: any) => (
-    <h2 className="text-theme-2xl font-theme-heading font-semibold text-primary mb-theme-md mt-theme-lg" {...props}>
+    <h2 className="text-theme-2xl font-theme-heading font-semibold text-primary mb-theme-md mt-theme-lg" {...sanitizeMarkdownDomProps(props)}>
       {children}
     </h2>
   ),
   h3: ({ children, ...props }: any) => (
-    <h3 className="text-theme-xl font-theme-heading font-medium text-primary mb-theme-sm mt-theme-md" {...props}>
+    <h3 className="text-theme-xl font-theme-heading font-medium text-primary mb-theme-sm mt-theme-md" {...sanitizeMarkdownDomProps(props)}>
       {children}
     </h3>
   ),
   h4: ({ children, ...props }: any) => (
-    <h4 className="text-theme-lg font-theme-heading font-medium text-secondary mb-theme-xs mt-theme-sm" {...props}>
+    <h4 className="text-theme-lg font-theme-heading font-medium text-secondary mb-theme-xs mt-theme-sm" {...sanitizeMarkdownDomProps(props)}>
       {children}
     </h4>
   ),
   p: ({ children, ...props }: any) => {
+    const safeProps = sanitizeMarkdownDomProps(props);
     // 检查子元素中是否包含块级元素
     const hasBlockElements = React.Children.toArray(children).some(child => 
       React.isValidElement(child) && 
@@ -133,60 +138,60 @@ const defaultComponents = {
     // 如果包含块级元素，则使用 span 替代 p 标签
     if (hasBlockElements) {
       return (
-        <span className="block text-secondary leading-relaxed mb-theme-md font-theme-body" {...props}>
+        <span className="block text-secondary leading-relaxed mb-theme-md font-theme-body" {...safeProps}>
           {children}
         </span>
       );
     }
     
     return (
-      <p className="text-secondary leading-relaxed mb-theme-md font-theme-body" {...props}>
+      <p className="text-secondary leading-relaxed mb-theme-md font-theme-body" {...safeProps}>
         {children}
       </p>
     );
   },
   ul: ({ children, ...props }: any) => (
-    <ul className="list-disc list-inside text-secondary mb-theme-md space-y-1 font-theme-body" {...props}>
+    <ul className="list-disc list-inside text-secondary mb-theme-md space-y-1 font-theme-body" {...sanitizeMarkdownDomProps(props)}>
       {children}
     </ul>
   ),
   ol: ({ children, ...props }: any) => (
-    <ol className="list-decimal list-inside text-secondary mb-theme-md space-y-1 font-theme-body" {...props}>
+    <ol className="list-decimal list-inside text-secondary mb-theme-md space-y-1 font-theme-body" {...sanitizeMarkdownDomProps(props)}>
       {children}
     </ol>
   ),
   li: ({ children, ...props }: any) => (
-    <li className="text-secondary font-theme-body" {...props}>
+    <li className="text-secondary font-theme-body" {...sanitizeMarkdownDomProps(props)}>
       {children}
     </li>
   ),
   blockquote: ({ children, ...props }: any) => (
-    <blockquote className="border-l-4 border-theme-fire-500 pl-theme-md italic text-secondary mb-theme-md font-theme-body" {...props}>
+    <blockquote className="border-l-4 border-theme-fire-500 pl-theme-md italic text-secondary mb-theme-md font-theme-body" {...sanitizeMarkdownDomProps(props)}>
       {children}
     </blockquote>
   ),
   strong: ({ children, ...props }: any) => (
-    <strong className="font-theme-heading font-semibold text-primary" {...props}>
+    <strong className="font-theme-heading font-semibold text-primary" {...sanitizeMarkdownDomProps(props)}>
       {children}
     </strong>
   ),
   em: ({ children, ...props }: any) => (
-    <em className="italic text-secondary font-theme-body" {...props}>
+    <em className="italic text-secondary font-theme-body" {...sanitizeMarkdownDomProps(props)}>
       {children}
     </em>
   ),
   del: ({ children, ...props }: any) => (
-    <del className="line-through text-helper font-theme-body" {...props}>
+    <del className="line-through text-helper font-theme-body" {...sanitizeMarkdownDomProps(props)}>
       {children}
     </del>
   ),
   pre: ({ children, ...props }: any) => (
-    <pre className="bg-theme-dark-800 rounded-lg p-theme-md overflow-x-auto mb-theme-md text-secondary font-theme-mono" {...props}>
+    <pre className="bg-theme-dark-800 rounded-lg p-theme-md overflow-x-auto mb-theme-md text-secondary font-theme-mono" {...sanitizeMarkdownDomProps(props)}>
       {children}
     </pre>
   ),
   code: ({ children, ...props }: any) => (
-    <code className="bg-theme-dark-700 text-accent px-theme-xs py-theme-xs rounded text-theme-sm font-theme-mono" {...props}>
+    <code className="bg-theme-dark-700 text-accent px-theme-xs py-theme-xs rounded text-theme-sm font-theme-mono" {...sanitizeMarkdownDomProps(props)}>
       {children}
     </code>
   ),

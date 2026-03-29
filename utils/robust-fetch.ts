@@ -11,6 +11,7 @@ export interface FetchOptions {
   fallbackData?: any;                 // 降级数据
   cacheKey?: string;                  // 缓存键
   enableCache?: boolean;              // 是否启用缓存
+  logFinalFailureAsError?: boolean;   // 最终失败是否作为error输出
 }
 
 export interface NetworkStatus {
@@ -105,7 +106,8 @@ export async function robustFetch<T = any>(
     retryDelayMultiplier = 2, // 指数退避
     fallbackData = null,
     cacheKey,
-    enableCache = true
+    enableCache = true,
+    logFinalFailureAsError = true
   } = options;
 
   const networkStatus = getNetworkStatus();
@@ -219,11 +221,20 @@ export async function robustFetch<T = any>(
   }
 
   // 所有重试都失败了，尝试返回缓存或降级数据
-  log.error(`All fetch attempts failed for ${url}`, lastError, {
+  const finalFailureContext = {
     url,
     attempts: retries + 1,
     networkStatus
-  });
+  };
+
+  if (logFinalFailureAsError) {
+    log.error(`All fetch attempts failed for ${url}`, lastError, finalFailureContext);
+  } else {
+    log.warn(`All fetch attempts failed for ${url}`, {
+      ...finalFailureContext,
+      error: lastError?.message
+    });
+  }
 
   // 尝试返回过期的缓存数据
   if (cacheKey && enableCache) {

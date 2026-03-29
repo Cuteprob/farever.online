@@ -48,6 +48,8 @@ const DEFAULT_CONFIG: Partial<GameRecommendationConfig> = {
   showTitle: true
 };
 
+const showRecommendationDebug = process.env.NEXT_PUBLIC_SHOW_RECOMMENDATION_DEBUG === 'true';
+
 // 热门游戏静态列表作为通用降级内容
 const DEFAULT_FALLBACK_GAMES: GameProps[] = [
   { 
@@ -307,9 +309,10 @@ function GameRecommendationCore({ config, currentGameId }: GameRecommendationSec
         finalConfig.endpoint,
         apiParams,
         { 
-          timeout: 4000,
+          timeout: 7000,
           retries: 0,
           enableCache: true,
+          logFinalFailureAsError: false,
           fallbackData: { success: true, data: [], count: 0 }
         }
       );
@@ -517,7 +520,7 @@ function GameRecommendationCore({ config, currentGameId }: GameRecommendationSec
         )}
 
         {/* 开发环境调试信息 */}
-        {process.env.NODE_ENV === 'development' && (
+        {showRecommendationDebug && (
           <div className="mt-theme-md p-theme-sm bg-theme-dark-700 rounded text-theme-xs text-helper space-y-1">
             <div><strong>Debug Info:</strong></div>
             <div>Game ID: {currentGameId || 'None'}</div>

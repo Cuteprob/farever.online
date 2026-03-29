@@ -19,6 +19,8 @@ const FALLBACK_POPULAR_GAMES = [
   { id: 'sprunki-mustard', title: 'Sprunki Mustard', image: '/games/sprunki-mustard.jpg', categories: ['Popular'] }
 ];
 
+const showRecommendationDebug = process.env.NEXT_PUBLIC_SHOW_RECOMMENDATION_DEBUG === 'true';
+
 function RelatedGamesCore({ currentGameId }: RelatedGamesProps) {
   const [relatedGames, setRelatedGames] = useState<GameProps[]>([]);
   const [loading, setLoading] = useState(true);
@@ -59,6 +61,38 @@ function RelatedGamesCore({ currentGameId }: RelatedGamesProps) {
     };
   }, [isVisible]);
 
+  // 降级策略处理
+  const handleFallbackStrategy = useCallback(() => {
+    const networkStatus = getNetworkStatus();
+    
+    // 策略2: 显示热门游戏（排除当前游戏）
+    const fallbackGames = FALLBACK_POPULAR_GAMES
+      .filter(game => game.id !== currentGameId)
+      .slice(0, 4);
+    
+    if (fallbackGames.length > 0) {
+      setRelatedGames(fallbackGames as GameProps[]);
+      setHasData(true);
+      setFromCache(false);
+      
+      log.info('Using fallback popular games', {
+        gameId: currentGameId,
+        fallbackCount: fallbackGames.length,
+        networkOnline: networkStatus.isOnline
+      });
+    } else {
+      // 策略3: 完全隐藏区域
+      setShouldShowSection(false);
+      
+      log.info('Hiding related games section due to no fallback data', {
+        gameId: currentGameId,
+        networkOnline: networkStatus.isOnline
+      });
+    }
+    
+    setLoading(false);
+  }, [currentGameId]);
+
   // 静默重试机制
   const fetchRelatedGames = useCallback(async (attemptNumber = 0): Promise<void> => {
     if (!currentGameId || !isVisible) {
@@ -77,9 +111,10 @@ function RelatedGamesCore({ currentGameId }: RelatedGamesProps) {
         '/api/getRelatedGames',
         { gameId: currentGameId, limit: '8' }, // 减少到8个提高加载速度
         { 
-          timeout: 4000, // 4秒超时
+          timeout: 7000, // 7秒超时，避免边缘网络下的误判
           retries: 0, // 禁用内部重试，由外部控制
           enableCache: true,
+          logFinalFailureAsError: false,
           fallbackData: { success: true, data: [], count: 0 }
         }
       );
@@ -126,39 +161,7 @@ function RelatedGamesCore({ currentGameId }: RelatedGamesProps) {
         setLoading(false);
       }
     }
-  }, [currentGameId, isVisible, maxRetries, hasData]);
-
-  // 降级策略处理
-  const handleFallbackStrategy = useCallback(() => {
-    const networkStatus = getNetworkStatus();
-    
-    // 策略2: 显示热门游戏（排除当前游戏）
-    const fallbackGames = FALLBACK_POPULAR_GAMES
-      .filter(game => game.id !== currentGameId)
-      .slice(0, 4);
-    
-    if (fallbackGames.length > 0) {
-      setRelatedGames(fallbackGames as GameProps[]);
-      setHasData(true);
-      setFromCache(false);
-      
-      log.info('Using fallback popular games', {
-        gameId: currentGameId,
-        fallbackCount: fallbackGames.length,
-        networkOnline: networkStatus.isOnline
-      });
-    } else {
-      // 策略3: 完全隐藏区域
-      setShouldShowSection(false);
-      
-      log.info('Hiding related games section due to no fallback data', {
-        gameId: currentGameId,
-        networkOnline: networkStatus.isOnline
-      });
-    }
-    
-    setLoading(false);
-  }, [currentGameId]);
+  }, [currentGameId, isVisible, maxRetries, hasData, handleFallbackStrategy]);
 
   // 设置总超时控制
   useEffect(() => {
@@ -276,7 +279,7 @@ function RelatedGamesCore({ currentGameId }: RelatedGamesProps) {
         )}
         
         {/* 开发环境调试信息 */}
-        {process.env.NODE_ENV === 'development' && (
+        {showRecommendationDebug && (
           <div className="mt-4 p-3 bg-gray-100 rounded text-xs text-gray-600 space-y-1">
             <div><strong>Debug Info:</strong></div>
             <div>Game ID: {currentGameId || 'None'}</div>
