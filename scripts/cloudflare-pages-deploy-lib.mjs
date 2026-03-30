@@ -62,9 +62,7 @@ export function classifyPagesEnvVarEntries(entries) {
   const secretEntries = {};
 
   for (const [key, value] of Object.entries(entries)) {
-    const isSecret =
-      !key.startsWith("NEXT_PUBLIC_") &&
-      /(TOKEN|SECRET|PASSWORD|DATABASE_URL|AUTH_TOKEN|AUTH)/i.test(key);
+    const isSecret = !key.startsWith("NEXT_PUBLIC_");
 
     if (isSecret) {
       secretEntries[key] = value;
