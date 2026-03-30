@@ -18,6 +18,7 @@ const envProductionPath = path.join(projectRoot, ".env.production");
 const envLocalPath = path.join(projectRoot, ".env.local");
 const buildOutputDir = path.join(projectRoot, ".vercel", "output", "static");
 const wranglerTomlPath = path.join(projectRoot, "wrangler.toml");
+let cachedCloudflareEnvEntries;
 
 function run(command, args, options = {}) {
   return execFileSync(command, args, {
@@ -48,6 +49,18 @@ function getDeployEnvironmentEntries() {
   return mergeDeployEnvSources(localEntries, productionEntries);
 }
 
+function getCloudflareEnvEntries() {
+  if (!cachedCloudflareEnvEntries) {
+    cachedCloudflareEnvEntries = {
+      ...readOptionalEnvFile(envProductionPath),
+      ...readOptionalEnvFile(envLocalPath),
+      ...process.env,
+    };
+  }
+
+  return cachedCloudflareEnvEntries;
+}
+
 function getProjectName(wranglerToml) {
   const match = wranglerToml.match(/^name\s*=\s*"([^"]+)"$/m);
   if (!match) {
@@ -57,6 +70,13 @@ function getProjectName(wranglerToml) {
 }
 
 function getAccountId() {
+  const envAccountId =
+    getCloudflareEnvEntries().CLOUDFLARE_ACCOUNT_ID ||
+    getCloudflareEnvEntries().CF_ACCOUNT_ID;
+  if (envAccountId) {
+    return envAccountId;
+  }
+
   const whoamiOutput = run("npx", ["wrangler", "whoami"], { capture: true });
   const match = whoamiOutput.match(/[a-f0-9]{32}/);
   if (!match) {
@@ -66,7 +86,11 @@ function getAccountId() {
 }
 
 function getBearerToken() {
-  return process.env.CLOUDFLARE_API_TOKEN || readWranglerOAuthToken();
+  return (
+    getCloudflareEnvEntries().CLOUDFLARE_API_TOKEN ||
+    getCloudflareEnvEntries().CF_API_TOKEN ||
+    readWranglerOAuthToken()
+  );
 }
 
 function callCloudflareApi(method, urlPath, body) {

@@ -17,117 +17,185 @@ export const guidePages: GuidePageData[] = [
       "New to Scritchy Scratchy? This beginner-friendly guide explains the gameplay loop, upgrades, automation, and prestige so you can progress faster and make smarter choices from the start.",
     heading: "Scritchy Scratchy Guide",
     intro:
-      "A beginner-friendly walkthrough of the gameplay loop, upgrades, automation, and prestige so new players can build momentum quickly.",
+      "A practical starter guide covering the first 15 minutes, early priorities, automation timing, and the signs that prestige is starting to make sense.",
     content: `# Scritchy Scratchy Guide
 
-Scritchy Scratchy is easy to start and surprisingly easy to misunderstand. At first, it looks like a simple scratch card game where you buy tickets, reveal symbols, and hope for a lucky result. That part is real, but it is only the surface. The reason many players search for a Scritchy Scratchy guide is that the game quickly becomes a loop of reinvestment, automation, upgrades, and prestige. If you only chase the thrill of a single big win, progression feels inconsistent. If you understand the loop, the game opens up fast.
+**Last updated:** March 2026  
+**Updated for:** public March 2026 release-era sources  
+**Estimated reading time:** 8 minutes  
+**Page goal:** help new players understand how to play Scritchy Scratchy, what to prioritize early, and when a run is actually improving
 
-This guide is built for that second approach. The goal is not just to explain what Scritchy Scratchy is, but to help you play it better from the beginning.
+![Scritchy Scratchy guide overview](https://pub-e3bcf72b1f5041c7aaaac686926b60de.r2.dev/scritchy-scratchy/image6.jpg)
 
-## Understand the Real Goal of a Run
+## Scritchy Scratchy Guide: What New Players Should Focus On First
 
-A lot of new players treat every ticket like a fresh gamble. That mindset is fun for a few minutes, but it is not the best way to grow. In Scritchy Scratchy, the goal of a run is not one lucky scratch. The goal is to build a stronger loop.
+A good **Scritchy Scratchy guide** should not just repeat that the game has upgrades, automation, and prestige. A new player usually wants something more practical:
 
-That means every good decision does one of three things:
+- What should I do in the first few minutes?
+- Which choices actually speed progress up?
+- When should I stop thinking ticket by ticket and start thinking about the whole run?
+- When does prestige become worth it?
 
-- makes money more consistently
-- reduces friction in your routine
-- helps you reach stronger systems sooner
+That is what this page answers.
 
-When you think that way, the early game becomes much clearer. You are not trying to look impressive. You are trying to create momentum.
+The most important thing to understand is that **Scritchy Scratchy** starts like a scratch-card game, but it quickly becomes a progression game. You buy tickets, scratch them, collect payouts, reinvest your money, unlock stronger tools, and eventually build a system that works faster than your early manual play ever could.
 
-## Start With Stability, Not Hype
+## Quick Start Checklist
 
-Early progress matters because it sets the pace for everything that comes after it. If you play too aggressively at the start, you can slow yourself down without realizing it. Scritchy Scratchy rewards players who keep the machine moving.
+Before getting fancy, make sure your first run does these basic things well:
 
-A stable start usually looks like this:
+- keep buying tickets instead of waiting too long for one "perfect" moment
+- pay attention to whether a purchase improves your pace or only looks exciting
+- treat upgrades as tools for smoother repetition, not just bigger numbers
+- move toward automation when manual scratching starts becoming the bottleneck
+- remember that a slowing run is not always a bad run, but it is often a signal
 
-1. buy affordable tickets
-2. scratch them cleanly and consistently
-3. reinvest without overcommitting
-4. unlock the next useful layer as soon as it becomes practical
+If you only take one idea from this **Scritchy Scratchy guide**, take this one:
 
-The key idea is simple: strong runs feel smooth. If a choice leaves you stuck, underfunded, or waiting too long for the next step, it is probably not helping.
+**play for momentum, not for one lucky reveal.**
 
-## Learn the Loop Before You Try to Outsmart It
+## How to Play Scritchy Scratchy Well in the First 15 Minutes
 
-The core loop is simple but powerful:
+The first 15 minutes shape how the rest of the run feels. Many players waste time here because the game is tactile and immediately rewarding. It is easy to think every decision is fine as long as money is moving. In practice, the opening is where you establish whether your run will feel smooth or awkward.
 
-**buy tickets -> scratch -> collect -> reinvest -> upgrade -> repeat**
+### Minutes 1-5: Learn the loop
 
-At the beginning, this loop feels very manual. You do the scratching yourself, small gains feel meaningful, and each purchase seems personal. Later, the same loop becomes more strategic. You care less about one ticket and more about how your whole setup performs over time.
+Your only real job at the start is learning the basic loop:
 
-That shift is important. Scritchy Scratchy starts as a tactile game, but it becomes an optimization game. New players improve faster once they stop asking "What happened on this one ticket?" and start asking "Is my whole run getting more efficient?"
+**buy -> scratch -> collect -> reinvest**
 
-## Do Not Treat Every Ticket the Same
+This sounds obvious, but many players interrupt that rhythm by overthinking too early. Do not try to "solve" Scritchy Scratchy in the first few purchases. Just understand the pace of the game:
 
-One of the most common beginner mistakes is assuming that ticket progression is only about higher cost and higher reward. In practice, different scratchers shape the run differently. Some keep money flowing. Some increase variance. Some feel exciting but are inefficient until you already have enough support from upgrades or automation.
+- how fast money comes in
+- how long each ticket takes
+- how scratching feels
+- how quickly the next meaningful purchase appears
 
-A useful rule is to test each new ticket type with two questions:
+The early scratching mechanic matters because Scritchy Scratchy is built around dragging across the card surface, not just clicking a button once. That tactile motion is one of the core identity pieces of the game.
 
-- Does this help my average pace?
-- Does this fit the stage of the run I am in right now?
+### Minutes 5-10: Start noticing efficiency
 
-If the answer is no, it may still be worth exploring later, but it should not become your new default just because it unlocked.
+Once the basic loop feels comfortable, stop asking "Did I win?" and start asking:
 
-## Buy Upgrades That Improve Flow
+- Did this purchase make the next few minutes better?
+- Did it smooth out the loop?
+- Did it help me earn faster, or just feel flashy?
 
-Bad upgrade decisions usually come from reading only the number. Good upgrade decisions come from reading the effect on your loop.
+This is where a lot of players improve fast. Scritchy Scratchy rewards players who notice pacing. A run that feels steady is usually stronger than a run that looks dramatic.
 
-The best early upgrades are often the ones that make the game feel cleaner, faster, or easier to repeat. Luck is valuable, but so is rhythm. Faster scratching, better multipliers, and smoother action flow often do more for progression than a flashy bonus that looks strong in isolation.
+### Minutes 10-15: Shift from scratching to managing
 
-A simple test helps here: if an upgrade makes the next ten minutes better, it is usually worth serious consideration.
+Around this point, your mindset should start changing.
 
-## Automation Is the Turning Point
+You are no longer just revealing one card at a time. You are building a system. This is the moment where players start to see the real shape of the game: ticket buying, upgrades, automation, and later prestige all connect into the same progression loop.
 
-Scritchy Scratchy feels like one game before automation and another after it. Before automation, you are doing almost everything by hand. After automation, you begin managing a system instead of brute-forcing every action yourself.
+![Scritchy Scratchy first 15 minutes](https://pub-e3bcf72b1f5041c7aaaac686926b60de.r2.dev/scritchy-scratchy/image7.jpg)
 
-This is why automation matters so much. It does not just save effort. It increases attempts over time and frees your attention for smarter decisions. In a game built around repetition and probability, that is a huge advantage.
+## Best Early Priorities
 
-New players sometimes delay automation because manual scratching feels more satisfying. That is understandable, but it usually slows progress. The faster you shift from pure manual play to supported play, the more the game starts to work for you.
+A lot of new players search for **how to play Scritchy Scratchy** when what they really need is a clearer priority order.
 
-## Know When a Run Has Peaked
+Here is the best early logic.
 
-Another thing that trips players up is the feeling that a run should last forever. In reality, Scritchy Scratchy is built around loops. A run that once felt strong can eventually flatten out. If you keep forcing weak momentum, you often waste time that could be turned into future power.
+### 1. Prioritize loop quality
+Your first goal is not one huge win. Your first goal is making the loop easier to repeat.
 
-That is why it helps to watch for signs of slowdown:
+### 2. Buy with purpose
+Do not buy something only because it unlocked. Buy it because it improves your current phase of the run.
 
-- upgrades stop changing the pace meaningfully
-- tickets no longer move your money forward fast enough
-- progress feels like maintenance instead of growth
+### 3. Respect ticket pacing
+Different scratch cards do not only differ in cost. They change how the run feels. Some are better for steady progress, while others are better once your setup is stronger.
 
-When that happens, you should start thinking ahead instead of squeezing the current run dry.
+### 4. Value upgrades that improve flow
+Upgrades matter most when they change the next several minutes, not just the next few seconds. Better pacing, cleaner repetition, and less friction usually outperform isolated excitement.
 
-## Prestige Is Not Failure
+### 5. Move toward automation
+Automation is one of the biggest progression steps in Scritchy Scratchy. The game's own systems are built to shift you from manual play into a more managed run structure. The Auto Scratcher is a turning point, not a side feature.
 
-Prestige is the moment many players hesitate, but it is also the moment the game starts showing its real structure. Resetting can feel painful at first because you lose visible progress. The important thing is that you are not resetting for nothing. You are converting one run into a stronger next run.
+## What to Ignore Early
 
-Your first prestige should be practical. Focus on permanent benefits that reduce friction, improve speed, or help you reach automation and scaling sooner. The smartest early prestige choices are usually not the fanciest ones. They are the ones that make the next run feel cleaner.
+One of the fastest ways to lose time in Scritchy Scratchy is to focus on the wrong things too early.
 
-## The Most Common Early Mistakes
+### Do not overvalue every new unlock
+New is not the same thing as efficient. Some unlocks are better tested than adopted immediately.
 
-If you want to progress faster, avoid these habits:
+### Do not chase rare outcomes as your main plan
+Jackpots are exciting, but they are not a progression strategy by themselves.
 
-**Chasing jackpots too early**  
-Big wins are fun, but they are not a system.
+### Do not assume every run should feel explosive
+Good runs are often steady before they are spectacular.
 
-**Buying new things just because they unlocked**  
-New is not automatically efficient.
+### Do not prestige just because you feel impatient
+Prestige matters, but it works best when it comes after you actually learned something from the current run.
 
-**Ignoring automation for too long**  
-Manual play feels active, but strong progression usually depends on support systems.
+## Common Beginner Mistakes
 
-**Holding weak runs too long**  
-If the run is clearly slowing down, start preparing for the next loop.
+### Mistake 1: Playing emotionally instead of structurally
+If every card feels like a dramatic moment, it becomes harder to judge whether the whole run is improving.
 
-**Playing without intention**  
-Scritchy Scratchy rewards players who notice pacing, cost, and timing.
+### Mistake 2: Buying before evaluating
+A purchase can be technically affordable and still be the wrong move for your current pace.
+
+### Mistake 3: Treating manual play as the ideal state
+Manual scratching is satisfying, but the game is clearly designed to open into automation and optimization. Staying fully manual for too long usually slows you down.
+
+### Mistake 4: Holding weak runs too long
+A run can still be active while no longer growing well. That difference matters more than many players realize.
+
+### Mistake 5: Looking for one perfect formula
+Scritchy Scratchy is not best played through a rigid script. It is best played by understanding the loop and making cleaner decisions inside it.
+
+## When to Prestige
+
+Many players search for **when to prestige in Scritchy Scratchy** because the reset can feel counterintuitive at first. You finally have income, upgrades, and rhythm, and then the game asks you to give that up.
+
+The right way to think about prestige is this:  
+it is not there to erase your progress, but to turn one run into a stronger next run. That prestige loop is one of the core pillars of the game's structure.
+
+Here are the clearest signs that prestige is starting to make sense:
+
+- upgrades stop meaningfully changing the pace of the run
+- your purchases feel more expensive than useful
+- the run feels like maintenance instead of growth
+- you already know what you would do better next time
+
+A strong prestige usually happens when the current run has already taught you something.
+
+## What a Good Early Prestige Mindset Looks Like
+
+Your first prestige does not need to be clever. It needs to be useful.
+
+The best mindset is:
+
+- what slowed this run down?
+- what would make the next run smoother?
+- what helps me reach the good part faster?
+
+That is why Scritchy Scratchy works well as an incremental game. It is not just about more money. It is about better loops, shorter rebuilding time, and stronger future runs.
+
+![Scritchy Scratchy prestige timing](https://pub-e3bcf72b1f5041c7aaaac686926b60de.r2.dev/scritchy-scratchy/image8.jpg)
+
+## A Simple Rule for New Players
+
+If you are unsure what to do next, ask this question:
+
+**Is my run actually getting stronger, or am I just staying busy?**
+
+That one question helps with almost every major Scritchy Scratchy decision:
+
+- whether to keep buying
+- whether to try a new ticket type
+- whether an upgrade is worth it
+- whether automation should be your next target
+- whether prestige is getting close
 
 ## Final Advice
 
-The best way to play Scritchy Scratchy is to respect the loop. Start stable. Reinvest with purpose. Buy upgrades that improve flow. Embrace automation early. Prestige when your run begins to flatten out. If you do that, the game stops feeling random and starts feeling elegant.
+The best **Scritchy Scratchy guide** is not a giant wall of theory. It is a clean way of reading the game.
 
-That is when Scritchy Scratchy becomes much more than a scratch card novelty. It becomes a satisfying progression game where every run teaches you how to build the next one better.`,
+Learn the loop. Keep the run stable. Favor purchases that improve flow. Move toward automation. Do not chase excitement at the expense of momentum. Prestige when the current run has flattened out and the next one has something to gain.
+
+That is how Scritchy Scratchy stops feeling random and starts feeling deliberate.`,
   },
   {
     slug: "scritchy-scratchy-achievements",
@@ -137,267 +205,394 @@ That is when Scritchy Scratchy becomes much more than a scratch card novelty. It
       "Looking for all Scritchy Scratchy achievements? This guide explains how the achievements are grouped, which ones are easiest to miss, and how to complete them with less wasted time.",
     heading: "Scritchy Scratchy Achievements",
     intro:
-      "A practical completion guide that groups achievements by logic, highlights the most missable ones, and helps players unlock more with less wasted time.",
+      "A full achievement routing guide with a complete unlock table, missable callouts, and a cleaner path to 100 percent completion.",
     content: `# Scritchy Scratchy Achievements
 
-If you are searching for Scritchy Scratchy achievements, you probably do not need a generic description of the game. You need clarity. Which achievements come naturally? Which ones are easy to miss? Which ones should be grouped together in the same run? And which ones are better saved for later, when your automation and prestige setup are stronger?
+**Last updated:** March 2026  
+**Updated for:** public March 2026 release-era sources  
+**Estimated reading time:** 9 minutes  
+**Page goal:** help players unlock Scritchy Scratchy achievements efficiently, especially the easy-to-miss ones
 
-This guide is designed to answer those questions in a practical way. Instead of treating every achievement as an isolated checklist item, it helps you think in categories so you can unlock more with less wasted time.
+![Scritchy Scratchy achievements overview](https://pub-e3bcf72b1f5041c7aaaac686926b60de.r2.dev/scritchy-scratchy/image6.jpg)
 
-## How to Think About Scritchy Scratchy Achievements
+If you are searching for **Scritchy Scratchy achievements**, you usually want something very specific. You do not need a broad description of the game. You need to know which achievements happen naturally, which ones are easy to miss, which ones depend on RNG, and which ones should be grouped together so you do not waste time.
 
-The biggest mistake players make is trying to do everything in one perfect order. Scritchy Scratchy does not really work that way. A much better approach is to divide the achievement list into types:
+That is what this page is built to do.
 
-- achievements that happen naturally
-- achievements tied to intentional losses
-- achievements tied to jackpots and rare luck
-- achievements tied to gadgets, automation, or special systems
-- achievements tied to long-term prestige progression
+Instead of treating the full **Scritchy Scratchy achievements** list like one giant checklist, this guide breaks it into practical groups so you can finish more of it with less frustration.
 
-Once you organize them like that, the achievement hunt feels much more manageable.
+## Quick Answer: How Many Achievements Are in Scritchy Scratchy?
 
-## 1. Achievements You Will Likely Unlock Naturally
+**Scritchy Scratchy has 34 achievements.**
 
-These are the ones that usually happen during normal play or with minimal planning:
+Some of them unlock naturally through normal progress. Others require deliberate mistakes, unusual choices, or highly specific setups. A few are tied to luck, but many of the hardest-looking achievements are really about timing and route planning rather than raw difficulty.
 
-- **Gambling Never Pays Off**
-- **Don't Read the Fine Print**
-- **Lucky Ticket**
-- **Visit the Night Market**
-- **Wizard**
-- **Time Machine**
-- **Big Win**
-- **Soul Siphon**
+## How to Read the Achievement List
 
-For these, the best strategy is not forcing them too early. Just keep progressing, interact with new systems when they appear, and do not ignore side mechanics like gadgets, cosmetics, or special offers. Many players miss easy achievements only because they tunnel too hard on ticket grinding.
+The easiest way to manage the **Scritchy Scratchy achievements** is to split them into six types:
 
-## 2. Death Achievements Should Be Batched
+1. natural progression achievements
+2. intentional loss achievements
+3. jackpot and RNG-heavy achievements
+4. automation and gadget achievements
+5. Day Job achievements
+6. endgame completion achievements
 
-Scritchy Scratchy has several achievements tied to dying multiple times:
+This matters because the fastest route is not "do them in order."  
+The fastest route is to group achievements that share the same kind of setup.
 
-- **Gambling Never Pays Off**
-- **A Losing Bet**
-- **Go for Broke**
-- **House Always Wins**
+## Full Achievement Table
 
-Do not treat these as separate projects. If you need one, you probably need the whole set. The efficient way to handle them is to plan a short achievement-focused sequence where you intentionally trigger losses instead of stumbling into them across many unrelated runs.
+| Achievement | How to Unlock | Best Phase | Missable? | Practical Note |
+|---|---|---|---|---|
+| Gambling Never Pays Off | Die once | Early-mid | No | Easy to trigger deliberately |
+| Don't Read The Fine Print | Accept a loan | Early | Yes-ish | Interact when the phone rings |
+| What Are The Odds? | Win a super jackpot | Mid-late | No | Better with more attempts |
+| A Losing Bet | Die twice | Early-mid | No | Batch with other death achievements |
+| Lucky Ticket | Win 1000x ticket cost | Mid | No | Easier on stronger tickets |
+| Why? | Trash a jackpot ticket | Mid | Yes | Save one winning jackpot ticket for it |
+| Visit The Night Market | Buy and equip a cosmetic | Mid | No | Good cleanup achievement |
+| Go For Broke | Die three times | Mid | No | Continue the death chain |
+| Bad Luck | Crack two plates in a row | Mid | No | RNG-heavy, keep attempting |
+| Lucky Cat | Have Mundo win a super jackpot | Late | No | Works better with automation |
+| Clicker Minigame | Stack 100+ scratched tickets in Scratch Bot | Mid-late | No | Delay collection intentionally |
+| House Always Wins | Die four times | Mid | No | Finish death chain together |
+| Wizard | Scratch a ticket using magic | Mid | No | Requires Spell Book gadget |
+| Spend All The World's Money | Buy something worth more than the global economy | Endgame | No | Pure scaling target |
+| Bad Kitty | Let Mundo bankrupt you | Mid-late | No | Deliberately allow bad automation outcome |
+| Good Luck | Hit a jackpot on your first ticket | Early | No | Reset attempts help |
+| Speedrun | Reach the ending in under 30 minutes after prestige | Late | No | Much easier with stronger permanent setup |
+| Honest Work | Earn $2000 without buying tickets | Mid | No | Day Job session |
+| Win Your Job | Win a jackpot from Day Job | Mid | No | Also belongs to Day Job route |
+| Big Win | Win 10,000x ticket cost | Late | No | Stronger tickets help |
+| Soul Siphon | Create an artificial soul | Late | No | Tied to deeper progression |
+| Walk-In Closet | Purchase every cosmetic | Endgame | No | Endgame cleanup |
+| Time Machine | Upgrade Egg Timer to 5x speed | Late | No | Gadget progression |
+| Idle Game | Start a run with all automation unlocked | Endgame | No | Prestige-heavy |
+| Win Everything? | Complete Final Chance without dying | Late | Yes-ish | Do not waste the attempt |
+| High Level Gambling | Win 100,000x ticket cost | Endgame | No | Very RNG-heavy |
+| Nap Time | Earn 1Sx while idle for 5 minutes | Endgame | No | Strong idle setup needed |
+| Winning Streak | Win jackpots from all four catalogues | Late | No | Track catalogue coverage |
+| One Of Each Please | Have all ticket types on the table at once | Mid-late | Yes-ish | Easy to forget in normal play |
+| Workaholic | Earn $20M without buying tickets | Late | No | Day Job route again |
+| Skip A Catalogue | Finish Final Chance with a catalogue still on the table | Late | Yes | Plan this one deliberately |
+| Faithful Servant | Give the winning Final Chance to the corporation | Late | Yes | Easy to miss by acting on instinct |
+| Max Out Skill Tree | Purchase all prestige upgrades | Endgame | No | Long-term completion target |
+| Achievement Hunter | Unlock every achievement | Endgame | No | Final meta achievement |
 
-This is also a good reminder that Scritchy Scratchy achievements are not all about optimal profit. Some of them reward experimentation, self-sabotage, or deliberately bad decisions. That is part of the fun.
+## Most Missable Achievements
 
-## 3. Jackpot Achievements Need Patience More Than Genius
+The most missable **Scritchy Scratchy achievements** are not always the rarest ones. The ones players miss most often are usually attached to moments that only happen once in a while, or choices that are easy to make automatically.
 
-Another large group is tied to jackpot outcomes and extreme payout ratios:
-
-- **What Are the Odds?**
-- **Lucky Ticket**
-- **Big Win**
-- **High Level Gambling**
-- **Good Luck**
-- **Winning Streak**
-
-These achievements feel different from the death group because they are not just about doing the right action once. They are about creating enough attempts for probability to work in your favor.
-
-That is why automation matters so much here. If an achievement depends on rare outcomes, the goal is not just to "play better." The goal is to increase repetitions while keeping your run stable. Strong automated setups are often more useful than heroic manual effort.
-
-For **Good Luck**, which asks for a jackpot on your very first ticket, reset attempts are usually more important than deep progression. For something like **Winning Streak**, patience and system coverage matter more than luck on a single run.
-
-## 4. Automation and Gadget Achievements Are Easier If You Wait
-
-Several Scritchy Scratchy achievements are much smoother once your save is more developed:
-
-- **Lucky Cat**
-- **Clicker Minigame**
-- **Bad Kitty**
-- **Idle Game**
-- **Nap Time**
-- **Wizard**
-- **Time Machine**
-
-The wrong way to approach these is trying to brute-force them before your systems are ready. The right way is to ask whether the achievement gets easier with more automation, better gadgets, or stronger prestige upgrades. In most cases, the answer is yes.
-
-For example, stack-based or idle-based achievements become much less annoying once you can let your setup run efficiently. The same is true for achievements that depend on special tools or alternate scratching methods.
-
-## 5. Day Job Achievements Deserve Their Own Session
-
-There is a small but important group tied to earning money without buying tickets:
-
-- **Honest Work**
-- **Win Your Job**
-- **Workaholic**
-
-These achievements are easy to delay because they do not feel central to the main ticket loop. That is exactly why many players leave them for the very end. A better plan is to deliberately reserve one session for Day Job progress instead of trying to blend it into normal runs.
-
-If you treat Day Job achievements as a side route rather than a background bonus, they become much easier to finish cleanly.
-
-## 6. The Weird Achievements Are Often the Most Missable
-
-Some achievements are simple in wording but easy to overlook in practice:
+The biggest ones to watch are:
 
 - **Why?**
-- **Bad Luck**
-- **One of Each Please**
-- **Skip a Catalogue**
+- **Don't Read The Fine Print**
+- **One Of Each Please**
+- **Skip A Catalogue**
 - **Faithful Servant**
 - **Win Everything?**
 
-These usually require very specific situations, and that makes them missable. The best solution is to keep a short "do not forget" list while progressing. If you reach a moment that seems unique or high-stakes, slow down before acting automatically. Some of these achievements depend less on difficulty and more on noticing that the right moment has arrived.
+These are worth writing down somewhere while you play. Most of them are not mechanically difficult. They are just easy to miss if you are playing quickly or following habit instead of checking what the achievement actually needs.
 
-## 7. Completion Achievements Are Endgame by Nature
+![Scritchy Scratchy missable achievements](https://pub-e3bcf72b1f5041c7aaaac686926b60de.r2.dev/scritchy-scratchy/image7.jpg)
 
-The last layer includes achievements that naturally belong near the end of your journey:
+## Fastest 100% Route
 
-- **Walk-In Closet**
-- **Max Out Skill Tree**
-- **Achievement Hunter**
-- **Spend All the World's Money**
+The fastest way to approach **Scritchy Scratchy achievements** is to treat them as routes, not as one giant list.
 
-These should not dominate your early planning. They are best viewed as endgame cleanup. If you obsess over them too early, you can make normal progression feel slower and less fun than it needs to be.
+### Phase 1: Let natural achievements happen
+During your first real runs, let the obvious progression-based achievements happen naturally. Do not interrupt basic learning just to force every unlock.
 
-## The Best Route for Faster Completion
+### Phase 2: Batch the death achievements
+Handle these together:
 
-A smart route looks like this:
+- Gambling Never Pays Off
+- A Losing Bet
+- Go For Broke
+- House Always Wins
 
-1. let natural achievements happen while learning the game
-2. batch the intentional death achievements together
-3. build enough automation for jackpot and idle-related achievements
-4. reserve a separate session for Day Job achievements
-5. clean up weird one-off achievements with a checklist
-6. finish prestige and completion goals last
+If you split them across unrelated sessions, they become more annoying than they need to be.
 
-This route works because it respects how Scritchy Scratchy is actually structured. It does not force every achievement into the same phase of the game.
+### Phase 3: Reserve a Day Job session
+Handle these as one block:
+
+- Honest Work
+- Win Your Job
+- Workaholic
+
+These fit together much better than they fit into standard ticket-focused runs.
+
+### Phase 4: Build into automation and gadget achievements
+This is the right phase for:
+
+- Lucky Cat
+- Clicker Minigame
+- Bad Kitty
+- Wizard
+- Time Machine
+
+Trying to brute-force these too early usually wastes time.
+
+### Phase 5: Clean up Final Chance and special-condition achievements
+This is where you deliberately plan for:
+
+- Win Everything?
+- Skip A Catalogue
+- Faithful Servant
+- One Of Each Please
+
+### Phase 6: Finish long-tail scaling achievements
+Save endgame grind goals for last:
+
+- High Level Gambling
+- Nap Time
+- Spend All The World's Money
+- Walk-In Closet
+- Max Out Skill Tree
+- Achievement Hunter
+
+## Practical Tips That Actually Save Time
+
+### Use automation for rare-outcome achievements
+If an achievement depends on repeated attempts, more volume is usually better than more manual effort.
+
+### Do not leave all Day Job work to the absolute end
+It is cleaner to handle Day Job achievements as a planned route instead of a late afterthought.
+
+### Keep a missables checklist
+Several Scritchy Scratchy achievements are not hard. They are just easy to forget.
+
+### Do not force every achievement in one run
+The cleanest completion route comes from grouping similar requirements, not trying to make one run do everything.
+
+## Which Achievements Are Best for Early Cleanup?
+
+If you do not want to think about full completion yet, these are good early cleanup targets:
+
+- Gambling Never Pays Off
+- Don't Read The Fine Print
+- Visit The Night Market
+- Lucky Ticket
+- Go For Broke
+- House Always Wins
+
+They either happen naturally, or they can be set up without needing a very strong late-game build.
+
+## Which Achievements Should Wait Until Later?
+
+These are better saved until your setup is stronger:
+
+- High Level Gambling
+- Nap Time
+- Spend All The World's Money
+- Idle Game
+- Max Out Skill Tree
+- Achievement Hunter
+
+These are not good targets for a weak or half-developed save. They become much cleaner once your automation and prestige systems are already in a good place.
+
+![Scritchy Scratchy achievement routing](https://pub-e3bcf72b1f5041c7aaaac686926b60de.r2.dev/scritchy-scratchy/image8.jpg)
 
 ## Final Advice
 
-The easiest way to burn out on Scritchy Scratchy achievements is to chase them one by one without a plan. The easiest way to enjoy them is to group them by logic. Some are natural, some are risky, some are passive, some are luck-based, and some are clearly endgame.
+The best way to finish **Scritchy Scratchy achievements** is to stop thinking like a collector trying to clear a list from top to bottom and start thinking like a route planner.
 
-Once you see that structure, the list stops looking chaotic. It becomes a sequence of manageable goals. That is when achievement hunting starts feeling satisfying instead of exhausting.`,
+Group the natural ones. Batch the deaths. Reserve a Day Job session. Use automation for RNG-heavy goals. Track the missables. Save the endgame scaling grind for last.
+
+That approach matches the structure of the game much better, and it gives players what they actually need from an achievements page: a useful plan, not just a wall of names.`,
   },
   {
     slug: "scritchy-scratchy-prestige",
     keyword: "scritchy scratchy prestige",
-    title: "Scritchy Scratchy Prestige Guide - When to Reset, What to Prioritize & How to Scale Faster",
+    title: "Scritchy Scratchy Prestige - When to Reset, When to Wait & What to Prioritize",
     metaDescription:
-      "Confused by the Scritchy Scratchy prestige system? Learn when to reset, what prestige really does, which choices help most, and how to make each new run stronger than the last.",
-    heading: "Scritchy Scratchy Prestige Guide",
+      "Unsure when to prestige in Scritchy Scratchy? This guide explains when to reset, when to wait, and which early prestige choices make the next run smoother and stronger.",
+    heading: "Scritchy Scratchy Prestige",
     intro:
-      "A focused prestige guide covering when to reset, what prestige really changes, and how to turn each new run into faster long-term scaling.",
-    content: `# Scritchy Scratchy Prestige Guide
+      "A cleaner prestige timing guide built around practical reset signals, when to wait, and what early prestige choices actually improve the next run.",
+    content: `# Scritchy Scratchy Prestige
 
-Prestige is the moment when Scritchy Scratchy stops feeling like a simple scratch card game and starts revealing its real structure. It is also the moment where many players hesitate. You spend a run building momentum, finally feel rich, and then the game asks you to reset. That can feel wrong at first. It can even feel like punishment. But the prestige system is not there to erase progress. It is there to transform one run into a stronger future run.
+**Last updated:** March 2026  
+**Updated for:** public March 2026 release-era sources  
+**Estimated reading time:** 7-8 minutes  
+**Page goal:** help players decide when to prestige in Scritchy Scratchy and what to prioritize after the reset
 
-If you are looking up Scritchy Scratchy prestige, you probably want answers to three questions:
+![Scritchy Scratchy prestige overview](https://pub-e3bcf72b1f5041c7aaaac686926b60de.r2.dev/scritchy-scratchy/image9.jpg)
 
-- What does prestige actually do?
-- When should I prestige?
-- What should I care about after I do it?
+If you are searching for **Scritchy Scratchy prestige**, you are usually not looking for a vague explanation of what prestige is in idle games. You are trying to answer a practical question:
 
-This guide focuses on those three questions.
+**Should I prestige now, or am I about to throw away a run that still has value?**
 
-## What Prestige Means in Scritchy Scratchy
+That is the real job of this page.
 
-Prestige is a reset system with long-term value. In short, you give up your current run in exchange for permanent progress that improves later runs. That is what makes it so important. Without prestige, you are only making one climb. With prestige, you are building a staircase.
+In **Scritchy Scratchy**, prestige is not just a reset button. It is the system that turns one run into a stronger next run. If you prestige too early, you may cut off momentum before the run has really taught you anything. If you prestige too late, you can end up spending too much time maintaining a run that is no longer growing well.
 
-This is one of the defining features of strong incremental games. The current run matters, but the future run matters more. Prestige teaches you to stop judging success only by what is visible on the screen right now.
+This guide is here to make that decision clearer.
 
-## Why Players Resist Prestige
+## Quick Answer: What Does Prestige Mean in Scritchy Scratchy?
 
-Most players resist prestige for emotional reasons, not strategic ones. They finally have income, upgrades, and momentum, and they do not want to let that go. The problem is that staying too long in a weak late run often feels safer than it really is.
+Prestige in **Scritchy Scratchy** is the point where you trade current run progress for better long-term progress.
 
-A run that has already flattened out can create the illusion of progress. Numbers still move, but they no longer move well. Costs rise. Decisions feel less impactful. Your setup starts maintaining itself instead of accelerating. That is usually the point where prestige becomes valuable.
+The important part is not the reset itself. The important part is what the reset does to the next cycle.
 
-In other words, prestige is not a last resort. It is a growth tool.
+A good prestige should make the next run:
 
-## The Best Time to Prestige
+- faster to start
+- smoother to stabilize
+- easier to scale
+- quicker to reach the fun part again
 
-There is no single magic number that works for every player, but there are clear signs that a run is ready to end.
+If the next run clearly improves in those ways, the prestige was probably worth it.
 
-You should start thinking seriously about prestige when:
+## Why Prestige Matters in Scritchy Scratchy
 
-- upgrades stop changing the pace of your run in a meaningful way
-- new purchases feel expensive without unlocking new momentum
-- the run is taking effort to maintain but no longer opening better systems
-- you clearly understand how the next run could be faster
+Scritchy Scratchy starts with very direct actions: buy a ticket, scratch it, reveal the result, collect the payout, buy another. But the game does not stay at that level. Its deeper structure is built around repetition, upgrades, automation, and long-term progression.
 
-That last point matters a lot. A good prestige is not just a reset. It is a reset with a plan.
+That is why prestige matters. It is one of the systems that changes the game from a scratch-card toy into a true **incremental loop**.
 
-## What a Good First Prestige Looks Like
+Without prestige, every run is mostly isolated.  
+With prestige, each run teaches the next run how to be better.
 
-Your first prestige should not be flashy. It should be useful. The strongest early prestige choices are usually the ones that reduce friction, improve pacing, or help you reach strong midgame systems earlier next time.
+That is the key mindset shift.
 
-A practical first prestige does three things:
+## The 5 Clearest Signs You Should Prestige
 
-1. it makes the next start feel less slow
-2. it helps you regain momentum faster
-3. it shortens the distance between "new run" and "real run"
+A lot of players ask **when to prestige in Scritchy Scratchy** because the game rarely gives one simple universal answer. Instead of chasing one fixed timing rule, it is better to look for signals.
 
-That is why practical prestige choices usually outperform greedy ones early on. You are not trying to build the perfect final setup yet. You are trying to make the loop itself stronger.
+### 1. Upgrades stop changing the pace of your run
 
-## What to Prioritize After Prestige
+If you are still buying things, but those purchases no longer make the run feel meaningfully better, that is one of the clearest signals that your current loop is flattening.
 
-After you prestige, it is tempting to play exactly the same way you played before. Resist that habit. A prestige is only as good as the adjustments it creates.
+### 2. New purchases feel expensive without opening new momentum
 
-The best post-prestige priorities usually look like this:
+A healthy run gives you stronger options. A tired run keeps asking for more investment while returning less useful progress.
 
-**Get back to stability faster**  
-You already know the early game now. Play with confidence and do not overcomplicate it.
+### 3. You are maintaining, not accelerating
 
-**Reach automation sooner**  
-If prestige helps you arrive at your automation tools faster, that is real value.
+This is the easiest mistake to miss. You are still active. You are still earning. The screen is still moving. But the run no longer feels like it is climbing. It feels like you are just keeping it alive.
 
-**Rebuild with intent**  
-Use what you learned from the previous run. Avoid the purchases that slowed you down before.
+### 4. You already know what you would do differently next time
 
-**Notice new breakpoints**  
-A stronger run may change which ticket, upgrade, or system feels best at a given moment.
+Prestige becomes much more valuable once you have learned from the run. If you can already name the purchases, habits, or priorities you would change, that is a strong sign that the next cycle will use the reset well.
 
-Prestige is not just about having bonuses. It is about using those bonuses to make smarter decisions.
+### 5. Automation is working, but scaling is dragging
 
-## Prestige Mistakes to Avoid
+Once the problem is no longer "can I keep the loop moving?" and becomes "why is this taking so long to improve?", prestige is often close.
 
-The first common mistake is prestigeing without a reason. Resetting randomly is not strategy. If you do not know what you are trying to improve in the next run, the value of prestige drops.
+![Scritchy Scratchy prestige timing signals](https://pub-e3bcf72b1f5041c7aaaac686926b60de.r2.dev/scritchy-scratchy/image10.jpg)
 
-The second mistake is the opposite: waiting far too long because the current run still looks rich. Rich is not always efficient. If progress has become flat, prestige may already be overdue.
+## When You Should Wait Instead of Prestige
 
-The third mistake is spending permanent gains on ideas that look exciting but do not actually improve pacing. The early game is where prestige feels most powerful, so upgrades that clean up the early loop often do more work than upgrades that only matter much later.
+Not every slow moment means your run is done.
 
-The fourth mistake is ignoring how prestige changes the value of automation. In many cases, the real reward of prestige is reaching the parts of the game you enjoy faster.
+You should usually wait if:
 
-## How Prestige Changes the Way You Think
+- a nearby upgrade would clearly improve the loop
+- automation is about to unlock
+- a strong purchase breakpoint is very close
+- the run still feels like growth instead of maintenance
+- you are still learning something important from the current cycle
 
-Before prestige, players often focus on individual wins. After prestige, they start thinking in cycles. That change is what makes Scritchy Scratchy deeper than it first appears.
+The right prestige timing is not "reset whenever progress slows."  
+It is closer to: **reset when the current run has mostly stopped opening better future value**.
 
-A strong player no longer asks only:
+## Prestige Decision Table
 
-- Is this ticket good?
-- Is this payout big?
-- Did I get lucky?
+| Situation | Prestige now or wait? | Why |
+|---|---|---|
+| You are still unlocking meaningful systems | Wait | The run still has growth left |
+| Upgrades barely change your pace anymore | Prestige now | Momentum is flattening |
+| Automation is one purchase away | Usually wait | That could materially improve the run |
+| You are grinding for tiny gains only | Prestige now | This is often low-return time |
+| You already know multiple mistakes from this run | Prestige now | A smarter next run has real value |
+| You are close to a major breakpoint | Wait | Test whether it changes the run first |
+| The run is active but no longer feels stronger | Prestige now | Activity is not the same as growth |
 
-They start asking:
+## Bad Prestige Timing Examples
 
-- Does this help the cycle?
-- Does this get me to the next strong phase faster?
-- Is this run better than my last one at the same stage?
+### Prestigeing because you are bored
+A reset should improve the next cycle. If you are prestigeing just to force change, the value of the reset usually drops.
 
-That is the mindset prestige is trying to teach.
+### Waiting forever because numbers are still moving
+This is the opposite mistake. A run can still look busy while giving weak returns.
 
-## Prestige and Frustration
+### Prestigeing without a next-run plan
+The best prestige moments come when you already know how the next run will improve.
 
-Some frustration around prestige comes from uncertainty. Players are not always sure whether they are missing something, whether they should wait, or whether a new run will actually feel better. That uncertainty is normal. The answer is not to avoid prestige forever. The answer is to prestige with a simple goal.
+### Comparing a fresh run to the absolute peak of the last run
+That comparison is misleading. A better comparison is this:  
+**At the same stage of the run, do I feel stronger than last time?**
 
-A good goal can be as basic as:
+## Best First Prestige Priorities
 
-- reach automation faster
-- avoid a weak purchase route from the last run
-- create a smoother early game
-- test whether a different pacing choice improves your cycle
+If this is your first serious prestige in **Scritchy Scratchy**, do not overcomplicate it. Early prestige choices should focus on making the next cycle cleaner.
 
-With a goal like that, prestige feels less like a leap and more like a deliberate experiment.
+The strongest early priorities usually look like this:
+
+### 1. Faster return to stable momentum
+If the next run gets out of the slow opening faster, the prestige is already helping.
+
+### 2. Easier access to your important systems
+A good prestige shortens the distance between "new run" and "real run."
+
+### 3. Less friction
+Practical improvements usually beat flashy ones early. If a choice makes the loop feel easier to repeat, it is probably useful.
+
+### 4. Better path back into automation
+Since automation is one of the biggest turning points in Scritchy Scratchy, anything that makes it easier to reach again has strong value.
+
+## What Not to Prioritize Too Early
+
+Players often weaken their first prestige by focusing on things that sound powerful but do not improve the next run enough.
+
+Be careful with anything that:
+
+- matters mostly in the late game
+- increases variance more than consistency
+- looks exciting on paper but does not improve flow
+- gives visible numbers without cleaning up the loop
+
+The best early prestige is not the loudest one. It is the one that makes the next cycle noticeably smoother.
+
+![Scritchy Scratchy prestige decision making](https://pub-e3bcf72b1f5041c7aaaac686926b60de.r2.dev/scritchy-scratchy/image11.jpg)
+
+## How Prestige Changes Your Next Run
+
+A good prestige should change the next run in visible ways:
+
+- the opening feels less slow
+- your first meaningful decisions arrive sooner
+- you reach stable income faster
+- you return to automation with less friction
+- you can tell the same stage is stronger than it was before
+
+That is the real test of whether the reset worked.
+
+Prestige is useful when it turns past effort into better future pacing. If the next run does that, the reset was not a loss. It was progress.
+
+## A Simple Prestige Framework
+
+When you are unsure, ask these three questions:
+
+### Question 1
+Is this run still opening meaningful growth, or am I mostly just keeping it going?
+
+### Question 2
+If I prestige now, do I already know what I will do better next time?
+
+### Question 3
+Am I delaying the reset because it is strategically smart, or because I do not want to give up visible progress?
+
+Those three questions solve most prestige hesitation better than staring at the reset button.
 
 ## Final Advice
 
-The prestige system in Scritchy Scratchy is not there to take progress away from you. It is there to make progress compound. The first run teaches the rules. Prestige teaches the structure. Once you understand that, the reset stops feeling painful and starts feeling powerful.
+The best **Scritchy Scratchy prestige** decisions come from reading the run honestly.
 
-If you are unsure when to prestige, watch for slowdown. If you are unsure what to prioritize, choose the options that make your next run cleaner and faster. If you are unsure whether prestige is worth it, remember that Scritchy Scratchy is built around cycles. The run you end well is often the run that makes all future runs better.`,
+Prestige when the loop has clearly flattened, not just when it has slowed slightly. Wait when a real breakpoint is still close. Prioritize choices that improve pacing, not just appearance. Compare runs by quality of progression, not by attachment to visible numbers.
+
+Once you start thinking that way, prestige stops feeling like giving something up and starts feeling like how the game actually grows.`,
   },
 ];
 

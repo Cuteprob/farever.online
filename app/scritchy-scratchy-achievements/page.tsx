@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { GuidePage } from "@/components/guide-page";
 import { getGuidePage } from "@/data/guides";
 import { siteConfig } from "@/lib/site-config";
