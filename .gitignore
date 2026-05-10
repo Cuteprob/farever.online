@@ -246,3 +246,6 @@ TODO.private.md
 NOTES.private.md
 admin-notes/
 internal-docs/
+
+# Claude Code 本地配置（可能包含 API Token）
+.claude/settings.local.json
