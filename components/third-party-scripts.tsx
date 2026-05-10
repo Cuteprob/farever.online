@@ -18,29 +18,6 @@ export function ThirdPartyScripts() {
 
   return (
     <>
-      {process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID && (
-        <Script
-          async
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID}`}
-          crossOrigin="anonymous"
-        />
-      )}
-      {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID && (
-        <>
-          <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
-            strategy="afterInteractive"
-          />
-          <Script id="google-analytics" strategy="afterInteractive">
-            {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}');
-            `}
-          </Script>
-        </>
-      )}
       {siteConfig.plausibleDomain && (
         <Script
           defer

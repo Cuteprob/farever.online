@@ -4,6 +4,7 @@ import { execFileSync } from "node:child_process";
 
 import {
   classifyPagesEnvVarEntries,
+  mergeBuildEnvSources,
   mergeDeployEnvSources,
   parseDotEnv,
   readWranglerOAuthToken,
@@ -25,6 +26,10 @@ function run(command, args, options = {}) {
     cwd: projectRoot,
     stdio: options.capture ? ["inherit", "pipe", "inherit"] : "inherit",
     encoding: "utf8",
+    env: {
+      ...process.env,
+      ...getCloudflareEnvEntries(),
+    },
   });
 }
 
@@ -51,11 +56,11 @@ function getDeployEnvironmentEntries() {
 
 function getCloudflareEnvEntries() {
   if (!cachedCloudflareEnvEntries) {
-    cachedCloudflareEnvEntries = {
-      ...readOptionalEnvFile(envProductionPath),
-      ...readOptionalEnvFile(envLocalPath),
-      ...process.env,
-    };
+    cachedCloudflareEnvEntries = mergeBuildEnvSources(
+      readOptionalEnvFile(envLocalPath),
+      readOptionalEnvFile(envProductionPath),
+      process.env,
+    );
   }
 
   return cachedCloudflareEnvEntries;
@@ -276,17 +281,20 @@ function main() {
   console.log("Building Cloudflare Pages output...");
   buildPagesOutput();
 
-  if (canUseCloudflareApi) {
-    console.log("Syncing production environment from .env.production...");
-    syncProductionEnv(projectName);
-  } else {
-    console.log("Skipping Cloudflare API env sync and using existing Pages production environment.");
-  }
-
   const originalWranglerToml = readRequiredFile(wranglerTomlPath, "wrangler.toml");
   const deployWranglerToml = createDeployConfigContents();
   try {
+    // Strip [env.production.vars] before running any wrangler commands
+    // to avoid conflicts between wrangler.toml bindings and Pages secrets/env_vars.
     fs.writeFileSync(wranglerTomlPath, deployWranglerToml);
+
+    if (canUseCloudflareApi) {
+      console.log("Syncing production environment from .env.production...");
+      syncProductionEnv(projectName);
+    } else {
+      console.log("Skipping Cloudflare API env sync and using existing Pages production environment.");
+    }
+
     console.log(`Deploying ${projectName} to production branch ${desiredBranch}...`);
     withTemporarilyHiddenFiles(
       [path.join(projectRoot, ".env.production"), path.join(projectRoot, ".env.local")],

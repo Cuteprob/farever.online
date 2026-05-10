@@ -1,5 +1,5 @@
-// Service Worker for the current game site template
-// 提供离线缓存和性能优化
+// Service Worker for Farever.online
+// Keep caching conservative so new homepage content and APIs are not stuck behind stale game-template routes.
 
 const CACHE_VERSION = 'v2';
 const CACHE_NAME = `game-site-${CACHE_VERSION}`;
@@ -14,13 +14,6 @@ const STATIC_ASSETS = [
   '/logo.png',
   '/placeholder.png',
   // 字体文件会被浏览器自动缓存
-];
-
-// 需要缓存的API路由
-const API_ROUTES = [
-  '/api/getMainGames',
-  '/api/getAllGames',
-  '/api/getGamesByCategory',
 ];
 
 // 安装事件 - 预缓存静态资源
@@ -116,15 +109,17 @@ async function handleApiRequest(request) {
       return cachedResponse;
     }
     
-    // 如果是主游戏API，返回空数据而不是错误
-    if (url.pathname === '/api/getMainGames') {
+    // Live Pulse APIs should fail softly when offline instead of reviving deleted template endpoints
+    if (url.pathname === '/api/player-count' || url.pathname === '/api/player-history') {
       return new Response(JSON.stringify({
-        success: true,
-        data: null,
-        message: 'Offline mode - no data available'
+        current: null,
+        points: [],
+        source: 'offline',
+        historyAvailable: false,
+        lastUpdated: new Date().toISOString(),
       }), {
         status: 200,
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
       });
     }
     

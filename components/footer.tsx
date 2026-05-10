@@ -1,71 +1,70 @@
 import Link from "next/link"
-import { getAllCategories } from "@/models/games"
-import { unstable_noStore as noStore } from "next/cache"
-import { guidePages } from "@/data/guides"
+import { siteConfig } from "@/lib/site-config"
 
-export async function Footer() {
-  noStore();
+const guideLinks = [
+  { name: "Beginner Guide", href: "/beginner-guide" },
+  { name: "Best Class", href: "/best-class" },
+  { name: "Arsenal System", href: "/arsenal-system" },
+  { name: "Co-op Guide", href: "/how-to-play-coop" },
+  { name: "Boss Drops", href: "/boss-drops" },
+  { name: "Patch Notes", href: "/patch-notes" },
+];
 
-  const categories = (await getAllCategories()).filter((category) => category.gameCount > 0).slice(0, 6);
-  const guides = guidePages;
-
+export function Footer() {
   return (
     <footer className="bg-card/80 backdrop-blur-sm border-t border-border">
-      <div className="container mx-auto px-4 py-8 max-w-7xl space-y-8">
-        {/* 链接区域 */}
+      <div className="container mx-auto px-4 py-10 max-w-7xl space-y-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {/* Brand */}
           <div className="space-y-4">
-            <h2 className="font-theme-heading text-primary font-bold">{process.env.NEXT_PUBLIC_PROJECT_NAME}</h2>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/" className="text-sm font-theme-body text-foreground hover:text-primary transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <span className="text-sm font-theme-body text-foreground">
-                  {process.env.NEXT_PUBLIC_PROJECT_EMAIL}
-                </span>
-              </li>
-            </ul>
+            <h2 className="font-theme-display text-primary font-bold text-lg">Farever.online</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Unofficial {siteConfig.gameName} guide hub with live player count, verified guides, and community data.
+            </p>
           </div>
 
+          {/* Guides */}
           <div className="space-y-4">
-            <h3 className="font-theme-heading text-primary font-bold">Categories</h3>
+            <h3 className="font-theme-heading text-primary font-semibold">Guides</h3>
             <ul className="space-y-2">
-              {categories.map((category) => (
-                <li key={category.id}>
-                  <Link href={`/games/${category.slug}`} className="text-sm font-theme-body text-foreground hover:text-primary transition-colors">
-                    {category.name}
+              {guideLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    {link.name}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
+          {/* Resources */}
           <div className="space-y-4">
-            <h3 className="font-theme-heading text-primary font-bold">Game Guides</h3>
+            <h3 className="font-theme-heading text-primary font-semibold">Resources</h3>
             <ul className="space-y-2">
-              {guides.map((guide) => (
-                <li key={guide.slug}>
-                  <Link href={`/${guide.slug}`} className="text-sm font-theme-body text-foreground hover:text-primary transition-colors">
-                    {guide.heading}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <a href="https://store.steampowered.com/app/3672400/Farever/" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Steam Store Page ↗
+                </a>
+              </li>
+              <li>
+                <a href="https://www.shirogames.com/" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Shiro Games ↗
+                </a>
+              </li>
             </ul>
           </div>
 
+          {/* Legal */}
           <div className="space-y-4">
-            <h3 className="font-theme-heading text-primary font-bold">Legal</h3>
+            <h3 className="font-theme-heading text-primary font-semibold">Legal</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/privacy" className="text-sm font-theme-body text-foreground hover:text-primary transition-colors">
+                <Link href="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-sm font-theme-body text-foreground hover:text-primary transition-colors">
+                <Link href="/terms" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   Terms of Service
                 </Link>
               </li>
@@ -73,10 +72,14 @@ export async function Footer() {
           </div>
         </div>
 
-        {/* 版权信息 */}
-        <div className="text-center">
-          <p className="text-sm font-theme-body text-text-secondary">
-            &copy; {new Date().getFullYear()} {process.env.NEXT_PUBLIC_WEB_URL?.replace('https://', '')}. All rights reserved.
+        {/* Disclaimer + Copyright */}
+        <div className="border-t border-border pt-6 space-y-3 text-center">
+          <p className="text-xs text-muted-foreground max-w-2xl mx-auto">
+            Farever.online is an unofficial fan site and is not affiliated with {siteConfig.developer}. 
+            All game content and materials are trademarks and copyrights of their respective owners.
+          </p>
+          <p className="text-xs text-muted-foreground">
+            © {new Date().getFullYear()} farever.online. All rights reserved.
           </p>
         </div>
       </div>

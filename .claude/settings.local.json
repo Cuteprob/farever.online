@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la \"/Users/mac/Documents/Project/farever-online \" 2>/dev/null; echo \"---\"; ls \"/Users/mac/Documents/Project/\" | grep farever)",
+      "Read(//Users/mac/Documents/Project/**)",
+      "WebFetch(domain:farever.online)",
+      "Bash(curl -s \"https://farever.online/api/player-count\")",
+      "Bash(python3 -m json.tool)",
+      "Bash(curl -sv \"https://farever.online/api/player-count\")",
+      "Bash(npx tsc *)",
+      "Bash(node -e \"const m = require\\('@cloudflare/next-on-pages'\\); console.log\\('getRequestContext:', typeof m.getRequestContext\\)\")",
+      "Bash(node -e \"import\\('@cloudflare/next-on-pages'\\).then\\(m => console.log\\('getRequestContext:', typeof m.getRequestContext\\)\\).catch\\(e => console.log\\('Error:', e.message\\)\\)\")",
+      "Bash(node -e \"const pkg = require\\('/Users/mac/Documents/Project/farever-online/node_modules/@cloudflare/next-on-pages/package.json'\\); console.log\\(JSON.stringify\\(pkg.exports || pkg.main, null, 2\\)\\)\")",
+      "Bash(npx wrangler *)",
+      "Bash(npx wrangler d1 list)",
+      "Bash(npx wrangler d1 info farever-online)",
+      "Bash(npx wrangler d1 execute farever-online --command \"SELECT name FROM sqlite_master WHERE type='table'\")",
+      "Bash(npx wrangler d1 execute farever-online --remote --command \"SELECT name FROM sqlite_master WHERE type='table'\")",
+      "Bash(npx wrangler d1 execute farever-online --remote --command \"SELECT * FROM player_samples ORDER BY sampled_at DESC LIMIT 10\")",
+      "Bash(npx @cloudflare/next-on-pages)",
+      "Bash(npx wrangler d1 execute farever-online --remote --command \"SELECT * FROM player_samples ORDER BY sampled_at DESC LIMIT 20\")",
+      "Bash(npx wrangler d1 info farever-online --remote)",
+      "Bash(npx wrangler d1 info farever-online --json)",
+      "Bash(CLOUDFLARE_ACCOUNT_ID=\"52bb84e9dd2f6d6b89984ea909a759a9\" node scripts/cloudflare-pages-deploy.mjs)",
+      "Bash(curl -sk \"https://0a2f1b38.farever-online.pages.dev/api/player-count\")",
+      "Bash(git remote *)",
+      "Bash(git config *)",
+      "Bash(git push *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git reset *)"
+    ]
+  }
+}

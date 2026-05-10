@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 
 import {
   classifyPagesEnvVarEntries,
+  mergeBuildEnvSources,
   mergeDeployEnvSources,
   parseDotEnv,
   parseWranglerOAuthToken,
@@ -15,14 +16,14 @@ import {
 test("parseDotEnv handles quotes, comments, and blank lines", () => {
   const env = parseDotEnv(`
 # comment
-PROJECT_ID="scritchyscratchy-click"
+PROJECT_ID="farever-online"
 NEXT_PUBLIC_SITE_DESCRIPTION="Play instantly"
 UNQUOTED=value
 
 `);
 
   assert.deepEqual(env, {
-    PROJECT_ID: "scritchyscratchy-click",
+    PROJECT_ID: "farever-online",
     NEXT_PUBLIC_SITE_DESCRIPTION: "Play instantly",
     UNQUOTED: "value",
   });
@@ -53,7 +54,7 @@ test("resolveDesiredProductionBranch falls back to main", () => {
 
 test("needsProductionBranchUpdate only updates when branch differs", () => {
   assert.equal(
-    needsProductionBranchUpdate({ production_branch: "scritchyscratchy-click" }, "main"),
+    needsProductionBranchUpdate({ production_branch: "farever-online" }, "main"),
     true,
   );
   assert.equal(needsProductionBranchUpdate({ production_branch: "main" }, "main"), false);
@@ -64,9 +65,9 @@ test("parseWranglerProductionVarNames reads env.production vars block", () => {
 name = "site"
 
 [env.production.vars]
-PROJECT_ID="scritchyscratchy-click"
+PROJECT_ID="farever-online"
 # comment
-NEXT_PUBLIC_WEB_URL="https://scritchyscratchy.click"
+NEXT_PUBLIC_WEB_URL="https://farever.online"
 
 [env.preview.vars]
 PROJECT_ID="preview"
@@ -80,8 +81,8 @@ test("stripWranglerProductionVarsSection removes only the production vars block"
 name = "site"
 
 [env.production.vars]
-PROJECT_ID="scritchyscratchy-click"
-NEXT_PUBLIC_WEB_URL="https://scritchyscratchy.click"
+PROJECT_ID="farever-online"
+NEXT_PUBLIC_WEB_URL="https://farever.online"
 
 [env.preview.vars]
 PROJECT_ID="preview"
@@ -91,22 +92,21 @@ PROJECT_ID="preview"
   assert.equal(stripped.includes('[env.preview.vars]'), true);
 });
 
-test("classifyPagesEnvVarEntries splits plain and secret variables", () => {
+test("classifyPagesEnvVarEntries keeps app variables as plain text", () => {
   const classified = classifyPagesEnvVarEntries({
-    NEXT_PUBLIC_WEB_URL: "https://scritchyscratchy.click",
-    PROJECT_ID: "scritchyscratchy-click",
+    NEXT_PUBLIC_WEB_URL: "https://farever.online",
+    PROJECT_ID: "farever-online",
     TURSO_DATABASE_URL: "libsql://example",
     TURSO_DATABASE_AUTH_TOKEN: "token",
   });
 
   assert.deepEqual(classified.plainTextEntries, {
-    NEXT_PUBLIC_WEB_URL: "https://scritchyscratchy.click",
-    PROJECT_ID: "scritchyscratchy-click",
-  });
-  assert.deepEqual(classified.secretEntries, {
+    NEXT_PUBLIC_WEB_URL: "https://farever.online",
+    PROJECT_ID: "farever-online",
     TURSO_DATABASE_URL: "libsql://example",
     TURSO_DATABASE_AUTH_TOKEN: "token",
   });
+  assert.deepEqual(classified.secretEntries, {});
 });
 
 test("mergeDeployEnvSources lets .env.production override .env.local", () => {
@@ -120,4 +120,14 @@ test("mergeDeployEnvSources lets .env.production override .env.local", () => {
     PROJECT_ID: "prod-project",
     NEXT_PUBLIC_WEB_URL: "https://example.com",
   });
+});
+
+test("mergeBuildEnvSources prevents local empty values from overriding production build values", () => {
+  const merged = mergeBuildEnvSources(
+    { NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: "" },
+    { NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: "G-RFCC6WPM1X" },
+    {},
+  );
+
+  assert.equal(merged.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID, "G-RFCC6WPM1X");
 });

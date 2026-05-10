@@ -1,24 +1,14 @@
-import { getAllCategories } from "@/models/games"
-import { unstable_noStore as noStore } from "next/cache"
-import { NavbarClient } from "./NavbarClient"
-import { guidePages } from "@/data/guides"
+import { NavbarClient } from "./NavbarClient";
 
-export async function Navbar() {
-  noStore();
+const guideItems = [
+  { name: "Beginner Guide", href: "/beginner-guide" },
+  { name: "Best Class", href: "/best-class" },
+  { name: "Arsenal System", href: "/arsenal-system" },
+  { name: "Co-op Guide", href: "/how-to-play-coop" },
+  { name: "Boss Drops", href: "/boss-drops" },
+  { name: "Patch Notes", href: "/patch-notes" },
+];
 
-  const categories = await getAllCategories();
-  const navItems = categories
-    .filter((category) => category.gameCount > 0)
-    .slice(0, 4)
-    .map((category) => ({
-      name: category.name,
-      href: `/games/${category.slug}`,
-    }));
-
-  const guideItems = guidePages.map((guide) => ({
-    name: guide.heading,
-    href: `/${guide.slug}`,
-  }));
-
-  return <NavbarClient navItems={navItems} guideItems={guideItems} />;
+export function Navbar() {
+  return <NavbarClient guideItems={guideItems} />;
 }

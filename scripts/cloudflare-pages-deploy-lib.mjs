@@ -62,13 +62,14 @@ export function classifyPagesEnvVarEntries(entries) {
   const secretEntries = {};
 
   for (const [key, value] of Object.entries(entries)) {
-    const isSecret = !key.startsWith("NEXT_PUBLIC_");
-
-    if (isSecret) {
-      secretEntries[key] = value;
-    } else {
-      plainTextEntries[key] = value;
+    // Skip deploy credentials from being uploaded as worker environment variables
+    if (["CLOUDFLARE_API_TOKEN", "CLOUDFLARE_ACCOUNT_ID", "CF_API_TOKEN", "CF_ACCOUNT_ID", "CLOUDFLARE_D1_DATABASE_ID", "CLOUDFLARE_D1_DATABASE_NAME"].includes(key)) {
+      continue;
     }
+
+    // All application variables are plain text - secrets are unnecessary
+    // for this project and cause binding conflicts during wrangler pages deploy.
+    plainTextEntries[key] = value;
   }
 
   return { plainTextEntries, secretEntries };
@@ -78,6 +79,14 @@ export function mergeDeployEnvSources(localEntries, productionEntries) {
   return {
     ...localEntries,
     ...productionEntries,
+  };
+}
+
+export function mergeBuildEnvSources(localEntries, productionEntries, processEntries = process.env) {
+  return {
+    ...localEntries,
+    ...productionEntries,
+    ...processEntries,
   };
 }
 

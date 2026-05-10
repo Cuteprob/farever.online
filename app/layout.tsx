@@ -1,29 +1,30 @@
 import type { Metadata, Viewport } from "next";
-import { Orbitron, Rajdhani, JetBrains_Mono } from "next/font/google";
+import { Inter, Cinzel, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { Toaster } from "sonner";
 import WebVitals from "@/components/WebVitals";
-import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import ThirdPartyScripts from "@/components/third-party-scripts";
 import { siteConfig } from "@/lib/site-config";
 
-// 配置Speed Stars运动风格字体
-// Orbitron - 科技感标题字体
-// Rajdhani - 运动风格正文字体，具有现代感和动感
-const orbitron = Orbitron({ 
-  weight: ['400', '700', '900'],
+const googleAdSenseId = process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID;
+const googleAnalyticsId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
+
+// Farever 奇幻主题字体
+// Cinzel - 古典衬线标题字体，奇幻感
+const cinzel = Cinzel({
+  weight: ['400', '600', '700'],
   subsets: ["latin"],
   display: 'swap',
-  variable: '--font-orbitron',
+  variable: '--font-cinzel',
 });
 
-const rajdhani = Rajdhani({ 
-  weight: ['300', '400', '500', '600', '700'],
+// Inter - 现代高可读性正文字体
+const inter = Inter({
   subsets: ["latin"],
   display: 'swap',
-  variable: '--font-rajdhani',
+  variable: '--font-inter',
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -33,7 +34,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.siteUrl || 'https://example.com'),
+  metadataBase: new URL(siteConfig.siteUrl || 'https://farever.online'),
   manifest: "/manifest.webmanifest",
   icons: {
     apple: "/apple-touch-icon.png",
@@ -63,22 +64,43 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* DNS预解析和资源预加载 */}
-        <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+        {googleAdSenseId && (
+          <>
+            <meta name="google-adsense-account" content={googleAdSenseId} />
+            <script
+              async
+              src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${googleAdSenseId}`}
+              crossOrigin="anonymous"
+            />
+          </>
+        )}
+        {googleAnalyticsId && (
+          <>
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
+            />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${googleAnalyticsId}');
+                `,
+              }}
+            />
+          </>
+        )}
+
+        {/* DNS 预解析 */}
         <link rel="dns-prefetch" href="//pagead2.googlesyndication.com" />
+        <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="//api.steampowered.com" />
 
-        {/* 关键API预加载 - 首屏数据 */}
-        <link rel="preload" href="/api/getMainGames" as="fetch" crossOrigin="anonymous" />
-        <link rel="preload" href="/api/getAllGames" as="fetch" crossOrigin="anonymous" />
-
-        {/* 关键图片预加载 */}
-        <link rel="preload" href="/logo.png" as="image" />
-        <link rel="preload" href="/placeholder.png" as="image" />
-
-        {/* 关键CSS内联 - 首屏渲染优化 */}
+        {/* 关键 CSS 内联 - 首屏渲染优化 */}
         <style dangerouslySetInnerHTML={{
           __html: `
-            /* 关键CSS - 首屏渲染 */
             body { margin: 0; padding: 0; }
             .loading-skeleton { 
               animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; 
@@ -87,16 +109,13 @@ export default function RootLayout({
               0%, 100% { opacity: 1; }
               50% { opacity: .5; }
             }
-            /* 防止布局偏移的关键样式 */
-            .aspect-ratio-4-3 { aspect-ratio: 4/3; }
-            .aspect-ratio-16-9 { aspect-ratio: 16/9; }
           `
         }} />
       </head>
       <body 
         className={`
-          ${orbitron.variable} 
-          ${rajdhani.variable} 
+          ${cinzel.variable} 
+          ${inter.variable} 
           ${jetbrainsMono.variable} 
           font-theme-body 
           antialiased
@@ -110,7 +129,6 @@ export default function RootLayout({
         <Toaster />
         <WebVitals />
         <ThirdPartyScripts />
-        <ServiceWorkerRegistration />
       </body>
     </html>
   );

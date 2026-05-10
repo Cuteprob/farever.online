@@ -2,634 +2,121 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 引入 Markdown 样式 */
 @import '../styles/markdown.css';
 
-/* 组件样式库将直接在此文件中定义 */
-
 :root {
-  /* Speed Stars 运动主题 - 火焰橙色 */
-  --primary: 14 100% 57%;
+  --primary: 270 60% 55%;
   --primary-foreground: 0 0% 98%;
-  
-  /* 次要色调 - 电蓝色 */
-  --secondary: 0 0% 85%;
-  --secondary-foreground: 0 0% 98%;
-  
-  /* 暗色背景 - 深黑色 */
-  --background: 220 15% 8%;
+  --secondary: 45 80% 55%;
+  --secondary-foreground: 0 0% 10%;
+  --background: 230 20% 7%;
   --foreground: 0 0% 95%;
-  
-  /* 卡片背景 - 深灰色 */
-  --card: 220 15% 12%;
+  --card: 230 18% 11%;
   --card-foreground: 0 0% 95%;
-  
-  /* 弹出层 */
-  --popover: 220 15% 12%;
+  --popover: 230 18% 13%;
   --popover-foreground: 0 0% 95%;
-  
-  /* 静音色调 */
-  --muted: 220 15% 18%;
-  --muted-foreground: 0 0% 75%; /* 提高对比度 */
-  
-  /* 强调色 - 霓虹绿色 */
-  --accent: 120 100% 50%;
-  --accent-foreground: 220 15% 8%;
-  
-  /* 危险色 - 警告红色 */
+  --muted: 230 18% 18%;
+  --muted-foreground: 230 15% 65%;
+  --accent: 195 90% 55%;
+  --accent-foreground: 230 20% 7%;
   --destructive: 0 85% 60%;
   --destructive-foreground: 0 0% 98%;
-  
-  /* 边框和输入框 */
-  --border: 220 15% 25%;
-  --input: 220 15% 18%;
-  --ring: 14 100% 57%;
-  
-  /* 圆角 */
-  --radius: 0.5rem;
-  
-  /* Speed Stars 运动风格字体 */
-  --font-space-grotesk: 'Orbitron', 'Rajdhani', sans-serif;
-  --font-rajdhani: 'Rajdhani', 'Exo 2', 'Roboto', sans-serif;
-  --font-jetbrains-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --border: 230 18% 20%;
+  --input: 230 18% 18%;
+  --ring: 270 60% 55%;
+  --radius: 0.625rem;
+  --chart-1: 270 60% 55%;
+  --chart-2: 195 90% 55%;
+  --chart-3: 142 70% 45%;
+  --chart-4: 45 80% 55%;
+  --chart-5: 340 75% 55%;
 }
 
 @layer base {
-  :root {
-    /* Speed Stars 暗色主题作为默认主题 */
-    --background: 220 15% 8%;
-    --foreground: 0 0% 95%;
-    --card: 220 15% 12%;
-    --card-foreground: 0 0% 95%;
-    --popover: 220 15% 12%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 14 100% 57%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 85%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 220 15% 18%;
-    --muted-foreground: 0 0% 75%; /* 提高对比度 */
-    --accent: 120 100% 50%;
-    --accent-foreground: 220 15% 8%;
-    --destructive: 0 85% 60%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 220 15% 25%;
-    --input: 220 15% 18%;
-    --ring: 14 100% 57%;
-    --radius: 0.5rem;
-    --chart-1: 14 100% 57%;
-    --chart-2: 200 100% 50%;
-    --chart-3: 120 100% 50%;
-    --chart-4: 60 100% 50%;
-    --chart-5: 280 100% 60%;
-  }
-
-  .light {
-    /* 浅色主题作为备用选项 */
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 14 100% 57%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 85%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 120 100% 50%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 14 100% 57%;
-    --chart-1: 14 100% 57%;
-    --chart-2: 200 100% 50%;
-    --chart-3: 120 100% 50%;
-    --chart-4: 60 100% 50%;
-    --chart-5: 280 100% 60%;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground; }
 }
 
 @layer components {
-  /* ==================== 按钮样式 ==================== */
-  
-  /* 主要按钮 - 火焰橙色渐变 */
   .btn-primary {
     @apply inline-flex items-center justify-center px-theme-md py-theme-sm
-           bg-gradient-fire text-white font-theme-heading font-medium rounded-lg
-           hover:from-theme-fire-600 hover:to-red-600 
-           transition-all duration-200 shadow-speed;
+           bg-gradient-primary text-white font-theme-heading font-medium rounded-lg
+           hover:opacity-90 transition-all duration-200 shadow-game;
   }
-
-  /* 次要按钮 - 暗色边框 */
   .btn-secondary {
     @apply inline-flex items-center justify-center px-theme-md py-theme-sm
-           bg-theme-dark-800 text-secondary border border-theme-dark-600 
-           rounded-lg hover:bg-theme-dark-700 hover:text-primary
+           bg-theme-dark-800 text-theme-dark-100 border border-theme-dark-500
+           rounded-lg hover:bg-theme-dark-700 hover:text-white
            transition-all duration-200 font-theme-heading font-medium;
   }
-
-  /* 强调按钮 - 霓虹绿色 */
   .btn-accent {
     @apply inline-flex items-center justify-center px-theme-md py-theme-sm
-           bg-theme-neon-500 hover:bg-theme-neon-600 
+           bg-gradient-gold hover:opacity-90
            text-theme-dark-900 font-theme-heading font-medium rounded-lg
-           transition-all duration-200 shadow-neon;
+           transition-all duration-200 shadow-gold;
   }
+  .btn-large { @apply px-theme-lg py-theme-md text-theme-lg; }
+  .btn-small { @apply px-theme-sm py-theme-xs text-theme-sm; }
 
-  /* 大型按钮 */
-  .btn-large {
-    @apply px-theme-lg py-theme-md text-theme-lg;
-  }
-
-  /* 小型按钮 */
-  .btn-small {
-    @apply px-theme-sm py-theme-xs text-theme-sm;
-  }
-
-  /* ==================== 卡片样式 ==================== */
-  
-  /* 游戏卡片 */
   .card-game {
-    @apply bg-theme-dark-800 border border-theme-dark-600 
-           rounded-lg shadow-game hover:shadow-game-hover 
+    @apply bg-theme-dark-800 border border-theme-dark-600
+           rounded-xl shadow-game hover:shadow-game-hover
            transition-all duration-300 overflow-hidden;
   }
-
-  /* 游戏卡片悬浮效果 */
   .card-game-hover {
-    @apply hover:scale-105 hover:border-theme-fire-500 
-           hover:-translate-y-1;
+    @apply hover:scale-[1.02] hover:border-theme-purple-500/40 hover:-translate-y-1;
   }
-
-  /* 详情卡片 */
   .card-detail {
-    @apply bg-card border border-border rounded-lg p-theme-lg
+    @apply bg-card border border-border rounded-xl p-theme-lg
            shadow-sm hover:shadow-md transition-shadow duration-200;
   }
-
-  /* 信息卡片 */
-  .card-info {
-    @apply bg-muted/50 border border-border rounded-md p-theme-md
-           backdrop-blur-sm;
-  }
-
-  /* 统计卡片 */
   .card-stats {
     @apply bg-theme-dark-800 border border-theme-dark-600
            rounded-xl p-theme-lg text-center shadow-game;
   }
 
-  /* ==================== 文字样式 ==================== */
-  
-  /* 页面标题 */
-  .heading-page {
-    @apply font-theme-display text-theme-4xl text-primary font-bold
-           mb-theme-lg;
-  }
+  .heading-page { @apply font-theme-display text-theme-4xl text-primary font-bold mb-theme-lg; }
+  .heading-section { @apply font-theme-heading text-theme-2xl text-primary font-semibold mb-theme-md; }
+  .heading-card { @apply font-theme-heading text-theme-lg text-primary font-medium mb-theme-sm; }
+  .text-content { @apply font-theme-body text-theme-base leading-relaxed; color: hsl(230,15%,78%); }
+  .text-helper { @apply font-theme-body text-theme-sm; color: hsl(230,10%,60%); }
+  .text-link { @apply text-theme-frost-400 hover:text-theme-purple-400 transition-colors duration-200 underline; }
 
-  /* 章节标题 */
-  .heading-section {
-    @apply font-theme-heading text-theme-2xl text-primary font-semibold
-           mb-theme-md;
-  }
+  .tag-status { @apply inline-block px-theme-sm py-theme-xs text-theme-xs font-theme-heading font-medium rounded-full; }
+  .tag-verified { @apply bg-green-500/15 text-green-400 border border-green-500/25; }
+  .tag-community { @apply bg-yellow-500/15 text-yellow-400 border border-yellow-500/25; }
+  .tag-unverified { @apply bg-gray-500/15 text-gray-400 border border-gray-500/25; }
+  .tag-needstest { @apply bg-orange-500/15 text-orange-400 border border-orange-500/25; }
 
-  /* 卡片标题 */
-  .heading-card {
-    @apply font-theme-heading text-theme-lg text-primary font-medium
-           mb-theme-sm;
-  }
+  .container-page { @apply min-h-screen bg-theme-dark-900; }
+  .container-content { @apply max-w-5xl mx-auto px-theme-md sm:px-theme-lg py-theme-xl; }
+  .flex-center { @apply flex items-center justify-center; }
+  .flex-between { @apply flex items-center justify-between; }
 
-  /* 子标题 */
-  .heading-subtitle {
-    @apply font-theme-heading text-theme-xl font-medium
-           mb-theme-sm;
-    color: hsl(0, 0%, 85%); /* 提高对比度 */
-  }
+  .source-badge { @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium; }
+  .source-badge-verified { @apply source-badge bg-green-500/15 text-green-400 border border-green-500/25; }
+  .source-badge-community { @apply source-badge bg-yellow-500/15 text-yellow-400 border border-yellow-500/25; }
+  .source-badge-unverified { @apply source-badge bg-gray-500/15 text-gray-400 border border-gray-500/25; }
+  .source-badge-needstest { @apply source-badge bg-orange-500/15 text-orange-400 border border-orange-500/25; }
 
-  /* 正文内容 */
-  .text-content {
-    @apply font-theme-body text-theme-base leading-relaxed;
-    color: hsl(0, 0%, 85%); /* 提高对比度 */
-  }
+  .hover-lift { @apply hover:-translate-y-1 transition-transform duration-200; }
+  .hover-scale { @apply hover:scale-105 transition-transform duration-200; }
+  .hover-glow { @apply hover:shadow-neon transition-shadow duration-300; }
+  .glass { @apply backdrop-blur-md bg-white/5 border border-white/10; }
+  .text-gradient-purple { @apply bg-gradient-primary bg-clip-text text-transparent; }
+  .text-gradient-gold { @apply bg-gradient-gold bg-clip-text text-transparent; }
 
-  /* 辅助文字 */
-  .text-helper {
-    @apply font-theme-body text-theme-sm;
-    color: hsl(0, 0%, 75%); /* 提高对比度 */
-  }
+  .hide-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
+  .line-clamp-2 { @apply overflow-hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+  .line-clamp-3 { @apply overflow-hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
 
-  /* 强调文字 */
-  .text-accent {
-    @apply font-theme-heading text-theme-base text-theme-fire-500 font-medium;
-  }
-
-  /* 链接文字 */
-  .text-link {
-    @apply text-theme-ocean-500 hover:text-theme-fire-500 
-           transition-colors duration-200 underline;
-  }
-
-  /* ==================== 标签样式 ==================== */
-  
-  /* 分类标签 */
-  .tag-category {
-    @apply inline-block px-theme-sm py-theme-xs 
-           bg-theme-dark-700 text-theme-xs 
-           rounded-full font-theme-body font-medium;
-    color: hsl(0, 0%, 85%); /* 提高对比度 */
-  }
-
-  /* 状态标签 */
-  .tag-status {
-    @apply inline-block px-theme-sm py-theme-xs
-           text-theme-xs font-theme-heading font-medium rounded-full;
-  }
-
-  /* 成功状态 */
-  .tag-success {
-    @apply bg-theme-neon-500/20 text-theme-neon-400 border border-theme-neon-500/30;
-  }
-
-  /* 警告状态 */
-  .tag-warning {
-    @apply bg-theme-fire-500/20 text-theme-fire-400;
-  }
-
-  /* 信息状态 */
-  .tag-info {
-    @apply bg-theme-ocean-500/20 text-theme-ocean-400;
-  }
-
-  /* 特色标签 */
-  .tag-featured {
-    @apply bg-theme-fire-500/20 text-theme-fire-400 
-           font-theme-heading font-semibold;
-  }
-
-  /* ==================== 布局样式 ==================== */
-  
-  /* 页面容器 */
-  .container-page {
-    @apply min-h-screen bg-theme-dark-900;
-  }
-
-  /* 内容容器 */
-  .container-content {
-    @apply max-w-5xl mx-auto px-theme-md sm:px-theme-lg
-           py-theme-xl;
-  }
-
-  /* 网格容器 */
-  .grid-games {
-    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 
-           gap-theme-lg;
-  }
-
-  /* 弹性容器 */
-  .flex-center {
-    @apply flex items-center justify-center;
-  }
-
-  .flex-between {
-    @apply flex items-center justify-between;
-  }
-
-  .flex-start {
-    @apply flex items-center justify-start;
-  }
-
-  /* ==================== 输入框样式 ==================== */
-  
-  /* 基础输入框 */
-  .input-base {
-    @apply w-full px-theme-md py-theme-sm
-           bg-input border border-border rounded-lg
-           text-foreground placeholder:text-muted
-           focus:outline-none focus:ring-2 focus:ring-primary/50
-           transition-all duration-200;
-  }
-
-  /* 搜索输入框 */
-  .input-search {
-    @apply input-base pl-10; /* 为搜索图标留空间 */
-  }
-
-  /* ==================== 导航样式 ==================== */
-  
-  /* 面包屑导航 */
-  .breadcrumb {
-    @apply flex items-center space-x-2 text-theme-sm mb-theme-lg;
-  }
-
-  .breadcrumb-item {
-    @apply text-secondary hover:text-primary transition-colors duration-200;
-  }
-
-  .breadcrumb-separator {
-    @apply text-text-muted;
-  }
-
-  /* 分页导航 */
-  .pagination {
-    @apply flex items-center justify-center space-x-theme-lg 
-           mt-theme-xl;
-  }
-
-  .pagination-button {
-    @apply flex items-center px-theme-md py-theme-sm
-           bg-theme-dark-800 text-secondary border border-theme-dark-600
-           rounded-lg hover:bg-theme-dark-700 hover:text-primary
-           transition-colors duration-200 font-theme-heading font-medium;
-  }
-
-  .pagination-current {
-    @apply px-theme-md py-theme-sm text-primary font-theme-heading font-medium;
-  }
-
-  /* ==================== 状态样式 ==================== */
-  
-  /* 加载状态 */
-  .loading-skeleton {
-    @apply animate-pulse bg-theme-dark-700 rounded;
-  }
-
-  /* 空状态 */
-  .empty-state {
-    @apply text-center py-theme-xl;
-  }
-
-  .empty-state-title {
-    @apply heading-card text-primary mb-theme-sm;
-  }
-
-  .empty-state-description {
-    @apply text-content text-secondary mb-theme-md;
-  }
-
-  /* 错误状态 */
-  .error-state {
-    @apply text-center py-theme-xl text-destructive;
-  }
-
-  /* ==================== 动画样式 ==================== */
-  
-  /* 悬浮动画 */
-  .hover-lift {
-    @apply hover:-translate-y-1 transition-transform duration-200;
-  }
-
-  /* 缩放动画 */
-  .hover-scale {
-    @apply hover:scale-105 transition-transform duration-200;
-  }
-
-  /* 发光动画 */
-  .hover-glow {
-    @apply hover:shadow-neon transition-shadow duration-300;
-  }
-
-  /* 渐变动画 */
-  .animate-gradient {
-    @apply bg-gradient-to-r bg-[length:200%_200%] animate-[gradient_3s_ease_infinite];
-  }
-
-  /* 兼容旧样式 - 游戏卡片悬停效果 */
-  .game-card {
-    @apply transition-all duration-300;
-    box-shadow: 0 4px 20px -8px hsla(14,100%,57%,0.2),
-                0 2px 8px hsla(200,100%,50%,0.1);
-    border: 1px solid hsla(14,100%,57%,0.1);
-  }
-  
-  .game-card:hover {
-    transform: translateY(-6px) scale(1.02);
-    box-shadow: 0 12px 40px -8px hsla(14,100%,57%,0.35),
-                0 6px 20px hsla(200,100%,50%,0.2),
-                0 0 20px hsla(120,100%,50%,0.15);
-    border: 1px solid hsla(14,100%,57%,0.3);
-  }
-
-  /* 游戏数值显示 */
-  .game-stats {
-    @apply font-theme-mono text-accent font-semibold;
-    text-shadow: 1px 1px 4px hsla(120,100%,50%,0.4),
-                 0 0 8px hsla(120,100%,50%,0.2);
-  }
-
-  /* ==================== 响应式工具 ==================== */
-  
-  /* 隐藏滚动条 */
-  .hide-scrollbar {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* 文字截断 */
-  .line-clamp-1 {
-    @apply overflow-hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-  }
-
-  .line-clamp-2 {
-    @apply overflow-hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-  }
-
-  .line-clamp-3 {
-    @apply overflow-hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-  }
-
-  /* Glass morphism 效果 */
-  .glass {
-    @apply backdrop-blur-md bg-white/10 border border-white/20;
-  }
-
-  /* 模糊遮罩 */
-  .blur-overlay {
-    @apply absolute inset-0 bg-black/50 backdrop-blur-sm;
-  }
-
-  /* 渐变文字 */
-  .text-gradient-fire {
-    @apply bg-gradient-fire bg-clip-text text-transparent;
-  }
-
-  .text-gradient-ocean {
-    @apply bg-gradient-ocean bg-clip-text text-transparent;
-  }
-
-  .text-gradient-neon {
-    @apply bg-gradient-neon bg-clip-text text-transparent;
-  }
+  .empty-state { @apply text-center py-theme-xl; }
+  .empty-state-title { @apply heading-card text-primary mb-theme-sm; }
+  .empty-state-description { @apply text-content mb-theme-md; }
 }
 
-@keyframes gradient {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-@keyframes bounce {
-  0%, 20%, 53%, 80%, 100% {
-    transform: translate3d(0,0,0);
-  }
-  40%, 43% {
-    transform: translate3d(0, -8px, 0);
-  }
-  70% {
-    transform: translate3d(0, -4px, 0);
-  }
-  90% {
-    transform: translate3d(0, -2px, 0);
-  }
-}
-
-.animate-bounce {
-  animation: bounce 1s ease-in-out;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.8;
-  }
-}
-
-.animate-pulse {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-.hide-scrollbar {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
-}
-.hide-scrollbar::-webkit-scrollbar {
-  display: none; /* Chrome/Safari/Opera */
-}
-
-/* Custom scrollbar styles - Speed Stars 暗色主题 */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: hsla(220,15%,12%,0.8);
-  border-radius: 6px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, 
-              hsla(14,100%,57%,0.7) 0%, 
-              hsla(200,100%,50%,0.7) 100%);
-  border-radius: 6px;
-  border: 1px solid hsla(14,100%,57%,0.3);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, 
-              hsla(14,100%,57%,0.9) 0%, 
-              hsla(200,100%,50%,0.9) 100%);
-  box-shadow: 0 0 8px hsla(14,100%,57%,0.4);
-}
-
-/* Markdown content styles - Speed Stars 暗色主题 */
-.markdown-content {
-  @apply text-foreground leading-relaxed;
-}
-
-.markdown-content h1,
-.markdown-content h2,
-.markdown-content h3,
-.markdown-content h4,
-.markdown-content h5,
-.markdown-content h6 {
-  @apply font-semibold text-primary mb-4 mt-6;
-  text-shadow: 1px 1px 4px hsla(14,100%,57%,0.3);
-}
-
-.markdown-content h1 {
-  @apply text-3xl;
-}
-
-.markdown-content h2 {
-  @apply text-2xl;
-}
-
-.markdown-content h3 {
-  @apply text-xl;
-}
-
-.markdown-content h4 {
-  @apply text-lg;
-}
-
-.markdown-content p {
-  @apply mb-4;
-}
-
-.markdown-content ul,
-.markdown-content ol {
-  @apply mb-4 space-y-1;
-}
-
-.markdown-content li {
-  @apply text-secondary; /* 使用更高对比度的次要文字颜色 */
-}
-
-.markdown-content a {
-  @apply text-secondary hover:text-accent underline transition-colors;
-}
-
-.markdown-content code {
-  @apply bg-muted px-1 py-0.5 rounded text-sm text-accent;
-}
-
-.markdown-content pre {
-  @apply bg-muted p-4 rounded-lg overflow-x-auto border border-border;
-}
-
-.markdown-content blockquote {
-  @apply border-l-4 border-primary pl-4 italic text-secondary; /* 使用更高对比度的次要文字颜色 */
-}
-
-.markdown-content table {
-  @apply w-full border-collapse border border-border;
-}
-
-.markdown-content th,
-.markdown-content td {
-  @apply border border-border px-4 py-2 text-left;
-}
-
-.markdown-content th {
-  @apply bg-muted font-semibold text-foreground;
-}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: hsla(230,18%,11%,0.8); border-radius: 4px; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, hsla(270,60%,55%,0.6), hsla(195,90%,55%,0.5)); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, hsla(270,60%,55%,0.8), hsla(195,90%,55%,0.7)); }
